@@ -1,2 +1,2 @@
 # eca100
-Utility to convert pcapng log file with ethercat frames to csv file
+Utility to convert pcapng log file with ethercat frames (by wireshark) to csv file

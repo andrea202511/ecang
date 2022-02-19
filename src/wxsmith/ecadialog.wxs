@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="ecaDialog">
+		<title>Eca</title>
+		<minsize>400,250</minsize>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON1" variable="Button1" member="yes">
+							<label>XML</label>
+							<handler function="SelezionaXML" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>2</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="TextCtrl1" member="yes" />
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>4</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBitmapButton" name="ID_BITMAPBUTTON2" variable="BitmapButton2" member="yes">
+							<bitmap stock_id="wxART_LIST_VIEW" />
+							<enabled>0</enabled>
+							<handler function="OnBitmapButton2Click" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON2" variable="Button2" member="yes">
+							<label>PCAPNG</label>
+							<handler function="SelezionaPcapng" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>2</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_TEXTCTRL2" variable="TextCtrl2" member="yes" />
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>4</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBitmapButton" name="ID_BITMAPBUTTON1" variable="BitmapButton1" member="yes">
+							<bitmap stock_id="wxART_LIST_VIEW" stock_client="wxART_TOOLBAR" />
+							<enabled>0</enabled>
+							<handler function="OnBitmapButton1Click" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxTextCtrl" name="ID_TEXTCTRL3" variable="TextCtrl3" member="yes">
+					<font>
+						<size>7</size>
+						<style>normal</style>
+						<weight>normal</weight>
+						<underlined>0</underlined>
+						<family>swiss</family>
+						<face>Sans</face>
+					</font>
+					<style>wxTE_MULTILINE|wxTE_READONLY|wxVSCROLL</style>
+					<handler function="OnTextCtrl3Text" entry="EVT_TEXT" />
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>3</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON4" variable="Button4" member="yes">
+							<label>Setup</label>
+							<handler function="OnButton4Click" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON3" variable="Button3" member="yes">
+							<label>Start</label>
+							<handler function="Elabora" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>3</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxFileDialog" variable="FileDialog1" member="yes">
+			<message>Select file XML</message>
+			<wildcard>*.xml</wildcard>
+		</object>
+		<object class="wxFileDialog" variable="FileDialog2" member="yes">
+			<message>Select file PCAPNG</message>
+			<style>wxFD_DEFAULT_STYLE|wxFD_OPEN</style>
+		</object>
+	</object>
+</wxsmith>

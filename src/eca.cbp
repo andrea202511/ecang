@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="eca" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/eca" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/eca" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="`wx-config --cflags`" />
+		</Compiler>
+		<Linker>
+			<Add option="`wx-config --libs`" />
+		</Linker>
+		<Unit filename="ecaApp.cpp" />
+		<Unit filename="ecaApp.h" />
+		<Unit filename="ecaDataFilter.cpp" />
+		<Unit filename="ecaDataFilter.h" />
+		<Unit filename="ecaMain.cpp" />
+		<Unit filename="ecaMain.h" />
+		<Unit filename="ecaPDO.h" />
+		<Unit filename="ecaPDOFilter.cpp" />
+		<Unit filename="ecaPDOFilter.h" />
+		<Unit filename="ecaSetting.cpp" />
+		<Unit filename="version.h" />
+		<Unit filename="wxsmith/ecaDataFilter.wxs" />
+		<Unit filename="wxsmith/ecaPDOFilter.wxs" />
+		<Unit filename="wxsmith/ecaSetting.wxs" />
+		<Unit filename="wxsmith/ecadialog.wxs" />
+		<Extensions>
+			<AutoVersioning>
+				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="1000" />
+				<Settings autoincrement="1" date_declarations="1" use_define="0" update_manifest="1" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
+				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
+			</AutoVersioning>
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output html="0" />
+				<doxyfile_preprocessor enable_preprocessing="0" />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="ecaApp.cpp" main="ecaDialog" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxDialog wxs="wxsmith/ecadialog.wxs" src="ecaMain.cpp" hdr="ecaMain.h" fwddecl="0" i18n="1" name="ecaDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/ecaSetting.wxs" src="ecaSetting.cpp" hdr="ecaSetting.h" fwddecl="0" i18n="1" name="ecaSetting" language="CPP" />
+					<wxDialog wxs="wxsmith/ecaPDOFilter.wxs" src="ecaPDOFilter.cpp" hdr="ecaPDOFilter.h" fwddecl="0" i18n="1" name="ecaPDOFilter" language="CPP" />
+					<wxDialog wxs="wxsmith/ecaDataFilter.wxs" src="ecaDataFilter.cpp" hdr="ecaDataFilter.h" fwddecl="0" i18n="1" name="ecaDataFilter" language="CPP" />
+				</resources>
+			</wxsmith>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

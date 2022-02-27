@@ -585,7 +585,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
               if  (SettingDialog->format64in==0) {
          //       str1=wxString::Format(wxT("%d"),ui64);
               }
-              else if (SettingDialog->format32in==1) {
+              else if (SettingDialog->format64in==1) {
          //       str1=wxString::Format(wxT("%016X"),ui64);
               }
               else {
@@ -603,7 +603,15 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                 str1=wxString::Format(wxT("0x%08X"),ui32);
               }
               else {
-                str1=wxString::Format(wxT("b%b"),ui32);
+                str1="b";
+                for (int i=0;i<32;i++)
+                {
+                  if (ui32&0x80000000)
+                    str1=str1+"1";
+                  else
+                    str1=str1+"0";
+                  ui32=ui32<<1;
+                }
               }
 
             }
@@ -616,9 +624,16 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                 str1=wxString::Format(wxT("0x%04X"),ui16);
               }
               else {
-                str1=wxString::Format(wxT("b%b"),ui16);
-              }
-
+                str1="b";
+                for (int i=0;i<16;i++)
+                {
+                  if (ui16&0x8000)
+                    str1=str1+"1";
+                  else
+                    str1=str1+"0";
+                  ui16=ui16<<1;
+                }
+             }
             }
             else {
               filepcap.Read(&ui8,1);
@@ -626,11 +641,19 @@ void ecaDialog::Elabora(wxCommandEvent& event)
               if  (SettingDialog->format8in==0) {
                 str1=wxString::Format(wxT("%d"),ui8);
               }
-              else if (SettingDialog->format16in==1) {
+              else if (SettingDialog->format8in==1) {
                 str1=wxString::Format(wxT("0x%02X"),ui8);
               }
               else {
-                str1=wxString::Format(wxT("b%b"),ui8);
+                str1="b";
+                for (int i=0;i<8;i++)
+                {
+                  if (ui8&0x80)
+                    str1=str1+"1";
+                  else
+                    str1=str1+"0";
+                  ui8=ui8<<1;
+                }
               }
             }
           }

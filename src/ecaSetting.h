@@ -31,10 +31,6 @@ class ecaSetting: public wxDialog
 		int format16in=2;
 		int format8in=2;
 
-		int format64out=1;
-		int format32out=0;
-		int format16out=2;
-		int format8out=2;
 
   private:
 

@@ -117,8 +117,6 @@ ecaSetting::ecaSetting(wxWindow* parent,wxWindowID id)
 	SetSizer(BoxSizer1);
 	SetSizer(BoxSizer1);
 	Layout();
-
-	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaSetting::OnButton2Click);
 	//*)
 
 

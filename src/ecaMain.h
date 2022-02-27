@@ -46,7 +46,6 @@ class ecaDialog: public wxDialog
         void Elabora(wxCommandEvent& event);
         void OnButton4Click(wxCommandEvent& event);
         void OnTextCtrl3Text(wxCommandEvent& event);
-        void OnButton5Click(wxCommandEvent& event);
         void OnBitmapButton1Click(wxCommandEvent& event);
         void OnBitmapButton2Click(wxCommandEvent& event);
         //*)

@@ -3,6 +3,7 @@
 
 //(*Headers(ecaSetting)
 #include <wx/button.h>
+#include <wx/checkbox.h>
 #include <wx/dialog.h>
 #include <wx/radiobox.h>
 #include <wx/sizer.h>
@@ -41,14 +42,16 @@ class ecaSetting: public wxDialog
 		//(*Declarations(ecaSetting)
 		wxButton* Button1;
 		wxButton* Button2;
+		wxCheckBox* CheckBox1;
+		wxCheckBox* CheckBox2;
+		wxCheckBox* CheckBox3;
+		wxCheckBox* CheckBox4;
+		wxCheckBox* CheckBox5;
+		wxCheckBox* CheckBox6;
 		wxRadioBox* RadioBox1;
 		wxRadioBox* RadioBox2;
 		wxRadioBox* RadioBox3;
 		wxRadioBox* RadioBox4;
-		wxRadioBox* RadioBox5;
-		wxRadioBox* RadioBox6;
-		wxRadioBox* RadioBox7;
-		wxRadioBox* RadioBox8;
 		wxStaticText* StaticText1;
 		wxStaticText* StaticText2;
 		//*)
@@ -62,10 +65,12 @@ class ecaSetting: public wxDialog
 		static const long ID_RADIOBOX3;
 		static const long ID_RADIOBOX4;
 		static const long ID_STATICTEXT2;
-		static const long ID_RADIOBOX5;
-		static const long ID_RADIOBOX6;
-		static const long ID_RADIOBOX7;
-		static const long ID_RADIOBOX8;
+		static const long ID_CHECKBOX1;
+		static const long ID_CHECKBOX2;
+		static const long ID_CHECKBOX3;
+		static const long ID_CHECKBOX4;
+		static const long ID_CHECKBOX5;
+		static const long ID_CHECKBOX6;
 		//*)
 
 	private:

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="ecaDialog">
-		<title>Eca</title>
-		<minsize>400,250</minsize>
+		<title>ecang</title>
+		<minsize>480,320</minsize>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
@@ -13,8 +13,8 @@
 							<handler function="SelezionaXML" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-						<border>5</border>
-						<option>2</option>
+						<border>4</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="TextCtrl1" member="yes" />
@@ -30,7 +30,6 @@
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
@@ -45,8 +44,8 @@
 							<handler function="SelezionaPcapng" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-						<border>5</border>
-						<option>2</option>
+						<border>4</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxTextCtrl" name="ID_TEXTCTRL2" variable="TextCtrl2" member="yes" />
@@ -60,9 +59,8 @@
 							<enabled>0</enabled>
 							<handler function="OnBitmapButton1Click" entry="EVT_BUTTON" />
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxALL|wxALIGN_TOP</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
@@ -80,17 +78,16 @@
 						<face>Sans</face>
 					</font>
 					<style>wxTE_MULTILINE|wxTE_READONLY|wxVSCROLL</style>
-					<handler function="OnTextCtrl3Text" entry="EVT_TEXT" />
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
-				<border>5</border>
+				<border>7</border>
 				<option>3</option>
 			</object>
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer4" member="no">
 					<object class="sizeritem">
 						<object class="wxButton" name="ID_BUTTON4" variable="Button4" member="yes">
-							<label>Setup</label>
+							<label>Setting</label>
 							<handler function="OnButton4Click" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -102,7 +99,7 @@
 							<label>Start</label>
 							<handler function="Elabora" entry="EVT_BUTTON" />
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 						<option>3</option>
 					</object>

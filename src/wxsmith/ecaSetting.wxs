@@ -2,8 +2,8 @@
 <wxsmith>
 	<object class="wxDialog" name="ecaSetting">
 		<title>Setting</title>
-		<size>500,500</size>
-		<minsize>400,500</minsize>
+		<size>600,500</size>
+		<minsize>300,500</minsize>
 		<exstyle>wxWS_EX_VALIDATE_RECURSIVELY</exstyle>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>

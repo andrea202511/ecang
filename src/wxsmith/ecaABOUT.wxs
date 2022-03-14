@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="ecaABOUT">
+		<size>300,300</size>
+		<bg>#F0F0F0</bg>
+		<minsize>300,300</minsize>
+		<pos_arg>1</pos_arg>
+		<size_arg>1</size_arg>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticBitmap" name="ID_STATICBITMAP1" variable="StaticBitmap1" member="yes">
+							<bitmap stock_id="wxART_INFORMATION" stock_client="wxART_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>2</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+							<label>ecang</label>
+							<font>
+								<size>14</size>
+								<style>italic</style>
+								<weight>bold</weight>
+								<underlined>0</underlined>
+								<family>swiss</family>
+								<face>Sans</face>
+							</font>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>4</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>2</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxTextCtrl" name="ID_TEXTCTRL2" variable="TextCtrl2" member="yes">
+					<value>0</value>
+					<bg>#F0F0F0</bg>
+					<font>
+						<size>10</size>
+						<style>italic</style>
+						<weight>bold</weight>
+						<underlined>0</underlined>
+						<family>swiss</family>
+						<face>Sans</face>
+					</font>
+					<style>wxTE_READONLY|wxBORDER_NONE</style>
+				</object>
+				<flag>wxALIGN_CENTER_HORIZONTAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="spacer">
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+				<size>400,0</size>
+			</object>
+			<object class="sizeritem">
+				<object class="wxTextCtrl" name="ID_TEXTCTRL3" variable="TextCtrl3" member="yes">
+					<value>0</value>
+					<style>wxTE_READONLY|wxTE_RIGHT|wxBORDER_NONE|wxTRANSPARENT_WINDOW</style>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="TextCtrl1" member="yes">
+					<value>Autor: andrea202511 (Andrea Fabbri)&#x0A;&#x0A;This program is licensed under the terms&#x0A;of the GNU General Public License version 3&#x0A;http://www.gnu.org/licenses/gpl-3.0.html</value>
+					<style>wxTE_MULTILINE|wxVSCROLL|wxALWAYS_SHOW_SB</style>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>3</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxButton" name="wxID_CANCEL" variable="Button1" member="yes">
+					<label>Close</label>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+	</object>
+</wxsmith>

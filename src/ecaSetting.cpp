@@ -38,8 +38,8 @@ ecaSetting::ecaSetting(wxWindow* parent,wxWindowID id)
 	wxBoxSizer* BoxSizer8;
 
 	Create(parent, id, _("Setting"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
-	SetClientSize(wxSize(500,500));
-	SetMinSize(wxSize(400,500));
+	SetClientSize(wxSize(600,500));
+	SetMinSize(wxSize(300,500));
 	SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);

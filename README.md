@@ -1,2 +1,3 @@
-# ecang1
+# ecang
+=======
 Utility to convert pcapng log file with ethercat frames (by wireshark) to csv file

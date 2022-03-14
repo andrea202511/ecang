@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="ecaPDOFilter">
-		<size>450,432</size>
-		<minsize>400,450</minsize>
+		<size>300,420</size>
+		<minsize>300,400</minsize>
 		<pos_arg>1</pos_arg>
 		<size_arg>1</size_arg>
 		<handler function="OnInit" entry="EVT_INIT_DIALOG" />
@@ -12,41 +12,41 @@
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
 						<object class="wxButton" name="ID_BUTTON2" variable="Button2" member="yes">
-							<label>No</label>
+							<label>Reset</label>
 							<handler function="OnButton2Click" entry="EVT_BUTTON" />
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxButton" name="ID_BUTTON3" variable="Button3" member="yes">
-							<label>All</label>
+							<label>Set all</label>
 							<handler function="OnButton3Click" entry="EVT_BUTTON" />
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
 				</object>
-				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-				<border>5</border>
-				<option>1</option>
-			</object>
-			<object class="sizeritem">
-				<object class="wxCheckListBox" name="ID_CHECKLISTBOX1" variable="CheckListBox1" member="yes" />
 				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
-				<option>7</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckListBox" name="ID_CHECKLISTBOX1" variable="CheckListBox1" member="yes">
+					<style>wxVSCROLL</style>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>6</option>
 			</object>
 			<object class="sizeritem">
 				<object class="wxButton" name="ID_BUTTON1" variable="Button1" member="yes">
-					<label>Chiudi</label>
+					<label>Close</label>
 					<handler function="OnButton1Click" entry="EVT_BUTTON" />
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
-				<option>1</option>
 			</object>
 		</object>
 	</object>

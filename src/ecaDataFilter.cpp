@@ -30,8 +30,8 @@ ecaDataFilter::ecaDataFilter(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	CheckListBox1->Append(_("No ethercat frame"));
 	CheckListBox1->Disable();
 	BoxSizer1->Add(CheckListBox1, 4, wxALL|wxEXPAND, 5);
-	Button1 = new wxButton(this, ID_BUTTON1, _("Chiudi"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-	BoxSizer1->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	Button1 = new wxButton(this, ID_BUTTON1, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
+	BoxSizer1->Add(Button1, 1, wxALL|wxEXPAND, 5);
 	SetSizer(BoxSizer1);
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);

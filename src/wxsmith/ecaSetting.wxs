@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="ecaSetting">
-		<size>500,500</size>
-		<minsize>400,500</minsize>
+		<title>Setting</title>
+		<size>600,500</size>
+		<minsize>300,500</minsize>
 		<exstyle>wxWS_EX_VALIDATE_RECURSIVELY</exstyle>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<orient>wxVERTICAL</orient>
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
-							<label>--- PDO in ---</label>
+							<label>--- PDO format ---</label>
 						</object>
-						<flag>wxALL|wxALIGN_TOP</flag>
+						<flag>wxALL|wxALIGN_LEFT</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
@@ -27,8 +28,8 @@
 							<label>64 bits</label>
 							<content>
 								<item>num</item>
-								<item>hex</item>
-								<item>hex (0x)</item>
+								<item>(0x) hex</item>
+								<item>(b) binary</item>
 							</content>
 							<default>-1</default>
 							<validator>wxGenericValidator(&amp;format64in)</validator>
@@ -43,8 +44,8 @@
 							<label>32 bits</label>
 							<content>
 								<item>num</item>
-								<item>hex</item>
-								<item>hex (0x)</item>
+								<item>(0x) hex</item>
+								<item>(b) binary</item>
 							</content>
 							<default>-1</default>
 							<validator>wxGenericValidator(&amp;format32in)</validator>
@@ -59,8 +60,8 @@
 							<label>16 bits</label>
 							<content>
 								<item>num</item>
-								<item>hex</item>
-								<item>hex (0x)</item>
+								<item>(0x) hex</item>
+								<item>(b) binary</item>
 							</content>
 							<default>-1</default>
 							<validator>wxGenericValidator(&amp;format16in)</validator>
@@ -75,8 +76,8 @@
 							<label>8 bits</label>
 							<content>
 								<item>num</item>
-								<item>hex</item>
-								<item>hex (0x)</item>
+								<item>(0x) hex</item>
+								<item>(b) binary</item>
 							</content>
 							<default>-1</default>
 							<validator>wxGenericValidator(&amp;format8in)</validator>
@@ -93,11 +94,12 @@
 			</object>
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+					<orient>wxVERTICAL</orient>
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
-							<label>--- PDO out ---</label>
+							<label>--- Options ---</label>
 						</object>
-						<flag>wxALL|wxALIGN_TOP</flag>
+						<flag>wxALL|wxALIGN_LEFT</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
@@ -108,71 +110,71 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer6" member="no">
 					<object class="sizeritem">
-						<object class="wxRadioBox" name="ID_RADIOBOX5" variable="RadioBox5" member="yes">
-							<label>64 bits</label>
-							<content>
-								<item>num</item>
-								<item>hex</item>
-								<item>hex (0x)</item>
-							</content>
-							<default>-1</default>
-							<validator>wxGenericValidator(&amp;format64in)</validator>
-							<style>wxRA_SPECIFY_COLS</style>
+						<object class="wxBoxSizer" variable="BoxSizer7" member="no">
+							<orient>wxVERTICAL</orient>
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX1" variable="CheckBox1" member="yes">
+									<label>Label</label>
+								</object>
+								<flag>wxALL|wxALIGN_LEFT</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX2" variable="CheckBox2" member="yes">
+									<label>Label</label>
+								</object>
+								<flag>wxALL|wxALIGN_LEFT</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX3" variable="CheckBox3" member="yes">
+									<label>Label</label>
+								</object>
+								<flag>wxALL|wxALIGN_LEFT</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
 					<object class="sizeritem">
-						<object class="wxRadioBox" name="ID_RADIOBOX6" variable="RadioBox6" member="yes">
-							<label>32 bits</label>
-							<content>
-								<item>num</item>
-								<item>hex</item>
-								<item>hex (0x)</item>
-							</content>
-							<default>-1</default>
-							<validator>wxGenericValidator(&amp;format32out)</validator>
-							<style>wxRA_SPECIFY_COLS</style>
-						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-						<border>5</border>
-						<option>1</option>
-					</object>
-					<object class="sizeritem">
-						<object class="wxRadioBox" name="ID_RADIOBOX7" variable="RadioBox7" member="yes">
-							<label>16 bits</label>
-							<content>
-								<item>num</item>
-								<item>hex</item>
-								<item>hex (0x)</item>
-							</content>
-							<default>-1</default>
-							<validator>wxGenericValidator(&amp;format16out)</validator>
-							<style>wxRA_SPECIFY_COLS</style>
-						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-						<border>5</border>
-						<option>1</option>
-					</object>
-					<object class="sizeritem">
-						<object class="wxRadioBox" name="ID_RADIOBOX8" variable="RadioBox8" member="yes">
-							<label>8 bits</label>
-							<content>
-								<item>num</item>
-								<item>hex</item>
-								<item>hex (0x)</item>
-							</content>
-							<default>-1</default>
-							<validator>wxGenericValidator(&amp;format8out)</validator>
-							<style>wxRA_SPECIFY_COLS</style>
+						<object class="wxBoxSizer" variable="BoxSizer8" member="no">
+							<orient>wxVERTICAL</orient>
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX4" variable="CheckBox4" member="yes">
+									<label>Label</label>
+								</object>
+								<flag>wxALL|wxALIGN_LEFT</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX5" variable="CheckBox5" member="yes">
+									<label>Label</label>
+								</object>
+								<flag>wxALL|wxALIGN_LEFT</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX6" variable="CheckBox6" member="yes">
+									<label>Label</label>
+								</object>
+								<flag>wxALL|wxALIGN_LEFT</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
 				</object>
-				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 				<option>1</option>
 			</object>
@@ -189,7 +191,6 @@
 					<object class="sizeritem">
 						<object class="wxButton" name="wxID_OK" variable="Button2" member="yes">
 							<label>OK</label>
-							<handler function="OnButton2Click" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -198,7 +199,6 @@
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
-				<option>1</option>
 			</object>
 		</object>
 	</object>

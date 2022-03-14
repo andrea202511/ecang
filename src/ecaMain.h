@@ -24,6 +24,8 @@
 #include "ecaPDO.h"
 #include "ecaPDOFilter.h"
 #include "ecaDataFilter.h"
+#include "ecaABOUT.h"
+
 
 
 
@@ -46,9 +48,10 @@ class ecaDialog: public wxDialog
         void Elabora(wxCommandEvent& event);
         void OnButton4Click(wxCommandEvent& event);
         void OnTextCtrl3Text(wxCommandEvent& event);
-        void OnButton5Click(wxCommandEvent& event);
         void OnBitmapButton1Click(wxCommandEvent& event);
         void OnBitmapButton2Click(wxCommandEvent& event);
+        void OnBitmapButton3Click(wxCommandEvent& event);
+        void OnButton5Click(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(ecaDialog)
@@ -59,19 +62,22 @@ class ecaDialog: public wxDialog
         static const long ID_TEXTCTRL2;
         static const long ID_BITMAPBUTTON1;
         static const long ID_TEXTCTRL3;
-        static const long ID_BUTTON4;
+        static const long ID_BUTTON5;
         static const long ID_BUTTON3;
+        static const long ID_BITMAPBUTTON3;
         //*)
 
         //(*Declarations(ecaDialog)
         wxBitmapButton* BitmapButton1;
         wxBitmapButton* BitmapButton2;
+        wxBitmapButton* BitmapButton3;
         wxButton* Button1;
         wxButton* Button2;
         wxButton* Button3;
-        wxButton* Button4;
+        wxButton* Button5;
         wxFileDialog* FileDialog1;
         wxFileDialog* FileDialog2;
+        wxFileDialog* FileDialog3;
         wxTextCtrl* TextCtrl1;
         wxTextCtrl* TextCtrl2;
         wxTextCtrl* TextCtrl3;
@@ -80,6 +86,7 @@ class ecaDialog: public wxDialog
         ecaSetting* SettingDialog;
         ecaPDOFilter* FilterPDODialog;
         ecaDataFilter* FilterDataDialog;
+        ecaABOUT* AboutDialog;
 
         DECLARE_EVENT_TABLE()
 };

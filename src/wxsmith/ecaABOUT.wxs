@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="ecaABOUT">
+		<title>about</title>
 		<size>300,300</size>
 		<bg>#F0F0F0</bg>
 		<minsize>300,300</minsize>

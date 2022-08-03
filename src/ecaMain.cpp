@@ -406,7 +406,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
   wxString rigacsv;
 
   //Prima riga csv con intestazioni
-  rigacsv="Block;Dir;Note;Errors";
+  rigacsv="Block;Dir;WorkCnt;Note;Errors";
   for (unsigned int i=0; i<ArrayPDO.GetCount();i++) {
     if (ArrayPDO[i].enabled==false)
       continue;
@@ -585,10 +585,12 @@ void ecaDialog::Elabora(wxCommandEvent& event)
         else {
           rigacsv+="M <= S;";
         }
+        //WorkingCount
+        rigacsv+=wxString::Format(wxT("%d;"),(uint16_t)WorkingCount);
         //note
         rigacsv+=" ;";
         //errors
-        rigacsv+=" ";  //no ; !!
+        rigacsv+=" ";
 
 
         for (unsigned int i=0; i<ArrayPDO.GetCount(); i++) {

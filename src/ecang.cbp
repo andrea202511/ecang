@@ -68,7 +68,7 @@
 				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
 			</AutoVersioning>
 			<DoxyBlocks>
-				<comment_style block="0" line="0" />
+				<comment_style block="2" line="2" />
 				<doxyfile_project />
 				<doxyfile_build />
 				<doxyfile_warnings />

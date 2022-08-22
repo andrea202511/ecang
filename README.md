@@ -24,7 +24,7 @@ from prompt can use dpgk
 
 sudo dpkg -i ecang_1_.... .deb
 
-# Internals
+## Internals
 Ecang exctracts the list of PDO reading the branch EtherCATConfig/Config/ProcessImage/Inputs and EtherCATConfig/Config/ProcessImage/Outputs
 
 //TODO completare

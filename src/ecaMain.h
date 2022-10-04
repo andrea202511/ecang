@@ -42,16 +42,17 @@ class ecaDialog: public wxDialog
         //(*Handlers(ecaDialog)
         void OnQuit(wxCommandEvent& event);
         void OnAbout(wxCommandEvent& event);
-        void SelezionaXML(wxCommandEvent& event);
-        void SelezionaPcapng(wxCommandEvent& event);
+        void OpenFileENI(wxCommandEvent& event);
+        void OpenFilePcapng(wxCommandEvent& event);
         void OnButton3Click(wxCommandEvent& event);
         void Elabora(wxCommandEvent& event);
-        void OnButton4Click(wxCommandEvent& event);
-        void OnTextCtrl3Text(wxCommandEvent& event);
+        //void OnButton4Click(wxCommandEvent& event);
+        //void OnTextCtrl3Text(wxCommandEvent& event);
         void OnBitmapButton1Click(wxCommandEvent& event);
         void OnBitmapButton2Click(wxCommandEvent& event);
         void OnBitmapButton3Click(wxCommandEvent& event);
         void OnButton5Click(wxCommandEvent& event);
+        void OnButton1Click(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(ecaDialog)
@@ -87,6 +88,9 @@ class ecaDialog: public wxDialog
         ecaPDOFilter* FilterPDODialog;
         ecaDataFilter* FilterDataDialog;
         ecaABOUT* AboutDialog;
+
+        wxString FileEni;
+        wxString FilePcapng;
 
         DECLARE_EVENT_TABLE()
 };

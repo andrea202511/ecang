@@ -9,8 +9,8 @@
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
 						<object class="wxButton" name="ID_BUTTON1" variable="Button1" member="yes">
-							<label>XML</label>
-							<handler function="SelezionaXML" entry="EVT_BUTTON" />
+							<label>ENI (xml)</label>
+							<handler function="OpenFileENI" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>4</border>
@@ -41,7 +41,7 @@
 					<object class="sizeritem">
 						<object class="wxButton" name="ID_BUTTON2" variable="Button2" member="yes">
 							<label>PCAPNG</label>
-							<handler function="SelezionaPcapng" entry="EVT_BUTTON" />
+							<handler function="OpenFilePcapng" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>4</border>

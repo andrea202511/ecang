@@ -86,7 +86,7 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
     SetMinSize(wxSize(480,320));
     BoxSizer1 = new wxBoxSizer(wxVERTICAL);
     BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-    Button1 = new wxButton(this, ID_BUTTON1, _("XML"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
+    Button1 = new wxButton(this, ID_BUTTON1, _("ENI (xml)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
     BoxSizer2->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
     TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
     BoxSizer2->Add(TextCtrl1, 4, wxALL|wxEXPAND, 5);
@@ -122,9 +122,9 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
     BoxSizer1->Fit(this);
     BoxSizer1->SetSizeHints(this);
 
-    Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::SelezionaXML);
+    Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OpenFileENI);
     Connect(ID_BITMAPBUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnBitmapButton2Click);
-    Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::SelezionaPcapng);
+    Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OpenFilePcapng);
     Connect(ID_BITMAPBUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnBitmapButton1Click);
     Connect(ID_BUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnButton5Click);
     Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::Elabora);
@@ -154,13 +154,19 @@ void ecaDialog::OnAbout(wxCommandEvent& event)
   wxMessageBox(msg, _("Welcome to..."));
 }
 
-void ecaDialog::SelezionaXML(wxCommandEvent& event)
+
+/* -----------------------------------------------
+ * Select, open and read all PDO's header from ENI
+ * file. All data are stored in ArrayPDO
+ * -----------------------------------------------*/
+void ecaDialog::OpenFileENI(wxCommandEvent& event)
 {
-  wxString FileXml;
+
   if (FileDialog1->ShowModal() == wxID_OK)
   {
-		FileXml=FileDialog1->GetPath();
-		TextCtrl1->SetValue(FileXml);
+		FileEni=FileDialog1->GetPath();
+		TextCtrl1->SetValue(FileEni);
+
 	}
 
   wxString str1;
@@ -173,10 +179,10 @@ void ecaDialog::SelezionaXML(wxCommandEvent& event)
   wxXmlNode *child_liv4;
   wxXmlNode *child_liv5;
 
-  if (!docxml.Load(FileXml))
+  if (!docxml.Load(FileEni))
     return;
 
-  str1="Open file: "+FileXml+"\n";
+  str1="Open file: "+FileEni+"\n";
   TextCtrl3->AppendText(str1);
   TextCtrl3->Refresh();
 
@@ -189,6 +195,7 @@ void ecaDialog::SelezionaXML(wxCommandEvent& event)
 
   ArrayPDO.Clear();
 
+  //Loop to find Config/ProcessImage/Inputs|Outputs
   child_liv1 = docxml.GetRoot()->GetChildren();
   while (child_liv1)
   {
@@ -213,7 +220,7 @@ void ecaDialog::SelezionaXML(wxCommandEvent& event)
                 str1=child_liv4->GetName();
                 if (str1=="ByteSize")
                 {
-                  str2=child_liv4->GetNodeContent(); //("Name", "NoName");
+                  str2=child_liv4->GetNodeContent();
                   str2.ToLong(&longtmp);
                   maxbytes=(int16_t) (longtmp/8);
                 }
@@ -225,21 +232,21 @@ void ecaDialog::SelezionaXML(wxCommandEvent& event)
                     str1=child_liv5->GetName();
                     if (str1=="Name")
                     {
-                      str2=child_liv5->GetNodeContent(); //("Name", "NoName");
+                      str2=child_liv5->GetNodeContent();
                       PdoTmp.PDO_name=str2;
                     }
                     if (str1=="BitSize")
                     {
-                      str2=child_liv5->GetNodeContent(); //("Name", "NoName");
+                      str2=child_liv5->GetNodeContent();
                       str2.ToLong(&longtmp);
-                     //variabili a bit sono gestite a gruppi di 8
+                      //Bits variables are managed by byte
                       if (longtmp<8)
                         longtmp=8;
                       PdoTmp.PDO_bytes=(int16_t)longtmp;
                     }
                     if (str1=="BitOffs")
                     {
-                      str2=child_liv5->GetNodeContent(); //("Name", "NoName");
+                      str2=child_liv5->GetNodeContent();
                       str2.ToLong(&longtmp);
                       if(not(longtmp%8 == 0)) {
                         PdoTmp.PDO_offset=32000;  //se non allineato al byte lo salto
@@ -267,7 +274,7 @@ void ecaDialog::SelezionaXML(wxCommandEvent& event)
                 str1=child_liv4->GetName();
                 if (str1=="ByteSize")
                 {
-                  str2=child_liv4->GetNodeContent(); //("Name", "NoName");
+                  str2=child_liv4->GetNodeContent();
                   str2.ToLong(&longtmp);
                   maxbytes=(int16_t) (longtmp/8);
                 }
@@ -279,12 +286,12 @@ void ecaDialog::SelezionaXML(wxCommandEvent& event)
                     str1=child_liv5->GetName();
                     if (str1=="Name")
                     {
-                      str2=child_liv5->GetNodeContent(); //("Name", "NoName");
+                      str2=child_liv5->GetNodeContent();
                       PdoTmp.PDO_name=str2;
                     }
                     if (str1=="BitSize")
                     {
-                      str2=child_liv5->GetNodeContent(); //("Name", "NoName");
+                      str2=child_liv5->GetNodeContent();
                       str2.ToLong(&longtmp);
                       //variabili a bit sono gestite a gruppi di 8
                       if (longtmp<8)
@@ -293,7 +300,7 @@ void ecaDialog::SelezionaXML(wxCommandEvent& event)
                     }
                     if (str1=="BitOffs")
                     {
-                      str2=child_liv5->GetNodeContent(); //("Name", "NoName");
+                      str2=child_liv5->GetNodeContent();
                       str2.ToLong(&longtmp);
                       if(not(longtmp%8 == 0))
                       {
@@ -338,13 +345,17 @@ void ecaDialog::SelezionaXML(wxCommandEvent& event)
 }
 
 
-void ecaDialog::SelezionaPcapng(wxCommandEvent& event)
+/*--------------------------------------------------
+ * Select PCAPNG file and put his name into
+ * FilePcapng string
+ * -------------------------------------------------*/
+void ecaDialog::OpenFilePcapng(wxCommandEvent& event)
 {
   wxString file,str1;
   if (FileDialog2->ShowModal() == wxID_OK)
   {
-    file=FileDialog2->GetPath();
-		TextCtrl2->SetValue(file);
+    FilePcapng=FileDialog2->GetPath();
+		TextCtrl2->SetValue(FilePcapng);
 		BitmapButton1->Enable();
 		str1="Open file: "+file+"\n";
 		TextCtrl3->AppendText(str1);
@@ -353,11 +364,7 @@ void ecaDialog::SelezionaPcapng(wxCommandEvent& event)
 
 void ecaDialog::Elabora(wxCommandEvent& event)
 {
-  wxString FilePcapng;
 
-
-
-  FilePcapng=TextCtrl2->GetValue();
 
   uint32_t ui32;
   uint16_t ui16;
@@ -700,14 +707,6 @@ void ecaDialog::Elabora(wxCommandEvent& event)
 
 }
 
-void ecaDialog::OnButton4Click(wxCommandEvent& event)
-{
-
-}
-
-void ecaDialog::OnTextCtrl3Text(wxCommandEvent& event)
-{
-}
 
 
 void ecaDialog::OnBitmapButton1Click(wxCommandEvent& event)
@@ -728,4 +727,8 @@ void ecaDialog::OnBitmapButton3Click(wxCommandEvent& event)
 void ecaDialog::OnButton5Click(wxCommandEvent& event)
 {
   AboutDialog->ShowModal();
+}
+
+void ecaDialog::OnButton1Click(wxCommandEvent& event)
+{
 }

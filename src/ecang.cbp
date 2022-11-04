@@ -27,6 +27,7 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
+					<Add option="-O3" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>

@@ -8,7 +8,7 @@
 			<object class="sizeritem">
 				<object class="wxCheckListBox" name="ID_CHECKLISTBOX1" variable="CheckListBox1" member="yes">
 					<content>
-						<item>SDO data</item>
+						<item>SDO data (experimental)</item>
 						<item>PDO data</item>
 						<item>No ethercat frame</item>
 					</content>

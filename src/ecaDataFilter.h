@@ -15,6 +15,10 @@ class ecaDataFilter: public wxDialog
 		ecaDataFilter(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize);
 		virtual ~ecaDataFilter();
 
+    bool SDOframes;
+    bool PDOframes;
+    bool OTHERframes;
+
 		//(*Declarations(ecaDataFilter)
 		wxButton* Button1;
 		wxCheckListBox* CheckListBox1;

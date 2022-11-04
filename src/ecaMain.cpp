@@ -88,7 +88,7 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
     BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
     Button1 = new wxButton(this, ID_BUTTON1, _("ENI (xml)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
     BoxSizer2->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
-    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL1"));
     BoxSizer2->Add(TextCtrl1, 4, wxALL|wxEXPAND, 5);
     BitmapButton2 = new wxBitmapButton(this, ID_BITMAPBUTTON2, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_BUTTON), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON2"));
     BitmapButton2->Disable();
@@ -97,7 +97,7 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
     BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
     Button2 = new wxButton(this, ID_BUTTON2, _("PCAPNG"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
     BoxSizer3->Add(Button2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
-    TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL2"));
+    TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL2"));
     BoxSizer3->Add(TextCtrl2, 4, wxALL|wxEXPAND, 5);
     BitmapButton1 = new wxBitmapButton(this, ID_BITMAPBUTTON1, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_BUTTON), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON1"));
     BitmapButton1->Disable();
@@ -131,6 +131,7 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
     Connect(ID_BITMAPBUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnBitmapButton3Click);
     //*)
 
+    //MainCore = new ecaMainCore(this);
     SettingDialog = new ecaSetting(this);
     FilterPDODialog = new ecaPDOFilter(this);
     FilterDataDialog = new ecaDataFilter(this);
@@ -357,14 +358,23 @@ void ecaDialog::OpenFilePcapng(wxCommandEvent& event)
     FilePcapng=FileDialog2->GetPath();
 		TextCtrl2->SetValue(FilePcapng);
 		BitmapButton1->Enable();
-		str1="Open file: "+file+"\n";
+		str1="Open file: "+FilePcapng+"\n";
 		TextCtrl3->AppendText(str1);
 	}
 }
 
+
+/*--------------------------------------------------
+ * Read PCAPNG file data and export to csv file
+ * -------------------------------------------------*/
 void ecaDialog::Elabora(wxCommandEvent& event)
 {
-
+  BLOCK_HEADER BlockHeader;
+  EPB_PART1_HEADER EpbPart1Header;
+  EPB_PART2_HEADER EpbPart2Header;
+  DATAGRAM_HEADER DatagramHeader;
+  MAILBOX_HEADER MailboxHeader;
+  MAILBOX_SERVICE MailboxService;
 
   uint32_t ui32;
   uint16_t ui16;
@@ -373,9 +383,11 @@ void ecaDialog::Elabora(wxCommandEvent& event)
   bool dirout=true;
   wxString str1;
   wxString fileCSV;
+  wxString rigacsv;
 
-
+  wxFile filecsv;
   wxFile filepcap;
+
   if (!filepcap.Open(FilePcapng,wxFile::read))
      return;
 
@@ -390,27 +402,26 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     return;
   }
 
-
-  wxFile filecsv;
   if (!filecsv.Open(fileCSV,wxFile::write))
      return;
 
-  wxProgressDialog ProgrDialog(wxT("Elaborazione"),
+  wxProgressDialog ProgrDialog(wxT("Progress"),
                               wxT("Reading pcapng file"),
                               sizepcap,
                               this,
                               wxPD_CAN_ABORT|wxPD_AUTO_HIDE);
 
-  uint32_t BlockType;
-  uint32_t BlockLength;
-  uint32_t InterfaceID;
-  uint32_t TimestampH;
-  uint32_t TimestampL;
-  uint32_t CapturedPacked;
-  uint32_t OriginalPacked;
-  uint64_t MacSource;
-  uint64_t MacDest;
-  wxString rigacsv;
+ // uint32_t BlockType;
+ // uint32_t BlockLength;
+
+ // uint32_t InterfaceID;
+ // uint32_t TimestampH;
+ // uint32_t TimestampL;
+ // uint32_t CapturedPacked;
+ // uint32_t OriginalPacked;
+
+ // uint64_t MacSource;
+ // uint64_t MacDest;
 
   //Prima riga csv con intestazioni
   rigacsv="Block;Dir;WorkCnt;Note;Errors";
@@ -428,8 +439,9 @@ void ecaDialog::Elabora(wxCommandEvent& event)
 
   wxFileOffset punto=0;
   wxFileOffset puntoB=0;
-
   wxFileOffset data_NOP;
+  wxFileOffset data_FPRD;
+  wxFileOffset data_FPWR;
   wxFileOffset data_BRD;
   wxFileOffset data_BWR;
   wxFileOffset data_BRW;
@@ -441,7 +453,6 @@ void ecaDialog::Elabora(wxCommandEvent& event)
 
   int blocchi=0;
 
-  bool dout=true;
   //Ciclo su file
   while (filepcap.Eof()==0)
   {
@@ -454,72 +465,74 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     }
 
     //lettura tipo e lunghezza blocco
-    if (filepcap.Read(&BlockType,4)!=4) break;
-    if (filepcap.Read(&BlockLength,4)!=4) break;
+    if (filepcap.Read(&BlockHeader,8)!=8) break;
+    //m if (filepcap.Read(&BlockLength,4)!=4) break;
 
 
     //blocco header 0x0A0D0D0A
-    if (BlockType==0x0A0D0D0A)
+    if (BlockHeader.BlockType==0x0A0D0D0A)
     {
     }
     //blocco Interface description 0x00000001
-    if (BlockType==0x00000001)
+    if (BlockHeader.BlockType==0x00000001)
     {
     }
-    //blocco Simple pachet 0x00000003
-    if (BlockType==0x00000003)
+    //blocco Simple packet 0x00000003
+    if (BlockHeader.BlockType==0x00000003)
     {
     }
     //blocco Name resolution block 0x00000004
-    if (BlockType==0x00000004)
+    if (BlockHeader.BlockType==0x00000004)
     {
     }
     //blocco Interface statistic block 0x00000005
-    if (BlockType==0x00000005)
+    if (BlockHeader.BlockType==0x00000005)
     {
     }
-    //blocco Enhanced pachet 0x00000006
-    if (BlockType==0x00000006)
+    //blocco Enhanced packet 0x00000006 (EPB)
+    if (BlockHeader.BlockType==0x00000006)
     {
-      if (filepcap.Read(&InterfaceID,4)!=4) break;
-      if (filepcap.Read(&TimestampH,4)!=4) break;
-      if (filepcap.Read(&TimestampL,4)!=4) break;
-      if (filepcap.Read(&CapturedPacked,4)!=4) break;
-      if (filepcap.Read(&OriginalPacked,4)!=4) break;
+   //m   if (filepcap.Read(&InterfaceID,4)!=4) break;
+   //m   if (filepcap.Read(&TimestampH,4)!=4) break;
+   //m   if (filepcap.Read(&TimestampL,4)!=4) break;
+   //m   if (filepcap.Read(&CapturedPacked,4)!=4) break;
+      if (filepcap.Read(&EpbPart1Header,20)!=20) break;
 
       //Da qui inizia il blocco di dati così come visualizzato da wireshark.
       //Gli offset (espressi in bits) ricavati dal file XML si riferiscono a questo blocco
       //Lo memorizzo
       puntoB=filepcap.Tell();
 
-      //  6+6 indirizzi schede
-      if (filepcap.Read(&MacSource,6)!=6) break;
-      if (filepcap.Read(&MacDest,6)!=6) break;
-
-
-      uint16_t Type;
-
-      uint16_t EthercatFrameHeader;
-      uint16_t EthercatFrameLenght;
+     //m uint16_t Type;
+     //m uint16_t EthercatFrameHeader;
+     uint16_t EthercatFrameLenght;
       //0x88A4 frame ethercat
-      if (filepcap.Read(&Type,2)!=2) break;
 
-      if (filepcap.Read(&EthercatFrameHeader,2)!=2) break;
+      //  6+6 indirizzi schede
+      //m if (filepcap.Read(&MacSource,6)!=6) break;
+      //m if (filepcap.Read(&MacDest,6)!=6) break;
+      //m if (filepcap.Read(&Type,2)!=2) break;
+      //m if (filepcap.Read(&EthercatFrameHeader,2)!=2) break;
 
-      EthercatFrameLenght=EthercatFrameHeader & 0x07FF;
+      if (filepcap.Read(&EpbPart2Header,16)!=16) break;
+
+      EthercatFrameLenght=EpbPart2Header.EthercatHeader & 0x07FF;
 
       uint16_t byteEstratti;
 
-      uint8_t DatagramCommand;
-      uint8_t DatagramIndex;
-      uint32_t DatagramAddress;
-      uint16_t DatagramHeader2;
-      uint16_t DatagramIRQ;
+//m      uint8_t DatagramCommand;
+//m      uint8_t DatagramIndex;
+//m      uint32_t DatagramAddress;
+//m      uint16_t DatagramHeader2;
+//m      uint16_t DatagramIRQ;
+
       uint16_t WorkingCount;
       uint16_t DatagramLenght;
       uint8_t datadatagram[2048];
 
       data_NOP=-1;
+      data_FPRD=-1;
+      data_FPWR=-1;
       data_BRD=-1;
       data_BWR=-1;
       data_BRW=-1;
@@ -533,52 +546,70 @@ void ecaDialog::Elabora(wxCommandEvent& event)
       byteEstratti=0;
       dirout=true;
       //Se e' un frame ethercat ne analizzo i singoli datagram
-      if (Type==0xA488) {
+      if (EpbPart2Header.Type==0xA488) {
 
         while (byteEstratti<EthercatFrameLenght)
         {
           //qui inizia il giro estrazione Datagrams
-          if (filepcap.Read(&DatagramCommand,1)!=1) break;
-          if (filepcap.Read(&DatagramIndex,1)!=1) break;
-          if (filepcap.Read(&DatagramAddress,4)!=4) break;
-          if (filepcap.Read(&DatagramHeader2,2)!=2) break; //length+reserved+circulating+next
-          if (filepcap.Read(&DatagramIRQ,2)!=2) break;
+          //estraggo tutto l'header
+          if (filepcap.Read(&DatagramHeader,10)!=10) break;
+     //    if (filepcap.Read(&DatagramHeader.Command,1)!=1) break;
+     //     if (filepcap.Read(&DatagramHeader.Index,1)!=1) break;
+     //    if (filepcap.Read(&DatagramHeader.Address,4)!=4) break;
+     //    if (filepcap.Read(&DatagramHeader.Mix,2)!=2) break; //length+reserved+circulating+next          if (filepcap.Read(&DatagramIRQ,2)!=2) break;
+     //   if (filepcap.Read(&DatagramHeader.IRQ,2)!=2) break; //length+reserved+circulating+next          if (filepcap.Read(&DatagramIRQ,2)!=2) break;
 
-          DatagramLenght=DatagramHeader2 & 0x07FF;
+          DatagramLenght=DatagramHeader.Mix & 0x07FF;
 
-          if(DatagramCommand==0x00)  //NOP
+          if(DatagramHeader.Command==0x00)  //NOP
             data_NOP=filepcap.Tell();
 
-          if(DatagramCommand==0x07)  //BRD broadcast read
+          if(DatagramHeader.Command==0x04)  //FPRD configured address physical read
+            data_FPRD=filepcap.Tell();    //risposta SDO
+
+          if(DatagramHeader.Command==0x05)  //FPWR configured address physical write
+            data_FPWR=filepcap.Tell();    //richiesta SDO
+
+          if(DatagramHeader.Command==0x07)  //BRD broadcast read
             data_BRD=filepcap.Tell();
 
-          if(DatagramCommand==0x08)  //BWR broadcast write
+          if(DatagramHeader.Command==0x08)  //BWR broadcast write
             data_BWR=filepcap.Tell();
 
-          if(DatagramCommand==0x09)  //BRW broadcast read/write
+          if(DatagramHeader.Command==0x09)  //BRW broadcast read/write
             data_BRW=filepcap.Tell();
 
-          if(DatagramCommand==0x0A)  //LRD logical read
+          if(DatagramHeader.Command==0x0A)  //LRD logical read
             data_LRD=filepcap.Tell();
 
-          if(DatagramCommand==0x0B)  //LWR logical write
+          if(DatagramHeader.Command==0x0B)  //LWR logical write
             data_LWR=filepcap.Tell();
 
-          if(DatagramCommand==0x0C)  //LRW logical read/write
+          if(DatagramHeader.Command==0x0C)  //LRW logical read/write
             data_LRW=filepcap.Tell();   //qui ci sono i PDO
 
-          if(DatagramCommand==0x0d)  //ARMW Auto increment physical  Read Multiple Wrire
+          if(DatagramHeader.Command==0x0d)  //ARMW Auto increment physical  Read Multiple Write
             data_ARMW=filepcap.Tell(); //contiene il DC
 
           //Estraggo i dati del datagramma
           filepcap.Read(&datadatagram,DatagramLenght);
-          if (filepcap.Read(&WorkingCount,2)!=2) break;
+          filepcap.Read(&WorkingCount,2);
           if (WorkingCount>0)
             dirout=false;
           byteEstratti+=10+DatagramLenght+2;
         }
       }
-
+      //FPRD configured address physical read
+      if (data_FPRD>0) {
+        filepcap.Read(&MailboxHeader,6);
+        filepcap.Read(&MailboxService,10);
+      }
+      //FPWR configured address physical write
+      if (data_FPWR>0) {
+        filepcap.Read(&MailboxHeader,6);
+        filepcap.Read(&MailboxService,10);
+      }
+      //LRW logical read/write
       if (data_LRW>0) {
         //block number
         rigacsv=wxString::Format(wxT("%d"),(uint16_t)blocchi);
@@ -696,7 +727,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     }
 
     blocchi++;
-    punto+=BlockLength;
+    punto+=BlockHeader.BlockLength;
 
     //dirout=!dirout;
   }
@@ -706,8 +737,6 @@ void ecaDialog::Elabora(wxCommandEvent& event)
   wxMessageBox(messa,wxT("- Finish -"),wxICON_INFORMATION);
 
 }
-
-
 
 void ecaDialog::OnBitmapButton1Click(wxCommandEvent& event)
 {

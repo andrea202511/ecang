@@ -25,7 +25,7 @@ ecaDataFilter::ecaDataFilter(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	CheckListBox1 = new wxCheckListBox(this, ID_CHECKLISTBOX1, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_CHECKLISTBOX1"));
-	CheckListBox1->Append(_("SDO data"));
+	CheckListBox1->Append(_("SDO data (experimental)"));
 	CheckListBox1->Append(_("PDO data"));
 	CheckListBox1->Append(_("No ethercat frame"));
 	CheckListBox1->Disable();
@@ -49,5 +49,9 @@ ecaDataFilter::~ecaDataFilter()
 
 void ecaDataFilter::OnButton1Click(wxCommandEvent& event)
 {
+  SDOframes=CheckListBox1->IsChecked(0);
+  PDOframes=CheckListBox1->IsChecked(1);
+  OTHERframes=CheckListBox1->IsChecked(2);
+
   EndModal(wxID_OK);
 }

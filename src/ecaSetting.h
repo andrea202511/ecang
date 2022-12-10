@@ -26,10 +26,10 @@ class ecaSetting: public wxDialog
 		bool allPDOin=true;
 		bool allPDOout=true;
 
-		int format64in=1;
+		int format64in=0;
 		int format32in=0;
-		int format16in=2;
-		int format8in=2;
+		int format16in=0;
+		int format8in=0;
 
 
   private:

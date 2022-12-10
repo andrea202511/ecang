@@ -13,6 +13,8 @@
 #include <wx/xml/xml.h>
 #include <wx/file.h>
 #include <wx/progdlg.h>
+#include <wx/wfstream.h>
+#include <wx/txtstrm.h>
 
 WX_DEFINE_OBJARRAY(PDOArray);
 
@@ -223,7 +225,7 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
                 {
                   str2=child_liv4->GetNodeContent();
                   str2.ToLong(&longtmp);
-                  maxbytes=(int16_t) (longtmp/8);
+                  maxbytes=(int16_t) (longtmp/8)*2;  //need double
                 }
                 if (str1=="Variable")
                 {
@@ -258,7 +260,7 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
                     }
                     child_liv5=child_liv5->GetNext();
                   }
-                  if ((PdoTmp.PDO_offset>0) && (PdoTmp.PDO_offset<30000)) { //=maxbytes)) {
+                  if ((PdoTmp.PDO_offset>0) && (PdoTmp.PDO_offset<maxbytes)) {
                     PdoTmp.out=false;
                     ArrayPDO.Add(PdoTmp);
                     pdoin++;
@@ -277,7 +279,7 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
                 {
                   str2=child_liv4->GetNodeContent();
                   str2.ToLong(&longtmp);
-                  maxbytes=(int16_t) (longtmp/8);
+                  maxbytes=(int16_t) (longtmp/8)*2; //need double!
                 }
                 if (str1=="Variable")
                 {
@@ -314,7 +316,7 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
                     }
                     child_liv5=child_liv5->GetNext();
                   }
-                  if ((PdoTmp.PDO_offset>0) && (PdoTmp.PDO_offset<30000)) { //=maxbytes)) {
+                  if ((PdoTmp.PDO_offset>0) && (PdoTmp.PDO_offset<maxbytes)) {
                      PdoTmp.out=true;
                      ArrayPDO.Add(PdoTmp);
                      pdout++;
@@ -388,6 +390,10 @@ void ecaDialog::Elabora(wxCommandEvent& event)
   wxFile filecsv;
   wxFile filepcap;
 
+
+  str1.Alloc(2000);
+  rigacsv.Alloc(5000);
+
   if (!filepcap.Open(FilePcapng,wxFile::read))
      return;
 
@@ -405,38 +411,29 @@ void ecaDialog::Elabora(wxCommandEvent& event)
   if (!filecsv.Open(fileCSV,wxFile::write))
      return;
 
+  wxFileOutputStream outfilecsv(filecsv);
+  wxTextOutputStream outfile(outfilecsv);
+
   wxProgressDialog ProgrDialog(wxT("Progress"),
                               wxT("Reading pcapng file"),
                               sizepcap,
                               this,
                               wxPD_CAN_ABORT|wxPD_AUTO_HIDE);
 
- // uint32_t BlockType;
- // uint32_t BlockLength;
-
- // uint32_t InterfaceID;
- // uint32_t TimestampH;
- // uint32_t TimestampL;
- // uint32_t CapturedPacked;
- // uint32_t OriginalPacked;
-
- // uint64_t MacSource;
- // uint64_t MacDest;
-
-  //Prima riga csv con intestazioni
-  rigacsv="Block;Dir;WorkCnt;Note;Errors";
+  //header
+  outfile<<wxT("Block;Dir;WorkCnt;Note;Errors");
   for (unsigned int i=0; i<ArrayPDO.GetCount();i++) {
     if (ArrayPDO[i].enabled==false)
       continue;
     ecaPDO ep=ArrayPDO[i];
-    rigacsv+=";";
-    rigacsv+=ep.PDO_name;
-    rigacsv+=wxString::Format(wxT(" %d %d"),ep.PDO_bytes,ep.PDO_offset);
+    outfile<<wxT(";");
+    outfile<<ep.PDO_name;
+    outfile<<wxT(" ");
+    outfile<<ep.PDO_bytes;
+    outfile<<wxT(" ");
+    outfile<<ep.PDO_offset;
   }
-  rigacsv+="\n";
-  filecsv.Write(rigacsv);
-
-
+  outfile<<wxT("\n");
   wxFileOffset punto=0;
   wxFileOffset puntoB=0;
   wxFileOffset data_NOP;
@@ -452,6 +449,10 @@ void ecaDialog::Elabora(wxCommandEvent& event)
 
 
   int blocchi=0;
+  uint16_t byteEstratti;
+  uint16_t WorkingCount;
+  uint16_t DatagramLenght;
+  char datadatagram[2048];
 
   //Ciclo su file
   while (filepcap.Eof()==0)
@@ -460,7 +461,6 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     filepcap.Seek(punto,wxFromStart);
 
     if (!ProgrDialog.Update((int)punto)) {
-//        ProgrDialog.EndModal();
       break;
     }
 
@@ -492,43 +492,19 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     //blocco Enhanced packet 0x00000006 (EPB)
     if (BlockHeader.BlockType==0x00000006)
     {
-   //m   if (filepcap.Read(&InterfaceID,4)!=4) break;
-   //m   if (filepcap.Read(&TimestampH,4)!=4) break;
-   //m   if (filepcap.Read(&TimestampL,4)!=4) break;
-   //m   if (filepcap.Read(&CapturedPacked,4)!=4) break;
-      if (filepcap.Read(&EpbPart1Header,20)!=20) break;
+     if (filepcap.Read(&EpbPart1Header,20)!=20) break;
 
       //Da qui inizia il blocco di dati così come visualizzato da wireshark.
       //Gli offset (espressi in bits) ricavati dal file XML si riferiscono a questo blocco
       //Lo memorizzo
       puntoB=filepcap.Tell();
 
-     //m uint16_t Type;
-     //m uint16_t EthercatFrameHeader;
-     uint16_t EthercatFrameLenght;
-      //0x88A4 frame ethercat
-
-      //  6+6 indirizzi schede
-      //m if (filepcap.Read(&MacSource,6)!=6) break;
-      //m if (filepcap.Read(&MacDest,6)!=6) break;
-      //m if (filepcap.Read(&Type,2)!=2) break;
-      //m if (filepcap.Read(&EthercatFrameHeader,2)!=2) break;
+      uint16_t EthercatFrameLenght;
 
       if (filepcap.Read(&EpbPart2Header,16)!=16) break;
 
       EthercatFrameLenght=EpbPart2Header.EthercatHeader & 0x07FF;
 
-      uint16_t byteEstratti;
-
-//m      uint8_t DatagramCommand;
-//m      uint8_t DatagramIndex;
-//m      uint32_t DatagramAddress;
-//m      uint16_t DatagramHeader2;
-//m      uint16_t DatagramIRQ;
-
-      uint16_t WorkingCount;
-      uint16_t DatagramLenght;
-      uint8_t datadatagram[2048];
 
       data_NOP=-1;
       data_FPRD=-1;
@@ -553,11 +529,6 @@ void ecaDialog::Elabora(wxCommandEvent& event)
           //qui inizia il giro estrazione Datagrams
           //estraggo tutto l'header
           if (filepcap.Read(&DatagramHeader,10)!=10) break;
-     //    if (filepcap.Read(&DatagramHeader.Command,1)!=1) break;
-     //     if (filepcap.Read(&DatagramHeader.Index,1)!=1) break;
-     //    if (filepcap.Read(&DatagramHeader.Address,4)!=4) break;
-     //    if (filepcap.Read(&DatagramHeader.Mix,2)!=2) break; //length+reserved+circulating+next          if (filepcap.Read(&DatagramIRQ,2)!=2) break;
-     //   if (filepcap.Read(&DatagramHeader.IRQ,2)!=2) break; //length+reserved+circulating+next          if (filepcap.Read(&DatagramIRQ,2)!=2) break;
 
           DatagramLenght=DatagramHeader.Mix & 0x07FF;
 
@@ -593,6 +564,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
 
           //Estraggo i dati del datagramma
           filepcap.Read(&datadatagram,DatagramLenght);
+   //       filepcap.Seek(DatagramLenght,wxFromCurrent);)
           filepcap.Read(&WorkingCount,2);
           if (WorkingCount>0)
             dirout=false;
@@ -612,23 +584,18 @@ void ecaDialog::Elabora(wxCommandEvent& event)
       //LRW logical read/write
       if (data_LRW>0) {
         //block number
-        rigacsv=wxString::Format(wxT("%d"),(uint16_t)blocchi);
-
-        rigacsv+=";";
+        outfile<<blocchi;
         //direction
         if (dirout==true)
         {
-          rigacsv+="M => S;";
+          outfile<<wxT(";M => S;");
         }
         else {
-          rigacsv+="M <= S;";
+          outfile<<wxT(";M <= S;");
         }
-        //WorkingCount
-        rigacsv+=wxString::Format(wxT("%d;"),(uint16_t)WorkingCount);
-        //note
-        rigacsv+=" ;";
-        //errors
-        rigacsv+=" ";
+        //WorkCnt;Note;Errors
+        outfile<<WorkingCount<<wxT("; ; ");
+    //    outfile<<wxT(" ; ");
 
 
         for (unsigned int i=0; i<ArrayPDO.GetCount(); i++) {
@@ -640,75 +607,93 @@ void ecaDialog::Elabora(wxCommandEvent& event)
             if (ArrayPDO[i].PDO_bytes==64) {
               filepcap.Read(&ui64,8);
               if  (SettingDialog->format64in==0) {
-         //       str1=wxString::Format(wxT("%d"),ui64);
+                outfile<<(signed)ui64;
               }
               else if (SettingDialog->format64in==1) {
-         //       str1=wxString::Format(wxT("%016X"),ui64);
+                ui32=(uint32_t)ui64>>32;
+                str1=wxString::Format(wxT("%08X"),ui32);
+                outfile<<str1;
+                ui32=(uint32_t)ui64;
+                str1=wxString::Format(wxT("%08X"),ui32);
+                outfile<<str1;
               }
               else {
-         //       str1=wxString::Format(wxT("0x%016X"),ui64);
-              }
-          }
+                outfile<<wxT("b");
+                for (int ii=0;ii<64;ii++)
+                {
+                  if (ui64&0x8000000000000000)
+                    outfile<<wxT("1");
+                  else
+                    outfile<<wxT("0");
+                  ui64=ui64<<1;
+                }
+                outfile<<str1;
+             }
+            }
             else if (ArrayPDO[i].PDO_bytes==32) {
               filepcap.Read(&ui32,4);
-            str1=wxString::Format(wxT("%d"),ui32);
-
+              outfile<<wxT(";");
               if  (SettingDialog->format32in==0) {
-                str1=wxString::Format(wxT("%d"),ui32);
+                outfile<<(signed)ui32;
               }
               else if (SettingDialog->format32in==1) {
                 str1=wxString::Format(wxT("0x%08X"),ui32);
+                outfile<<str1;
               }
               else {
-                str1="b";
-                for (int i=0;i<32;i++)
+                outfile<<wxT("b");
+                for (int ii=0;ii<32;ii++)
                 {
                   if (ui32&0x80000000)
-                    str1=str1+"1";
+                    outfile<<wxT("1");
                   else
-                    str1=str1+"0";
+                    outfile<<wxT("0");
                   ui32=ui32<<1;
                 }
+                outfile<<str1;
               }
 
             }
             else if (ArrayPDO[i].PDO_bytes==16) {
               filepcap.Read(&ui16,2);
+              outfile<<wxT(";");
               if  (SettingDialog->format16in==0) {
-                str1=wxString::Format(wxT("%d"),ui16);
+                 outfile<<(signed)ui16;
               }
               else if (SettingDialog->format16in==1) {
                 str1=wxString::Format(wxT("0x%04X"),ui16);
+                outfile<<str1;
               }
               else {
-                str1="b";
-                for (int i=0;i<16;i++)
+                outfile<<wxT("b");
+                for (int ii=0;ii<16;ii++)
                 {
                   if (ui16&0x8000)
-                    str1=str1+"1";
+                    outfile<<wxT("1");
                   else
-                    str1=str1+"0";
+                    outfile<<wxT("0");
                   ui16=ui16<<1;
                 }
-             }
+            }
             }
             else {
               filepcap.Read(&ui8,1);
-              str1=wxString::Format(wxT("%d"),ui8);
+              outfile<<wxT(";");
               if  (SettingDialog->format8in==0) {
-                str1=wxString::Format(wxT("%d"),ui8);
+                 outfile<<(signed)ui8;
               }
               else if (SettingDialog->format8in==1) {
                 str1=wxString::Format(wxT("0x%02X"),ui8);
+                outfile<<str1;
               }
               else {
-                str1="b";
-                for (int i=0;i<8;i++)
+                outfile<<wxT("b");
+                for (int ii=0;ii<8;ii++)
                 {
                   if (ui8&0x80)
-                    str1=str1+"1";
+                    outfile<<wxT("1");
                   else
-                    str1=str1+"0";
+                    outfile<<wxT("0");
                   ui8=ui8<<1;
                 }
               }
@@ -716,20 +701,15 @@ void ecaDialog::Elabora(wxCommandEvent& event)
           }
           else
           {
-            str1="";
+            outfile<<";";
           }
-          rigacsv+=";";
-          rigacsv+=str1;
         }
-        rigacsv+="\n";
-        filecsv.Write(rigacsv);
+        outfile<<endl;
       }
     }
 
     blocchi++;
     punto+=BlockHeader.BlockLength;
-
-    //dirout=!dirout;
   }
   filecsv.Close();
   wxString messa;

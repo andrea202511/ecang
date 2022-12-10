@@ -11,11 +11,9 @@ Ecang extracts the list of PDOs exchanged in an ethercat network directly from t
 
 ## Requirements
 
-Ecang use the wxWidgets library (www.wxwidgets.org). These libraries are requested:
+Ecang use the wxWidgets library (www.wxwidgets.org). From Alpha version 1.0.30, wxWidgets library are statically linked for easier installation
 
-//TODO completare
-
-Ecang is develop with Code:Blocks (www.codebloks.org). In the src folder, codeblocks projet can be found;
+Ecang is develop with Code:Blocks (www.codebloks.org). In the src folder, codeblocks project can be found, ecang.cbp for linux version and ecangw.cbp for windows version.
 
 
 ## Istallation
@@ -24,7 +22,7 @@ from prompt can use dpgk
 
 sudo dpkg -i ecang_1_.... .deb
 
-Also installer for windows system will be ready...  //TODO
+Also installer for windows is available. Download the setup_xxx.exe and run it.
 ## Internals
 Ecang exctracts the list of PDO reading the branch EtherCATConfig/Config/ProcessImage/Inputs and EtherCATConfig/Config/ProcessImage/Outputs
 

@@ -31,7 +31,6 @@
 								<item>(0x) hex</item>
 								<item>(b) binary</item>
 							</content>
-							<default>-1</default>
 							<validator>wxGenericValidator(&amp;format64in)</validator>
 							<style>wxRA_SPECIFY_COLS</style>
 						</object>
@@ -47,7 +46,6 @@
 								<item>(0x) hex</item>
 								<item>(b) binary</item>
 							</content>
-							<default>-1</default>
 							<validator>wxGenericValidator(&amp;format32in)</validator>
 							<style>wxRA_SPECIFY_COLS</style>
 						</object>
@@ -63,7 +61,6 @@
 								<item>(0x) hex</item>
 								<item>(b) binary</item>
 							</content>
-							<default>-1</default>
 							<validator>wxGenericValidator(&amp;format16in)</validator>
 							<style>wxRA_SPECIFY_COLS</style>
 						</object>
@@ -79,7 +76,6 @@
 								<item>(0x) hex</item>
 								<item>(b) binary</item>
 							</content>
-							<default>-1</default>
 							<validator>wxGenericValidator(&amp;format8in)</validator>
 							<style>wxRA_SPECIFY_COLS</style>
 						</object>

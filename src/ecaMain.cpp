@@ -69,6 +69,7 @@ const long ecaDialog::ID_TEXTCTRL3 = wxNewId();
 const long ecaDialog::ID_BUTTON5 = wxNewId();
 const long ecaDialog::ID_BUTTON3 = wxNewId();
 const long ecaDialog::ID_BITMAPBUTTON3 = wxNewId();
+const long ecaDialog::ID_TIMER1 = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(ecaDialog,wxDialog)
@@ -121,6 +122,8 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
     FileDialog1 = new wxFileDialog(this, _("Select file XML"), wxEmptyString, wxEmptyString, _("*.xml"), wxFD_DEFAULT_STYLE|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
     FileDialog2 = new wxFileDialog(this, _("Select file PCAPNG"), wxEmptyString, wxEmptyString, _("*.pcapng"), wxFD_DEFAULT_STYLE|wxFD_OPEN|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
     FileDialog3 = new wxFileDialog(this, _("Select file CSV"), wxEmptyString, wxEmptyString, _("*.csv"), wxFD_SAVE|wxFD_OVERWRITE_PROMPT, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
+    Timer1.SetOwner(this, ID_TIMER1);
+    Timer1.Start(1000, false);
     BoxSizer1->Fit(this);
     BoxSizer1->SetSizeHints(this);
 
@@ -131,6 +134,7 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
     Connect(ID_BUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnButton5Click);
     Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::Elabora);
     Connect(ID_BITMAPBUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnBitmapButton3Click);
+    Connect(ID_TIMER1,wxEVT_TIMER,(wxObjectEventFunction)&ecaDialog::OnTimer1Trigger);
     //*)
 
     //MainCore = new ecaMainCore(this);
@@ -416,9 +420,10 @@ void ecaDialog::Elabora(wxCommandEvent& event)
 
   wxProgressDialog ProgrDialog(wxT("Progress"),
                               wxT("Reading pcapng file"),
-                              sizepcap,
+                              100,
                               this,
                               wxPD_CAN_ABORT|wxPD_AUTO_HIDE);
+//ProgressDialog1 = new wxProgressDialog(wxEmptyString, wxEmptyString, 100, this, wxPD_APP_MODAL|wxPD_AUTO_HIDE|wxPD_CAN_ABORT|wxPD_REMAINING_TIME);
 
   //header
   outfile<<wxT("Block;Dir;WorkCnt;Note;Errors");
@@ -453,21 +458,24 @@ void ecaDialog::Elabora(wxCommandEvent& event)
   uint16_t WorkingCount;
   uint16_t DatagramLenght;
   char datadatagram[2048];
+  int percento;
+
+  Timer1.Start(1000);
+  ticks=0;
 
   //Ciclo su file
   while (filepcap.Eof()==0)
   {
+    wxYield();
     //Estrazione blocchi file pcapng
     filepcap.Seek(punto,wxFromStart);
 
-    if (!ProgrDialog.Update((int)punto)) {
+    percento=(int)((((int)punto)*100)/sizepcap);
+    if (!ProgrDialog.Update(percento)) {
       break;
     }
-
     //lettura tipo e lunghezza blocco
     if (filepcap.Read(&BlockHeader,8)!=8) break;
-    //m if (filepcap.Read(&BlockLength,4)!=4) break;
-
 
     //blocco header 0x0A0D0D0A
     if (BlockHeader.BlockType==0x0A0D0D0A)
@@ -713,7 +721,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
   }
   filecsv.Close();
   wxString messa;
-  messa.Printf("Blocks managed:%i",blocchi);
+  messa.Printf("Blocks managed: %i \nElapsed time: %is",blocchi,ticks);
   wxMessageBox(messa,wxT("- Finish -"),wxICON_INFORMATION);
 
 }
@@ -740,4 +748,9 @@ void ecaDialog::OnButton5Click(wxCommandEvent& event)
 
 void ecaDialog::OnButton1Click(wxCommandEvent& event)
 {
+}
+
+void ecaDialog::OnTimer1Trigger(wxTimerEvent& event)
+{
+  ticks++;
 }

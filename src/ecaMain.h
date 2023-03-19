@@ -17,6 +17,7 @@
 #include <wx/filedlg.h>
 #include <wx/sizer.h>
 #include <wx/textctrl.h>
+#include <wx/timer.h>
 //*)
 
 #include <wx/arrimpl.cpp>
@@ -119,6 +120,7 @@ class ecaDialog: public wxDialog
         void OnBitmapButton3Click(wxCommandEvent& event);
         void OnButton5Click(wxCommandEvent& event);
         void OnButton1Click(wxCommandEvent& event);
+        void OnTimer1Trigger(wxTimerEvent& event);
         //*)
 
         //(*Identifiers(ecaDialog)
@@ -132,6 +134,7 @@ class ecaDialog: public wxDialog
         static const long ID_BUTTON5;
         static const long ID_BUTTON3;
         static const long ID_BITMAPBUTTON3;
+        static const long ID_TIMER1;
         //*)
 
         //(*Declarations(ecaDialog)
@@ -148,6 +151,7 @@ class ecaDialog: public wxDialog
         wxTextCtrl* TextCtrl1;
         wxTextCtrl* TextCtrl2;
         wxTextCtrl* TextCtrl3;
+        wxTimer Timer1;
         //*)
 
         ecaSetting* SettingDialog;
@@ -157,6 +161,8 @@ class ecaDialog: public wxDialog
 
         wxString FileEni;
         wxString FilePcapng;
+
+        int32_t ticks;
 
         DECLARE_EVENT_TABLE()
 };

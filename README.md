@@ -27,3 +27,4 @@ Also installer for windows is available. Download the setup_xxx.exe and run it.
 Ecang exctracts the list of PDO reading the branch EtherCATConfig/Config/ProcessImage/Inputs and EtherCATConfig/Config/ProcessImage/Outputs
 
 //TODO completare
+

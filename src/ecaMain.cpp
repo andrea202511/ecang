@@ -592,7 +592,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
       //LRW logical read/write
       if (data_LRW>0) {
         //block number
-        outfile<<blocchi;
+        outfile<<(blocchi-1);
         //direction
         if (dirout==true)
         {

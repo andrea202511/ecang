@@ -16,7 +16,7 @@ Ecang use the wxWidgets library (www.wxwidgets.org). From Alpha version 1.0.30, 
 Ecang is develop with Code:Blocks (www.codebloks.org). In the src folder, codeblocks project can be found, ecang.cbp for linux version and ecangw.cbp for windows version.
 
 
-## Istallation
+## Installation
 Linux. Deb pachages are disposable. Download them from and install with your pakage manager preferred
 from prompt can use dpgk
 
@@ -27,4 +27,3 @@ Also installer for windows is available. Download the setup_xxx.exe and run it.
 Ecang exctracts the list of PDO reading the branch EtherCATConfig/Config/ProcessImage/Inputs and EtherCATConfig/Config/ProcessImage/Outputs
 
 //TODO completare
-

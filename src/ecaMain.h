@@ -23,6 +23,7 @@
 #include <wx/arrimpl.cpp>
 #include "ecaSetting.h"
 #include "ecaPDO.h"
+#include "ecaSlaves.h"
 #include "ecaPDOFilter.h"
 #include "ecaDataFilter.h"
 #include "ecaABOUT.h"

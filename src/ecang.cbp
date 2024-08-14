@@ -70,6 +70,7 @@
 		<Unit filename="ecaPDOFilter.cpp" />
 		<Unit filename="ecaPDOFilter.h" />
 		<Unit filename="ecaSetting.cpp" />
+		<Unit filename="ecaSlaves.h" />
 		<Unit filename="version.h" />
 		<Unit filename="wxsmith/ecaABOUT.wxs" />
 		<Unit filename="wxsmith/ecaDataFilter.wxs" />

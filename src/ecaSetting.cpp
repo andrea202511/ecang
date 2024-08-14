@@ -49,36 +49,36 @@ ecaSetting::ecaSetting(wxWindow* parent,wxWindowID id)
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	wxString __wxRadioBoxChoices_1[3] =
 	{
-		_("num"),
-		_("(0x) hex"),
-		_("(b) binary")
+	    _("num"),
+	    _("(0x) hex"),
+	    _("(b) binary")
 	};
 	RadioBox1 = new wxRadioBox(this, ID_RADIOBOX1, _("64 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format64in), _T("ID_RADIOBOX1"));
 	RadioBox1->SetSelection(0);
 	BoxSizer4->Add(RadioBox1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	wxString __wxRadioBoxChoices_2[3] =
 	{
-		_("num"),
-		_("(0x) hex"),
-		_("(b) binary")
+	    _("num"),
+	    _("(0x) hex"),
+	    _("(b) binary")
 	};
 	RadioBox2 = new wxRadioBox(this, ID_RADIOBOX2, _("32 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_2, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format32in), _T("ID_RADIOBOX2"));
 	RadioBox2->SetSelection(0);
 	BoxSizer4->Add(RadioBox2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	wxString __wxRadioBoxChoices_3[3] =
 	{
-		_("num"),
-		_("(0x) hex"),
-		_("(b) binary")
+	    _("num"),
+	    _("(0x) hex"),
+	    _("(b) binary")
 	};
 	RadioBox3 = new wxRadioBox(this, ID_RADIOBOX3, _("16 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_3, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format16in), _T("ID_RADIOBOX3"));
 	RadioBox3->SetSelection(0);
 	BoxSizer4->Add(RadioBox3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	wxString __wxRadioBoxChoices_4[3] =
 	{
-		_("num"),
-		_("(0x) hex"),
-		_("(b) binary")
+	    _("num"),
+	    _("(0x) hex"),
+	    _("(b) binary")
 	};
 	RadioBox4 = new wxRadioBox(this, ID_RADIOBOX4, _("8 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_4, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format8in), _T("ID_RADIOBOX4"));
 	RadioBox4->SetSelection(0);
@@ -118,7 +118,6 @@ ecaSetting::ecaSetting(wxWindow* parent,wxWindowID id)
 	Button2 = new wxButton(this, wxID_OK, _("OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
 	BoxSizer2->Add(Button2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxEXPAND, 5);
-	SetSizer(BoxSizer1);
 	SetSizer(BoxSizer1);
 	Layout();
 	//*)

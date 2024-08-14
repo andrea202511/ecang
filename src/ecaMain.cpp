@@ -17,8 +17,10 @@
 #include <wx/txtstrm.h>
 
 WX_DEFINE_OBJARRAY(PDOArray);
+WX_DEFINE_OBJARRAY(SLVArray);
 
 PDOArray ArrayPDO;
+SLVArray ArraySlaves;
 
 
 //(*InternalHeaders(ecaDialog)
@@ -124,8 +126,7 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
     FileDialog3 = new wxFileDialog(this, _("Select file CSV"), wxEmptyString, wxEmptyString, _("*.csv"), wxFD_SAVE|wxFD_OVERWRITE_PROMPT, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
     Timer1.SetOwner(this, ID_TIMER1);
     Timer1.Start(1000, false);
-    BoxSizer1->Fit(this);
-    BoxSizer1->SetSizeHints(this);
+    Fit();
 
     Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OpenFileENI);
     Connect(ID_BITMAPBUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnBitmapButton2Click);
@@ -147,6 +148,9 @@ ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
 ecaDialog::~ecaDialog()
 {
     //(*Destroy(ecaDialog)
+    FileDialog1->Destroy();
+    FileDialog2->Destroy();
+    FileDialog3->Destroy();
     //*)
 }
 
@@ -195,12 +199,15 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
 
   BitmapButton2->Disable();
   ecaPDO PdoTmp;
+  ecaSlaves SlvTmp;
   long int longtmp;
   uint16_t maxbytes;
+  int slaves=0;
   int pdoin=0;
   int pdout=0;
 
   ArrayPDO.Clear();
+  ArraySlaves.Clear();
 
   //Loop to find Config/ProcessImage/Inputs|Outputs
   child_liv1 = docxml.GetRoot()->GetChildren();
@@ -332,11 +339,44 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
             child_liv3=child_liv3->GetNext();
           }
         }
+        if (str1=="Slave")
+        {
+          child_liv3=child_liv2->GetChildren();
+          str1=child_liv3->GetName();
+          if (str1=="Info")
+          {
+            child_liv4=child_liv3->GetChildren();
+            while (child_liv4)
+            {
+              str1=child_liv4->GetName();
+              str2=child_liv4->GetNodeContent();
+              if (str1=="Name")
+              {
+                SlvTmp.Slave_name=str2;
+              }
+              if (str1=="PhysAddr")
+              {
+                str2.ToLong(&longtmp);
+                SlvTmp.Slave_addr=(int16_t) longtmp;
+                if (SlvTmp.Slave_name!="")
+                {
+                  ArraySlaves.Add(SlvTmp);
+                  slaves++;
+                }
+                SlvTmp.Slave_name="";
+              }
+              child_liv4=child_liv4->GetNext();
+            }
+            child_liv3=child_liv3->GetNext();
+          }
+        }
         child_liv2=child_liv2->GetNext();
       }
     }
     child_liv1=child_liv1->GetNext();
   }
+  str1.Printf(" Found %i slaves\n",slaves);
+  TextCtrl3->AppendText(str1);
   str1.Printf(" Found %i PDO Inputs\n",pdoin);
   TextCtrl3->AppendText(str1);
   str1.Printf(" Found %i PDO Outputs\n",pdout);
@@ -571,7 +611,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
             data_ARMW=filepcap.Tell(); //contiene il DC
 
           //Estraggo i dati del datagramma
-          filepcap.Read(&datadatagram,DatagramLenght);
+          filepcap.Read(&datadatagram,DatagramLenght); //per adesso questo serve solo a fare avanzare il puntatore al prossimo datagram
    //       filepcap.Seek(DatagramLenght,wxFromCurrent);)
           filepcap.Read(&WorkingCount,2);
           if (WorkingCount>0)

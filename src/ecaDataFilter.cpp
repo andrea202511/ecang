@@ -25,15 +25,15 @@ ecaDataFilter::ecaDataFilter(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	CheckListBox1 = new wxCheckListBox(this, ID_CHECKLISTBOX1, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_CHECKLISTBOX1"));
-	CheckListBox1->Append(_("SDO data (experimental)"));
+	CheckListBox1->Append(_("SDO data"));
 	CheckListBox1->Append(_("PDO data"));
-	CheckListBox1->Append(_("No ethercat frame"));
-	CheckListBox1->Disable();
+	CheckListBox1->Append(_("EoE data (no managed)"));
+	CheckListBox1->Append(_("FoE data (no managed)"));
+	CheckListBox1->SetExtraStyle( CheckListBox1->GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
 	BoxSizer1->Add(CheckListBox1, 4, wxALL|wxEXPAND, 5);
 	Button1 = new wxButton(this, ID_BUTTON1, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
 	BoxSizer1->Add(Button1, 1, wxALL|wxEXPAND, 5);
 	SetSizer(BoxSizer1);
-	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 
 	Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDataFilter::OnButton1Click);

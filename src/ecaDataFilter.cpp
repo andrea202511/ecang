@@ -29,6 +29,7 @@ ecaDataFilter::ecaDataFilter(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	CheckListBox1->Append(_("PDO data"));
 	CheckListBox1->Append(_("EoE data (no managed)"));
 	CheckListBox1->Append(_("FoE data (no managed)"));
+	CheckListBox1->Disable();
 	CheckListBox1->SetExtraStyle( CheckListBox1->GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
 	BoxSizer1->Add(CheckListBox1, 4, wxALL|wxEXPAND, 5);
 	Button1 = new wxButton(this, ID_BUTTON1, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));

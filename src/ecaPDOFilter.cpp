@@ -1,8 +1,10 @@
 #include "ecaPDOFilter.h"
 #include "ecaPDO.h"
+#include "ecaSlaves.h"
 
 
 extern PDOArray ArrayPDO;
+extern SLVArray ArraySlaves;
 
 
 //(*InternalHeaders(ecaPDOFilter)
@@ -62,8 +64,17 @@ ecaPDOFilter::~ecaPDOFilter()
 
 void ecaPDOFilter::OnButton1Click(wxCommandEvent& event)
 {
-  for(unsigned int i=0 ; i<CheckListBox1->GetCount();i++) {
-    ArrayPDO[i].enabled=CheckListBox1->IsChecked(i);
+  uint16_t nr_slaves,d;
+  nr_slaves=ArraySlaves.GetCount();
+  d=nr_slaves*2;
+
+  for(uint16_t i=0 ; i<nr_slaves;i++) {
+    ArraySlaves[i].Reg_enable=CheckListBox1->IsChecked(i*2);
+    ArraySlaves[i].Sdo_enable=CheckListBox1->IsChecked(i*2+1);
+  }
+
+  for(uint16_t i=d ; i<CheckListBox1->GetCount();i++) {
+    ArrayPDO[i-d].enabled=CheckListBox1->IsChecked(i);
   }
   EndModal(wxID_OK);
 }
@@ -71,11 +82,28 @@ void ecaPDOFilter::OnButton1Click(wxCommandEvent& event)
 
 void ecaPDOFilter::OnInit(wxInitDialogEvent& event)
 {
-   if (CheckListBox1->GetCount()==0) {
-     for (unsigned int i=0; i<ArrayPDO.GetCount();i++) {
-       CheckListBox1->InsertItems(1,&ArrayPDO[i].PDO_name,i);
-       CheckListBox1->Check(i,ArrayPDO[i].enabled);
-     }
+  wxString str1;
+  int ii=0;
+  if (CheckListBox1->GetCount()==0) {
+    for (unsigned int i=0; i<ArraySlaves.GetCount();i++) {
+      str1="REG-";
+      str1+=(ArraySlaves[i].Slave_name);
+      CheckListBox1->InsertItems(1,&str1,ii);
+      CheckListBox1->Check(i,ArraySlaves[i].Reg_enable);
+      ii++;
+      str1="SDO-";
+      str1+=(ArraySlaves[i].Slave_name);
+      CheckListBox1->InsertItems(1,&str1,ii);
+      CheckListBox1->Check(i,ArraySlaves[i].Sdo_enable);
+      ii++;
+    }
+    for (unsigned int i=0; i<ArrayPDO.GetCount();i++) {
+      str1="PDO-";
+      str1+=(ArrayPDO[i].PDO_name);
+      CheckListBox1->InsertItems(1,&str1,ii);
+      CheckListBox1->Check(i,ArrayPDO[i].enabled);
+      ii++;
+    }
   }
 }
 

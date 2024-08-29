@@ -20,6 +20,7 @@
 #include <wx/timer.h>
 //*)
 
+#include <stdint.h>
 #include <wx/arrimpl.cpp>
 #include "ecaSetting.h"
 #include "ecaPDO.h"

@@ -16,13 +16,13 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="C:/wx/3.2.1/lib/gcc_dll/mswud" />
+					<Add directory="C:/wx/3.2.2.1/lib/gcc1220_x64_dll/mswud" />
 				</Compiler>
 				<Linker>
 					<Add library="libwxbase32ud.a" />
 					<Add library="libwxbase32ud_xml.a" />
 					<Add library="libwxmsw32ud_core.a" />
-					<Add directory="C:/wx/3.2.1/lib/gcc_dll" />
+					<Add directory="C:/wx/3.2.2.1/lib/gcc1220_x64_dll" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -35,21 +35,21 @@
 				<Compiler>
 					<Add option="-fomit-frame-pointer" />
 					<Add option="-O1" />
-					<Add directory="C:/wx/3.2.1/lib/gcc_dll/mswu" />
+					<Add option="-std=c99" />
+					<Add directory="C:/wx/3.2.2.1/lib/gcc1220_x64_dll/mswu" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add library="libwxbase32u.a" />
 					<Add library="libwxbase32u_xml.a" />
 					<Add library="libwxmsw32u_core.a" />
-					<Add directory="C:/wx/3.2.1/lib/gcc_dll" />
+					<Add directory="C:/wx/3.2.2.1/lib/gcc1220_x64_dll" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="`wx-config --cflags`" />
-			<Add directory="C:/wx/3.2.1/include" />
+			<Add directory="C:/wx/3.2.2.1/include" />
 		</Compiler>
 		<Unit filename="ecaABOUT.cpp" />
 		<Unit filename="ecaABOUT.h" />

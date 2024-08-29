@@ -203,7 +203,7 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
     ecaPDO PdoTmp;
     ecaSlaves SlvTmp;
     long int longtmp;
-    uint16_t maxbytes;
+    uint16_t maxbytes=0;
     int slaves=0;
     int pdoin=0;
     int pdout=0;
@@ -470,7 +470,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     uint16_t byteEstratti;
     uint16_t WorkingCount;
     uint16_t DatagramLenght;
-    char datadatagram[2048];
+ //   char datadatagram[2048];
     int percento;
     uint16_t col=0;
 
@@ -743,7 +743,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                         filepcap.Seek(puntoC);
                         //           filepcap.Read(&MailboxHeader,6);
                         //          filepcap.Read(&MailboxService,10);
-                        for (int i=0; i<ArraySlaves.GetCount(); i++)
+                        for (unsigned int i=0; i<ArraySlaves.GetCount(); i++)
                         {
                             if (ArraySlaves[i].Slave_addr==DatagramHeader.Address  && ArraySlaves[i].Reg_enable)
                             {
@@ -775,7 +775,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
 
                         //   filepcap.Read(&MailboxHeader,6);
                         // filepcap.Read(&MailboxService,10);
-                        for (int i=0; i<ArraySlaves.GetCount(); i++)
+                        for (unsigned int i=0; i<ArraySlaves.GetCount(); i++)
                         {
                             if (ArraySlaves[i].Slave_addr==DatagramHeader.Address  && ArraySlaves[i].Reg_enable)
                             {
@@ -806,7 +806,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                         filepcap.Read(&MailboxService,6);
 
 
-                        for (int i=0; i<ArraySlaves.GetCount(); i++)
+                        for (unsigned int i=0; i<ArraySlaves.GetCount(); i++)
                         {
                             if (ArraySlaves[i].Slave_addr==DatagramHeader.Address  && ArraySlaves[i].Sdo_enable)
                             {
@@ -872,7 +872,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                         filepcap.Read(&MailboxHeader,6);
                         filepcap.Read(&MailboxService,6);
 
-                        for (int i=0; i<ArraySlaves.GetCount(); i++)
+                        for (unsigned int i=0; i<ArraySlaves.GetCount(); i++)
                         {
                             if (ArraySlaves[i].Slave_addr==DatagramHeader.Address  && ArraySlaves[i].Sdo_enable)
                             {
@@ -930,7 +930,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                     if (is_LRW_PDO && !dirout)
                     {
 
-                        for (int i=0; i<ArrayPDO.GetCount(); i++)
+                        for (unsigned int i=0; i<ArrayPDO.GetCount(); i++)
                         {
                             if (ArrayPDO[i].enabled==false)
                                 continue;
@@ -961,10 +961,10 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                                         str1="b";
                                         for (int ii=0; ii<64; ii++)
                                         {
-                                          if (ui64 & 0x8000000000000000)
-                                            str1+="1";
-                                           else
-                                            str1+="0";
+                                            if (ui64 & 0x8000000000000000)
+                                                str1+="1";
+                                            else
+                                                str1+="0";
                                             ui64=ui64<<1;
                                         }
                                         arrstr[u]=str1;
@@ -989,10 +989,10 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                                         str1="b";
                                         for (int ii=0; ii<32; ii++)
                                         {
-                                          if (ui32 & 0x80000000)
-                                            str1+="1";
-                                           else
-                                            str1+="0";
+                                            if (ui32 & 0x80000000)
+                                                str1+="1";
+                                            else
+                                                str1+="0";
                                             ui32=ui32<<1;
                                         }
                                         arrstr[u]=str1;
@@ -1018,10 +1018,10 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                                         str1="b";
                                         for (int ii=0; ii<16; ii++)
                                         {
-                                          if (ui16 & 0x8000)
-                                            str1+="1";
-                                           else
-                                            str1+="0";
+                                            if (ui16 & 0x8000)
+                                                str1+="1";
+                                            else
+                                                str1+="0";
                                             ui16=ui16<<1;
                                         }
                                         arrstr[u]=str1;
@@ -1046,10 +1046,10 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                                         str1="b";
                                         for (int ii=0; ii<8; ii++)
                                         {
-                                          if (ui8 & 0x80)
-                                            str1+="1";
-                                           else
-                                            str1+="0";
+                                            if (ui8 & 0x80)
+                                                str1+="1";
+                                            else
+                                                str1+="0";
                                             ui8=ui8<<1;
                                         }
                                         arrstr[u]=str1;

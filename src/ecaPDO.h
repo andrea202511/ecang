@@ -1,6 +1,8 @@
 #ifndef ECAPDO_H
 #define ECAPDO_H
 
+#include <stdint.h>
+
 
 class ecaPDO
 {

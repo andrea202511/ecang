@@ -45,14 +45,15 @@ struct EPB_PART1_HEADER {
   uint32_t InterfaceID;
   uint32_t TimestampH;
   uint32_t TimestampL;
+  //uint64_t Timestamp;
   uint32_t CapturedPacked;
   uint32_t OriginalPacked;
 };
 
 //Ethercat header
 struct EPB_PART2_HEADER {
-  MAC_ADDRESS MacSource;
   MAC_ADDRESS MacDest;
+  MAC_ADDRESS MacSource;
   uint16_t Type;
   uint16_t EthercatHeader; //Lenght(11)-Reserved(1)-Type(4) //questa lunghezza è la lunghezza totale di tutti i datagram
 };
@@ -118,6 +119,7 @@ class ecaDialog: public wxDialog
         void OpenFilePcapng(wxCommandEvent& event);
         void OnButton3Click(wxCommandEvent& event);
         void Elabora(wxCommandEvent& event);
+        void PreElabora(void);
         //void OnButton4Click(wxCommandEvent& event);
         //void OnTextCtrl3Text(wxCommandEvent& event);
         void OnBitmapButton1Click(wxCommandEvent& event);
@@ -166,6 +168,7 @@ class ecaDialog: public wxDialog
 
         wxString FileEni;
         wxString FilePcapng;
+        MAC_ADDRESS MacSourceDirIn;
 
         int32_t ticks;
 

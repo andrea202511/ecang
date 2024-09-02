@@ -412,8 +412,155 @@ void ecaDialog::OpenFilePcapng(wxCommandEvent& event)
         BitmapButton1->Enable();
         str1="Open file: "+FilePcapng+"\n";
         TextCtrl3->AppendText(str1);
+        PreElabora();
     }
 }
+
+/*--------------------------------------------------
+ * Read PCAPNG file data just to find Master/Slaves
+ * addresses and define timing limits
+ * -------------------------------------------------*/
+void ecaDialog::PreElabora(void)
+{
+    BLOCK_HEADER BlockHeader;
+    EPB_PART1_HEADER EpbPart1Header;
+    EPB_PART2_HEADER EpbPart2Header;
+    DATAGRAM_HEADER DatagramHeader;
+
+    MacSourceDirIn.part_1=0;
+    MacSourceDirIn.part_2=0;
+    MacSourceDirIn.part_3=0;
+
+    wxFile filepcap;
+    wxString str1;
+
+    wxFileOffset punto=0;
+    wxFileOffset puntoC=0;
+
+    uint16_t byteEstratti=0;
+    uint16_t WorkingCount=0;
+    uint16_t DatagramLenght=0;
+
+    uint32_t blocchi=0,blocknr=0;
+    uint32_t ui32=0;
+    int32_t offs=0;
+    uint16_t ui16;
+    uint8_t ui8;
+    bool mac_found=false;
+
+    if (!filepcap.Open(FilePcapng,wxFile::read))
+        return;
+
+    //First check if at the end there is a "Statistic block"
+    filepcap.Seek(-4,wxFromEnd);
+    filepcap.Read(&offs,4);
+    filepcap.Seek(-offs,wxFromEnd);
+    filepcap.Read(&ui32,4);
+    if (ui32==0x0005)
+    {
+      filepcap.Read(&ui32,4); //lenght
+      filepcap.Read(&ui32,4); //interface id
+      filepcap.Read(&ui32,4); //timestamo H
+      filepcap.Read(&ui32,4); //timestamp L
+      while (filepcap.Eof()==0)
+      {
+        filepcap.Read(&ui16,2); //option
+       if (ui16==0x0004)
+        {
+           filepcap.Read(&ui16,2); //lenght
+           filepcap.Read(&blocknr,4);
+          break;
+        }
+        filepcap.Read(&ui16,2); //lenght
+        for (uint16_t i=0; i<ui16; i++)
+          filepcap.Read(&ui8,1);
+      }
+    }
+
+
+    //Ciclo su file
+    while (filepcap.Eof()==0)
+    {
+        wxYield();
+        //Estrazione blocchi file pcapng
+        filepcap.Seek(punto,wxFromStart);
+
+        //lettura tipo e lunghezza blocco
+        if (filepcap.Read(&BlockHeader,8)!=8) break;
+
+        if (!mac_found)
+        {
+
+        //blocco Enhanced packet 0x00000006 (EPB)
+        if (BlockHeader.BlockType==0x00000006)
+        {
+            if (filepcap.Read(&EpbPart1Header,20)!=20) break;
+
+            uint16_t EthercatFrameLenght;
+
+            if (filepcap.Read(&EpbPart2Header,16)!=16) break;
+
+            EthercatFrameLenght=EpbPart2Header.EthercatHeader & 0x07FF;
+
+            byteEstratti=0;
+
+            //Se e' un frame ethercat ne analizzo i singoli datagram
+            if (EpbPart2Header.Type==0xA488)
+            {
+;
+                while (byteEstratti<EthercatFrameLenght)
+                {
+
+                    //qui inizia il giro estrazione Datagrams
+                    //estraggo tutto l'header
+                    if (filepcap.Read(&DatagramHeader,10)!=10) break;
+
+                    //Da qui iniziano i data del datagramam
+                    //Lo memorizzo
+                    puntoC=filepcap.Tell();
+
+                    DatagramLenght=DatagramHeader.Mix & 0x07FF;
+
+                   filepcap.Seek(puntoC+DatagramLenght);
+                    filepcap.Read(&WorkingCount,2);
+                    if (WorkingCount>0)
+                   {
+                        MacSourceDirIn=EpbPart2Header.MacSource;
+                        break;
+                   }
+                   byteEstratti+=10+DatagramLenght+2;
+                }
+            }
+        }
+        if (WorkingCount>0 && (blocchi>10000 || blocknr>0))
+          {
+          filepcap.Close();
+          break;
+          }
+        }
+        blocchi++;
+        punto+=BlockHeader.BlockLength;
+    }
+    if (blocknr>0)
+      str1=wxString::Format(wxT("Frames in the file: %i\n"),blocknr);
+    else if (blocchi>10000)
+      str1=wxString::Format(wxT("Frames in the file: >10000"));
+    else
+      str1=wxString::Format(wxT("Frames in the file: %i\n"),blocchi);
+    TextCtrl3->AppendText(str1);
+    if(MacSourceDirIn.part_1!=0 || MacSourceDirIn.part_2!=0 || MacSourceDirIn.part_3!=0)
+    str1="Master/Slaves mac address find...Done";
+    else
+    str1="Master/Slaves mac address find...FAIL !";
+        TextCtrl3->AppendText(str1);
+
+
+}
+
+
+
+
+
 
 
 /*--------------------------------------------------
@@ -429,7 +576,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     MAILBOX_SERVICE MailboxService;
 
     wxArrayString arrstr;
-    arrstr.Add("12345679012345678901234567890",200);
+    arrstr.Add("12345679012345678901234567890",500);
 
     uint32_t ui32;
     uint16_t ui16;
@@ -585,10 +732,8 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     outfile<<wxT("\n");
 
     //reset the array
-    for (int i=0; i<200; i++)
+    for (int i=0; i<500; i++)
         arrstr[i]="";
-
-
 
 
     Timer1.Start(1000);
@@ -720,21 +865,29 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                     if(DatagramHeader.Command==0x0d)  //ARMW Auto increment physical  Read Multiple Write
                         is_ARMW=true; //contiene il DC
 
-
+                    //Slaves to Master or viceversa
+                    if(MacSourceDirIn.part_1==EpbPart2Header.MacSource.part_1 &&
+                       MacSourceDirIn.part_2==EpbPart2Header.MacSource.part_2 &&
+                       MacSourceDirIn.part_3==EpbPart2Header.MacSource.part_3)
+                      dirout=0;
+                    else
+                      dirout=1;
 
                     //Estraggo i dati del datagramma
 //questo lo devo togliere!!         filepcap.Read(&datadatagram,DatagramLenght); //per adesso questo serve solo a fare avanzare il puntatore al prossimo datagram
                     //       filepcap.Seek(DatagramLenght,wxFromCurrent);)
 
                     //mi sposto a fine datagram per leggere il WC da cui capisco la direzione
+ //                   filepcap.Seek(puntoC+DatagramLenght);
+  //                  filepcap.Read(&WorkingCount,2);
+   //                 if (WorkingCount>0)
+    //                    dirout=false;
+     //               else
+      //                  dirout=true;
+
+                    //leggo subito in WorkingCount
                     filepcap.Seek(puntoC+DatagramLenght);
                     filepcap.Read(&WorkingCount,2);
-                    if (WorkingCount>0)
-                        dirout=false;
-                    else
-                        dirout=true;
-                    byteEstratti+=10+DatagramLenght+2;
-
 
 
                     //FPRD configured address physical read
@@ -927,7 +1080,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                     }
 
                     //LRW logical read/write
-                    if (is_LRW_PDO && !dirout)
+                    if (is_LRW_PDO && !dirout && WorkingCount>0)
                     {
 
                         for (unsigned int i=0; i<ArrayPDO.GetCount(); i++)
@@ -1067,6 +1220,7 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                     //vado al prossimo datagram
                     filepcap.Seek(puntoC+DatagramLenght);
                     filepcap.Read(&WorkingCount,2);
+                    byteEstratti+=(10+DatagramLenght+2);
                 }
 
                 if (towrite==true)

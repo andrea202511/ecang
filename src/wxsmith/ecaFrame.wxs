@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="ecaFrame">
+		<title>Ecang</title>
+		<icon stock_id="wxART_WX_LOGO" stock_client="wxART_FRAME_ICON" />
+		<font>
+			<size>9</size>
+			<style>normal</style>
+			<weight>normal</weight>
+			<underlined>0</underlined>
+			<family>swiss</family>
+			<face>Sans</face>
+		</font>
+		<minsize>550,450</minsize>
+		<style>wxCAPTION|wxDEFAULT_FRAME_STYLE</style>
+		<exstyle>wxWS_EX_VALIDATE_RECURSIVELY</exstyle>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+							<object class="sizeritem">
+								<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+									<label>ENI</label>
+								</object>
+								<flag>wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+							</object>
+							<object class="sizeritem">
+								<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="TextCtrl1" member="yes">
+									<font>
+										<size>9</size>
+										<style>normal</style>
+										<weight>normal</weight>
+										<underlined>0</underlined>
+										<family>swiss</family>
+										<face>Sans</face>
+									</font>
+									<style>wxTE_READONLY</style>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>1</border>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+							<object class="sizeritem">
+								<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
+									<label>PCAPNG</label>
+								</object>
+								<flag>wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+							</object>
+							<object class="sizeritem">
+								<object class="wxTextCtrl" name="ID_TEXTCTRL2" variable="TextCtrl2" member="yes">
+									<style>wxTE_READONLY</style>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>1</border>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxTextCtrl" name="ID_TEXTCTRL3" variable="TextCtrl3" member="yes">
+					<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH2|wxVSCROLL|wxHSCROLL|wxALWAYS_SHOW_SB</style>
+				</object>
+				<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxMenuBar" variable="MenuBar1" member="no">
+			<object class="wxMenu" variable="Menu1" member="no">
+				<label>&amp;File</label>
+				<object class="wxMenuItem" name="ID_MENUITEM1" variable="Menu3" member="yes">
+					<label>Load ENI</label>
+					<handler function="OpenFileENI" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM2" variable="MenuItem3" member="yes">
+					<label>Load PCAPNG</label>
+					<help>Load PCAPNG file</help>
+					<handler function="OpenFilePcapng" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="ID_MENUITEM6" variable="MenuItem7" member="yes">
+					<label>Clear</label>
+					<handler function="Clear" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="idMenuQuit" variable="MenuItem1" member="no">
+					<label>Quit</label>
+					<accel>Alt-F4</accel>
+					<help>Quit the application</help>
+					<handler function="OnQuit" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu4" member="yes">
+				<label>Build</label>
+				<object class="wxMenuItem" name="ID_MENUITEM3" variable="MenuItem4" member="yes">
+					<label>Filter</label>
+					<handler function="ShowFilterDataDialog" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM4" variable="MenuItem5" member="yes">
+					<label>Option</label>
+					<handler function="ShowSettingDialog" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="ID_MENUITEM5" variable="MenuItem6" member="yes">
+					<label>Execute</label>
+					<handler function="Elabora" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu2" member="no">
+				<label>Help</label>
+				<object class="wxMenuItem" name="ID_MENUITEM7" variable="MenuItem8" member="yes">
+					<label>Help</label>
+				</object>
+				<object class="wxMenuItem" name="idMenuAbout" variable="MenuItem2" member="no">
+					<label>About</label>
+					<accel>F1</accel>
+					<help>Show info about this application</help>
+					<handler function="ShowAboutDialog" entry="EVT_MENU" />
+				</object>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+			<style>wxBORDER_DOUBLE</style>
+		</object>
+		<object class="wxToolBar" name="ID_TOOLBAR1" variable="ToolBar1" member="yes">
+			<style>wxTB_HORIZONTAL|wxTB_TEXT|wxTB_TOP|wxALWAYS_SHOW_SB</style>
+			<object class="tool" name="ID_TOOLBARITEM1" variable="ToolBarItem1" member="yes">
+				<label>ENI</label>
+				<bitmap stock_id="wxART_FILE_OPEN" stock_client="wxART_TOOLBAR" />
+				<tooltip>Load ENI file</tooltip>
+				<handler function="OpenFileENI" entry="EVT_TOOL" />
+			</object>
+			<object class="tool" name="ID_TOOLBARITEM2" variable="ToolBarItem2" member="yes">
+				<label>PCAPNG</label>
+				<bitmap stock_id="wxART_FILE_OPEN" stock_client="wxART_TOOLBAR" />
+				<tooltip>Load PCAPNG file</tooltip>
+				<handler function="OpenFilePcapng" entry="EVT_TOOL" />
+			</object>
+			<object class="separator" />
+			<object class="tool" name="ID_TOOLBARITEM3" variable="ToolBarItem3" member="yes">
+				<label>CLEAR</label>
+				<bitmap stock_id="wxART_DELETE" stock_client="wxART_TOOLBAR" />
+				<bitmap2 stock_id="wxART_DELETE" stock_client="wxART_TOOLBAR" />
+				<tooltip>Clear</tooltip>
+				<handler function="Clear" entry="EVT_TOOL" />
+			</object>
+			<object class="separator" />
+			<object class="separator" />
+			<object class="tool" name="ID_TOOLBARITEM4" variable="ToolBarItem4" member="yes">
+				<label>FILTER</label>
+				<bitmap stock_id="wxART_LIST_VIEW" stock_client="wxART_TOOLBAR" />
+				<bitmap2 stock_id="wxART_LIST_VIEW" stock_client="wxART_TOOLBAR" />
+				<tooltip>Datagram filters</tooltip>
+				<handler function="ShowFilterDataDialog" entry="EVT_TOOL" />
+			</object>
+			<object class="tool" name="ID_TOOLBARITEM6" variable="ToolBarItem5" member="yes">
+				<label>OPTIONS</label>
+				<bitmap stock_id="wxART_EXECUTABLE_FILE" />
+				<bitmap2 stock_id="wxART_EXECUTABLE_FILE" stock_client="wxART_TOOLBAR" />
+				<tooltip>Program options</tooltip>
+				<handler function="ShowSettingDialog" entry="EVT_TOOL" />
+			</object>
+			<object class="separator" />
+			<object class="separator" />
+			<object class="tool" name="ID_TOOLBARITEM5" variable="ToolBarItem8" member="yes">
+				<label>EXECUTE</label>
+				<bitmap stock_id="wxART_GOTO_LAST" stock_client="wxART_TOOLBAR" />
+				<bitmap2 stock_id="wxART_GOTO_LAST" stock_client="wxART_TOOLBAR" />
+				<tooltip>Go!</tooltip>
+				<handler function="Elabora" entry="EVT_TOOL" />
+			</object>
+			<object class="stretchable" />
+			<object class="tool" name="ID_TOOLBARITEM7" variable="ToolBarItem10" member="yes">
+				<label>Help</label>
+				<bitmap stock_id="wxART_HELP" stock_client="wxART_TOOLBAR" />
+				<bitmap2 stock_id="wxART_HELP" stock_client="wxART_TOOLBAR" />
+				<tooltip>Help</tooltip>
+			</object>
+		</object>
+		<object class="wxFileDialog" variable="FileDialog1" member="yes">
+			<message>Select file XML</message>
+			<wildcard>*.xml</wildcard>
+			<style>wxFD_DEFAULT_STYLE|wxFD_FILE_MUST_EXIST</style>
+		</object>
+		<object class="wxFileDialog" variable="FileDialog2" member="yes">
+			<message>Select file PCAPNG</message>
+			<wildcard>*.pcapng</wildcard>
+			<style>wxFD_DEFAULT_STYLE|wxFD_OPEN|wxFD_FILE_MUST_EXIST</style>
+		</object>
+		<object class="wxFileDialog" variable="FileDialog3" member="yes">
+			<message>Select file CSV</message>
+			<wildcard>*.csv</wildcard>
+			<style>wxFD_SAVE|wxFD_OVERWRITE_PROMPT</style>
+		</object>
+		<object class="wxTimer" name="ID_TIMER1" variable="Timer1" member="yes">
+			<interval>1000</interval>
+			<handler function="OnTimer1Trigger" entry="EVT_TIMER" />
+		</object>
+	</object>
+</wxsmith>

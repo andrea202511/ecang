@@ -16,6 +16,8 @@
 #include <wx/wfstream.h>
 #include <wx/txtstrm.h>
 
+#include <wx/msgdlg.h>
+
 WX_DEFINE_OBJARRAY(PDOArray);
 WX_DEFINE_OBJARRAY(SLVArray);
 
@@ -23,10 +25,11 @@ PDOArray ArrayPDO;
 SLVArray ArraySlaves;
 
 
-//(*InternalHeaders(ecaDialog)
+//(*InternalHeaders(ecaFrame)
 #include <wx/artprov.h>
 #include <wx/bitmap.h>
 #include <wx/font.h>
+#include <wx/icon.h>
 #include <wx/image.h>
 #include <wx/intl.h>
 #include <wx/string.h>
@@ -62,125 +65,191 @@ wxString wxbuildinfo(wxbuildinfoformat format)
     return wxbuild;
 }
 
-//(*IdInit(ecaDialog)
-const long ecaDialog::ID_BUTTON1 = wxNewId();
-const long ecaDialog::ID_TEXTCTRL1 = wxNewId();
-const long ecaDialog::ID_BITMAPBUTTON2 = wxNewId();
-const long ecaDialog::ID_BUTTON2 = wxNewId();
-const long ecaDialog::ID_TEXTCTRL2 = wxNewId();
-const long ecaDialog::ID_BITMAPBUTTON1 = wxNewId();
-const long ecaDialog::ID_TEXTCTRL3 = wxNewId();
-const long ecaDialog::ID_BUTTON5 = wxNewId();
-const long ecaDialog::ID_BUTTON3 = wxNewId();
-const long ecaDialog::ID_BITMAPBUTTON3 = wxNewId();
-const long ecaDialog::ID_TIMER1 = wxNewId();
+//(*IdInit(ecaFrame)
+const long ecaFrame::ID_STATICTEXT1 = wxNewId();
+const long ecaFrame::ID_TEXTCTRL1 = wxNewId();
+const long ecaFrame::ID_STATICTEXT2 = wxNewId();
+const long ecaFrame::ID_TEXTCTRL2 = wxNewId();
+const long ecaFrame::ID_TEXTCTRL3 = wxNewId();
+const long ecaFrame::ID_MENUITEM1 = wxNewId();
+const long ecaFrame::ID_MENUITEM2 = wxNewId();
+const long ecaFrame::ID_MENUITEM6 = wxNewId();
+const long ecaFrame::idMenuQuit = wxNewId();
+const long ecaFrame::ID_MENUITEM3 = wxNewId();
+const long ecaFrame::ID_MENUITEM4 = wxNewId();
+const long ecaFrame::ID_MENUITEM5 = wxNewId();
+const long ecaFrame::ID_MENUITEM7 = wxNewId();
+const long ecaFrame::idMenuAbout = wxNewId();
+const long ecaFrame::ID_STATUSBAR1 = wxNewId();
+const long ecaFrame::ID_TOOLBARITEM1 = wxNewId();
+const long ecaFrame::ID_TOOLBARITEM2 = wxNewId();
+const long ecaFrame::ID_TOOLBARITEM3 = wxNewId();
+const long ecaFrame::ID_TOOLBARITEM4 = wxNewId();
+const long ecaFrame::ID_TOOLBARITEM6 = wxNewId();
+const long ecaFrame::ID_TOOLBARITEM5 = wxNewId();
+const long ecaFrame::ID_TOOLBARITEM7 = wxNewId();
+const long ecaFrame::ID_TOOLBAR1 = wxNewId();
+const long ecaFrame::ID_TIMER1 = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(ecaDialog,wxDialog)
-    //(*EventTable(ecaDialog)
+BEGIN_EVENT_TABLE(ecaFrame,wxFrame)
+    //(*EventTable(ecaFrame)
     //*)
 END_EVENT_TABLE()
 
-ecaDialog::ecaDialog(wxWindow* parent,wxWindowID id)
+ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
 {
-    //(*Initialize(ecaDialog)
+    //(*Initialize(ecaFrame)
     wxBoxSizer* BoxSizer1;
     wxBoxSizer* BoxSizer2;
     wxBoxSizer* BoxSizer3;
     wxBoxSizer* BoxSizer4;
+    wxMenu* Menu1;
+    wxMenu* Menu2;
+    wxMenuBar* MenuBar1;
+    wxMenuItem* MenuItem1;
+    wxMenuItem* MenuItem2;
 
-    Create(parent, id, _("ecang"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
-    SetMinSize(wxSize(480,320));
+    Create(parent, id, _("Ecang"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxDEFAULT_FRAME_STYLE, _T("id"));
+    SetMinSize(wxSize(550,450));
+    wxFont thisFont(9,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Sans"),wxFONTENCODING_DEFAULT);
+    SetFont(thisFont);
+    SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
+    {
+      wxIcon FrameIcon;
+      FrameIcon.CopyFromBitmap(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_WX_LOGO")),wxART_FRAME_ICON));
+      SetIcon(FrameIcon);
+    }
     BoxSizer1 = new wxBoxSizer(wxVERTICAL);
-    BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-    Button1 = new wxButton(this, ID_BUTTON1, _("ENI (xml)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-    BoxSizer2->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
-    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL1"));
-    BoxSizer2->Add(TextCtrl1, 4, wxALL|wxEXPAND, 5);
-    BitmapButton2 = new wxBitmapButton(this, ID_BITMAPBUTTON2, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_BUTTON), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON2"));
-    BitmapButton2->Disable();
-    BoxSizer2->Add(BitmapButton2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    BoxSizer1->Add(BoxSizer2, 1, wxALL|wxEXPAND, 5);
+    BoxSizer2 = new wxBoxSizer(wxVERTICAL);
     BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
-    Button2 = new wxButton(this, ID_BUTTON2, _("PCAPNG"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
-    BoxSizer3->Add(Button2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
-    TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL2"));
-    BoxSizer3->Add(TextCtrl2, 4, wxALL|wxEXPAND, 5);
-    BitmapButton1 = new wxBitmapButton(this, ID_BITMAPBUTTON1, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_BUTTON), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON1"));
-    BitmapButton1->Disable();
-    BoxSizer3->Add(BitmapButton1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    BoxSizer1->Add(BoxSizer3, 1, wxALL|wxEXPAND, 5);
-    TextCtrl3 = new wxTextCtrl(this, ID_TEXTCTRL3, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY|wxVSCROLL, wxDefaultValidator, _T("ID_TEXTCTRL3"));
-    wxFont TextCtrl3Font(7,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Sans"),wxFONTENCODING_DEFAULT);
-    TextCtrl3->SetFont(TextCtrl3Font);
-    BoxSizer1->Add(TextCtrl3, 3, wxALL|wxEXPAND, 7);
+    StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("ENI"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+    BoxSizer3->Add(StaticText1, 0, wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+    wxFont TextCtrl1Font(9,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Sans"),wxFONTENCODING_DEFAULT);
+    TextCtrl1->SetFont(TextCtrl1Font);
+    BoxSizer3->Add(TextCtrl1, 1, wxALL|wxEXPAND, 1);
+    BoxSizer2->Add(BoxSizer3, 1, wxEXPAND, 5);
     BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
-    Button5 = new wxButton(this, ID_BUTTON5, _("About"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON5"));
-    BoxSizer4->Add(Button5, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
-    Button3 = new wxButton(this, ID_BUTTON3, _("Export to CSV"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON3"));
-    BoxSizer4->Add(Button3, 4, wxALL|wxEXPAND, 5);
-    BitmapButton3 = new wxBitmapButton(this, ID_BITMAPBUTTON3, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_BUTTON), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON3"));
-    BoxSizer4->Add(BitmapButton3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    BoxSizer1->Add(BoxSizer4, 1, wxALL|wxEXPAND, 5);
+    StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("PCAPNG"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
+    BoxSizer4->Add(StaticText2, 0, wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL2"));
+    BoxSizer4->Add(TextCtrl2, 1, wxALL|wxEXPAND, 1);
+    BoxSizer2->Add(BoxSizer4, 1, wxEXPAND, 5);
+    BoxSizer1->Add(BoxSizer2, 0, wxALL|wxEXPAND, 5);
+    TextCtrl3 = new wxTextCtrl(this, ID_TEXTCTRL3, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH2|wxVSCROLL|wxHSCROLL|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL3"));
+    BoxSizer1->Add(TextCtrl3, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 5);
     SetSizer(BoxSizer1);
-    FileDialog1 = new wxFileDialog(this, _("Select file XML"), wxEmptyString, wxEmptyString, _("*.xml"), wxFD_DEFAULT_STYLE|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
-    FileDialog2 = new wxFileDialog(this, _("Select file PCAPNG"), wxEmptyString, wxEmptyString, _("*.pcapng"), wxFD_DEFAULT_STYLE|wxFD_OPEN|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
-    FileDialog3 = new wxFileDialog(this, _("Select file CSV"), wxEmptyString, wxEmptyString, _("*.csv"), wxFD_SAVE|wxFD_OVERWRITE_PROMPT, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
+    MenuBar1 = new wxMenuBar();
+    Menu1 = new wxMenu();
+    Menu3 = new wxMenuItem(Menu1, ID_MENUITEM1, _("Load ENI"), _("Load ENI file (xml file)"), wxITEM_NORMAL);
+    Menu1->Append(Menu3);
+    MenuItem3 = new wxMenuItem(Menu1, ID_MENUITEM2, _("Load PCAPNG"), _("Load PCAPNG file (by wireshark)"), wxITEM_NORMAL);
+    Menu1->Append(MenuItem3);
+    Menu1->AppendSeparator();
+    MenuItem7 = new wxMenuItem(Menu1, ID_MENUITEM6, _("Clear"), _("Clear fields"), wxITEM_NORMAL);
+    Menu1->Append(MenuItem7);
+    Menu1->AppendSeparator();
+    MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);
+    Menu1->Append(MenuItem1);
+    MenuBar1->Append(Menu1, _("&File"));
+    Menu4 = new wxMenu();
+    MenuItem4 = new wxMenuItem(Menu4, ID_MENUITEM3, _("Filter"), _("Datagram filter"), wxITEM_NORMAL);
+    Menu4->Append(MenuItem4);
+    MenuItem5 = new wxMenuItem(Menu4, ID_MENUITEM4, _("Option"), _("Program options"), wxITEM_NORMAL);
+    Menu4->Append(MenuItem5);
+    Menu4->AppendSeparator();
+    MenuItem6 = new wxMenuItem(Menu4, ID_MENUITEM5, _("Execute"), _("Execute"), wxITEM_NORMAL);
+    Menu4->Append(MenuItem6);
+    MenuBar1->Append(Menu4, _("Build"));
+    Menu2 = new wxMenu();
+    MenuItem8 = new wxMenuItem(Menu2, ID_MENUITEM7, _("Help"), _("Manuals"), wxITEM_NORMAL);
+    Menu2->Append(MenuItem8);
+    MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Informations about this application"), wxITEM_NORMAL);
+    Menu2->Append(MenuItem2);
+    MenuBar1->Append(Menu2, _("Help"));
+    SetMenuBar(MenuBar1);
+    StatusBar1 = new wxStatusBar(this, ID_STATUSBAR1, wxBORDER_DOUBLE, _T("ID_STATUSBAR1"));
+    int __wxStatusBarWidths_1[1] = { -1 };
+    int __wxStatusBarStyles_1[1] = { wxSB_NORMAL };
+    StatusBar1->SetFieldsCount(1,__wxStatusBarWidths_1);
+    StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
+    SetStatusBar(StatusBar1);
+    ToolBar1 = new wxToolBar(this, ID_TOOLBAR1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_TEXT|wxTB_TOP|wxALWAYS_SHOW_SB, _T("ID_TOOLBAR1"));
+    ToolBarItem1 = ToolBar1->AddTool(ID_TOOLBARITEM1, _("ENI"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Load ENI file (xml file)"), wxEmptyString);
+    ToolBarItem2 = ToolBar1->AddTool(ID_TOOLBARITEM2, _("PCAPNG"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Load PCAPNG file (by wireshark)"), wxEmptyString);
+    ToolBar1->AddSeparator();
+    ToolBarItem3 = ToolBar1->AddTool(ID_TOOLBARITEM3, _("CLEAR"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_DELETE")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_DELETE")),wxART_TOOLBAR), wxITEM_NORMAL, _("Clear fields"), wxEmptyString);
+    ToolBar1->AddSeparator();
+    ToolBar1->AddSeparator();
+    ToolBarItem4 = ToolBar1->AddTool(ID_TOOLBARITEM4, _("FILTER"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_TOOLBAR), wxITEM_NORMAL, _("Datagram filters"), wxEmptyString);
+    ToolBarItem5 = ToolBar1->AddTool(ID_TOOLBARITEM6, _("OPTIONS"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_EXECUTABLE_FILE")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_EXECUTABLE_FILE")),wxART_TOOLBAR), wxITEM_NORMAL, _("Program options"), wxEmptyString);
+    ToolBar1->AddSeparator();
+    ToolBar1->AddSeparator();
+    ToolBarItem8 = ToolBar1->AddTool(ID_TOOLBARITEM5, _("EXECUTE"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GOTO_LAST")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GOTO_LAST")),wxART_TOOLBAR), wxITEM_NORMAL, _("Execute"), wxEmptyString);
+    ToolBar1->AddStretchableSpace();
+    ToolBarItem10 = ToolBar1->AddTool(ID_TOOLBARITEM7, _("Help"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP")),wxART_TOOLBAR), wxITEM_NORMAL, _("Manuals"), wxEmptyString);
+    ToolBar1->Realize();
+    SetToolBar(ToolBar1);
+    FileDialog1 = new wxFileDialog(this, _("Open ENI file"), wxEmptyString, wxEmptyString, _("*.xml"), wxFD_DEFAULT_STYLE|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
+    FileDialog2 = new wxFileDialog(this, _("Open PCAPNG file"), wxEmptyString, wxEmptyString, _("*.pcapng"), wxFD_DEFAULT_STYLE|wxFD_OPEN|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
+    FileDialog3 = new wxFileDialog(this, _("Write CSV file"), wxEmptyString, wxEmptyString, _("*.csv"), wxFD_SAVE|wxFD_OVERWRITE_PROMPT, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
     Timer1.SetOwner(this, ID_TIMER1);
     Timer1.Start(1000, false);
     Fit();
 
-    Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OpenFileENI);
-    Connect(ID_BITMAPBUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnBitmapButton2Click);
-    Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OpenFilePcapng);
-    Connect(ID_BITMAPBUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnBitmapButton1Click);
-    Connect(ID_BUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnButton5Click);
-    Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::Elabora);
-    Connect(ID_BITMAPBUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaDialog::OnBitmapButton3Click);
-    Connect(ID_TIMER1,wxEVT_TIMER,(wxObjectEventFunction)&ecaDialog::OnTimer1Trigger);
+    Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::OpenFileENI);
+    Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::OpenFilePcapng);
+    Connect(ID_MENUITEM6,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::Clear);
+    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::OnQuit);
+    Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::ShowFilterDataDialog);
+    Connect(ID_MENUITEM4,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::ShowSettingDialog);
+    Connect(ID_MENUITEM5,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::Elabora);
+    Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::ShowAboutDialog);
+    Connect(ID_TOOLBARITEM1,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::OpenFileENI);
+    Connect(ID_TOOLBARITEM2,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::OpenFilePcapng);
+    Connect(ID_TOOLBARITEM3,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::Clear);
+    Connect(ID_TOOLBARITEM4,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::ShowFilterDataDialog);
+    Connect(ID_TOOLBARITEM6,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::ShowSettingDialog);
+    Connect(ID_TOOLBARITEM5,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::Elabora);
+    Connect(ID_TIMER1,wxEVT_TIMER,(wxObjectEventFunction)&ecaFrame::OnTimer1Trigger);
     //*)
 
-    //MainCore = new ecaMainCore(this);
     SettingDialog = new ecaSetting(this);
     FilterPDODialog = new ecaPDOFilter(this);
-    FilterDataDialog = new ecaDataFilter(this);
     AboutDialog = new ecaABOUT(this);
 }
 
-ecaDialog::~ecaDialog()
+ecaFrame::~ecaFrame()
 {
-    //(*Destroy(ecaDialog)
+    //(*Destroy(ecaFrame)
     FileDialog1->Destroy();
     FileDialog2->Destroy();
     FileDialog3->Destroy();
     //*)
 }
 
-void ecaDialog::OnQuit(wxCommandEvent& event)
+void ecaFrame::OnQuit(wxCommandEvent& event)
 {
     Close();
-}
-
-void ecaDialog::OnAbout(wxCommandEvent& event)
-{
-    wxString msg = wxbuildinfo(long_f);
-    wxMessageBox(msg, _("Welcome to..."));
 }
 
 
 /* -----------------------------------------------
  * Select, open and read all PDO's header from ENI
- * file. All data are stored in ArrayPDO
+ * file. Data are stored in ArrayPDO and ArraySlaves
  * -----------------------------------------------*/
-void ecaDialog::OpenFileENI(wxCommandEvent& event)
+void ecaFrame::OpenFileENI(wxCommandEvent& event)
 {
 
+    FileDialog1->SetDirectory(SettingDialog->pathEni);
     if (FileDialog1->ShowModal() == wxID_OK)
     {
         FileEni=FileDialog1->GetPath();
+        SettingDialog->pathEni=FileDialog1->GetDirectory();
         TextCtrl1->SetValue(FileEni);
-
     }
+
 
     wxString str1;
     wxString str2;
@@ -195,11 +264,13 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
     if (!docxml.Load(FileEni))
         return;
 
-    str1="Open file: "+FileEni+"\n";
+    str1=_("Open file: ")+FileEni+"\n";
+    TextCtrl3->SetDefaultStyle(wxTextAttr(*wxBLACK));
     TextCtrl3->AppendText(str1);
     TextCtrl3->Refresh();
 
-    BitmapButton2->Disable();
+////    BitmapButton2->Disable();
+
     ecaPDO PdoTmp;
     ecaSlaves SlvTmp;
     long int longtmp;
@@ -282,6 +353,7 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
                                         pdoin++;
                                     }
                                 }
+
                                 child_liv4=child_liv4->GetNext();
                             }
                         }
@@ -381,18 +453,19 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
         }
         child_liv1=child_liv1->GetNext();
     }
-    str1.Printf(" Found %i slaves\n",slaves);
+    str1.Printf(_(" Found %i slaves\n"),slaves);
+    TextCtrl3->SetDefaultStyle(wxTextAttr(*wxBLACK));
     TextCtrl3->AppendText(str1);
-    str1.Printf(" Found %i PDO Inputs\n",pdoin);
+    str1.Printf(_(" Found %i PDO Inputs\n"),pdoin);
     TextCtrl3->AppendText(str1);
-    str1.Printf(" Found %i PDO Outputs\n",pdout);
+    str1.Printf(_(" Found %i PDO Outputs\n"),pdout);
     TextCtrl3->AppendText(str1);
     TextCtrl3->ShowPosition(TextCtrl3->GetLastPosition());
     TextCtrl3->Refresh();
     TextCtrl3->Update();
 
-    if (pdoin>0 || pdout>0)
-        BitmapButton2->Enable();
+////    if (pdoin>0 || pdout>0)
+////        BitmapButton2->Enable();
 
 
 }
@@ -402,15 +475,17 @@ void ecaDialog::OpenFileENI(wxCommandEvent& event)
  * Select PCAPNG file and put his name into
  * FilePcapng string
  * -------------------------------------------------*/
-void ecaDialog::OpenFilePcapng(wxCommandEvent& event)
+void ecaFrame::OpenFilePcapng(wxCommandEvent& event)
 {
     wxString file,str1;
+    FileDialog2->SetDirectory(SettingDialog->pathPca);
     if (FileDialog2->ShowModal() == wxID_OK)
     {
         FilePcapng=FileDialog2->GetPath();
+        SettingDialog->pathPca=FileDialog2->GetDirectory();
         TextCtrl2->SetValue(FilePcapng);
-        BitmapButton1->Enable();
-        str1="Open file: "+FilePcapng+"\n";
+        str1=_("Open file: ")+FilePcapng+"\n";
+        TextCtrl3->SetDefaultStyle(wxTextAttr(*wxBLACK));
         TextCtrl3->AppendText(str1);
         PreElabora();
     }
@@ -420,7 +495,7 @@ void ecaDialog::OpenFilePcapng(wxCommandEvent& event)
  * Read PCAPNG file data just to find Master/Slaves
  * addresses and define timing limits
  * -------------------------------------------------*/
-void ecaDialog::PreElabora(void)
+void ecaFrame::PreElabora(void)
 {
     BLOCK_HEADER BlockHeader;
     EPB_PART1_HEADER EpbPart1Header;
@@ -450,6 +525,7 @@ void ecaDialog::PreElabora(void)
 
     if (!filepcap.Open(FilePcapng,wxFile::read))
         return;
+
 
     //First check if at the end there is a "Statistic block"
     filepcap.Seek(-4,wxFromEnd);
@@ -542,22 +618,39 @@ void ecaDialog::PreElabora(void)
         punto+=BlockHeader.BlockLength;
     }
     if (blocknr>0)
-      str1=wxString::Format(wxT("Frames in the file: %i\n"),blocknr);
+      str1=wxString::Format(_("Frames in the file: %i\n"),blocknr);
     else if (blocchi>10000)
-      str1=wxString::Format(wxT("Frames in the file: >10000"));
+      str1=wxString::Format(_("Frames in the file: >10000\n"));
     else
-      str1=wxString::Format(wxT("Frames in the file: %i\n"),blocchi);
+      str1=wxString::Format(_("Frames in the file: %i\n"),blocchi);
+    TextCtrl3->SetDefaultStyle(wxTextAttr(*wxBLACK));
     TextCtrl3->AppendText(str1);
     if(MacSourceDirIn.part_1!=0 || MacSourceDirIn.part_2!=0 || MacSourceDirIn.part_3!=0)
-    str1="Master/Slaves mac address find...Done";
+    {
+      str1=_("Master/Slaves mac address find...Done\n");
+      TextCtrl3->SetDefaultStyle(wxTextAttr(*wxBLACK));
+      TextCtrl3->AppendText(str1);
+    }
     else
-    str1="Master/Slaves mac address find...FAIL !";
-        TextCtrl3->AppendText(str1);
+    {
+      str1=_("Master/Slaves mac address find...FAIL\n");
+      TextCtrl3->SetDefaultStyle(wxTextAttr(*wxRED));
+      TextCtrl3->AppendText(str1);
+    }
 
 
 }
 
 
+/*--------------------------------------------------
+ * Clear eni-pcapng-log fields
+ * -------------------------------------------------*/
+void ecaFrame::Clear(wxCommandEvent& event)
+{
+    TextCtrl1->Clear();
+    TextCtrl2->Clear();
+    TextCtrl3->Clear();
+}
 
 
 
@@ -566,7 +659,7 @@ void ecaDialog::PreElabora(void)
 /*--------------------------------------------------
  * Read PCAPNG file data and export to csv file
  * -------------------------------------------------*/
-void ecaDialog::Elabora(wxCommandEvent& event)
+void ecaFrame::Elabora(wxCommandEvent& event)
 {
     BLOCK_HEADER BlockHeader;
     EPB_PART1_HEADER EpbPart1Header;
@@ -629,11 +722,13 @@ void ecaDialog::Elabora(wxCommandEvent& event)
         return;
 
     long int sizepcap=filepcap.Length();
+    FileDialog3->SetDirectory(SettingDialog->pathCsv);
 
     if (FileDialog3->ShowModal() == wxID_OK)
     {
         fileCSV=FileDialog3->GetPath();
-    }
+        SettingDialog->pathCsv=FileDialog3->GetDirectory();
+     }
     else
     {
         return;
@@ -983,11 +1078,13 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                                         k=3;
                                     else if ((ui8==0x23) || (ui8==0x43))
                                         k=4;
+//                                    else if ((ui8==0x22) || (ui8==0x21) || (ui8==0x42) || (ui8==0x41))
+//                                        k=8;
                                     else if (ui8==0x60)
                                         k=0;
                                     else if (ui8==0x80)
                                         k=4;
-                                    if (k>0)
+                                   if (k>0)
                                         arrstr[++u]="h";
                                     for (int j=0; j<k; j++)
                                     {
@@ -1049,6 +1146,8 @@ void ecaDialog::Elabora(wxCommandEvent& event)
                                         k=3;
                                     else if ((ui8==0x23) || (ui8==0x43))
                                         k=4;
+// 0x21 initiate download                                   else if ((ui8==0x22) || (ui8==0x21) || (ui8==0x42) || (ui8==0x41))
+// dopo subindex 4 byte lunghezza                                       k=8;
                                     else if (ui8==0x60)
                                         k=0;
                                     else if (ui8==0x80)
@@ -1266,36 +1365,39 @@ void ecaDialog::Elabora(wxCommandEvent& event)
     }
     filecsv.Close();
     wxString messa;
-    messa.Printf("Blocks managed: %i \nElapsed time: %is",blocchi,ticks);
-    wxMessageBox(messa,wxT("- Finish -"),wxICON_INFORMATION);
+    messa.Printf(_("Blocks managed: %i \nElapsed time: %is"),blocchi,ticks);
+    wxMessageBox(messa,_("- Finish -"),wxICON_INFORMATION);
 
 }
 
-void ecaDialog::OnBitmapButton1Click(wxCommandEvent& event)
-{
-    FilterDataDialog->ShowModal();
-}
 
-void ecaDialog::OnBitmapButton2Click(wxCommandEvent& event)
+void ecaFrame::ShowFilterDataDialog(wxCommandEvent& event)
 {
     FilterPDODialog->ShowModal();
 }
 
-void ecaDialog::OnBitmapButton3Click(wxCommandEvent& event)
+
+/*
+void ecaFrame::OnBitmapButton2Click(wxCommandEvent& event)
+{
+    FilterPDODialog->ShowModal();
+}
+*/
+
+
+void ecaFrame::ShowSettingDialog(wxCommandEvent& event)
 {
     SettingDialog->ShowModal();
+    SettingDialog->SaveSetting();
 }
 
-void ecaDialog::OnButton5Click(wxCommandEvent& event)
+void ecaFrame::ShowAboutDialog(wxCommandEvent& event)
 {
     AboutDialog->ShowModal();
 }
 
-void ecaDialog::OnButton1Click(wxCommandEvent& event)
-{
-}
 
-void ecaDialog::OnTimer1Trigger(wxTimerEvent& event)
+void ecaFrame::OnTimer1Trigger(wxTimerEvent& event)
 {
     ticks++;
 }

@@ -8,8 +8,59 @@
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer9" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxStaticLine" name="ID_STATICLINE1" variable="StaticLine1" member="yes">
+							<size>10,-1</size>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
+							<label>-- Language --</label>
+						</object>
+						<flag>wxALL|wxALIGN_LEFT</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer10" member="no">
+					<object class="sizeritem">
+						<object class="wxRadioBox" name="ID_RADIOBOX5" variable="RadioBox5" member="yes">
+							<label></label>
+							<content>
+								<item> system  </item>
+								<item> it  </item>
+								<item> en </item>
+							</content>
+							<default>-1</default>
+							<validator>wxGenericValidator(&amp;language)</validator>
+							<style>wxRA_SPECIFY_ROWS|wxBORDER_NONE</style>
+						</object>
+						<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxStaticLine" name="ID_STATICLINE2" variable="StaticLine2" member="yes">
+							<size>10,-1</size>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
 							<label>--- PDO format ---</label>
@@ -18,7 +69,7 @@
 						<border>5</border>
 					</object>
 				</object>
-				<flag>wxALL|wxEXPAND</flag>
+				<flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND</flag>
 				<border>5</border>
 			</object>
 			<object class="sizeritem">
@@ -32,9 +83,9 @@
 								<item>(b) binary</item>
 							</content>
 							<validator>wxGenericValidator(&amp;format64in)</validator>
-							<style>wxRA_SPECIFY_COLS</style>
+							<style>wxRA_SPECIFY_COLS|wxRA_VERTICAL</style>
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
@@ -49,7 +100,7 @@
 							<validator>wxGenericValidator(&amp;format32in)</validator>
 							<style>wxRA_SPECIFY_COLS</style>
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
@@ -64,7 +115,7 @@
 							<validator>wxGenericValidator(&amp;format16in)</validator>
 							<style>wxRA_SPECIFY_COLS</style>
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
@@ -79,18 +130,25 @@
 							<validator>wxGenericValidator(&amp;format8in)</validator>
 							<style>wxRA_SPECIFY_COLS</style>
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
 				</object>
-				<flag>wxALL|wxEXPAND</flag>
+				<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND</flag>
 				<border>5</border>
 				<option>1</option>
 			</object>
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer5" member="no">
 					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxStaticLine" name="ID_STATICLINE3" variable="StaticLine3" member="yes">
+							<size>10,-1</size>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
 							<label>--- Options ---</label>
@@ -100,7 +158,7 @@
 						<option>1</option>
 					</object>
 				</object>
-				<flag>wxALL|wxEXPAND</flag>
+				<flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND</flag>
 				<border>5</border>
 			</object>
 			<object class="sizeritem">

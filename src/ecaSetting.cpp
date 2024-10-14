@@ -1,4 +1,6 @@
 #include "ecaSetting.h"
+#include "ecaApp.h"
+
 
 //(*InternalHeaders(ecaSetting)
 #include <wx/intl.h>
@@ -6,11 +8,16 @@
 //*)
 
 //(*IdInit(ecaSetting)
+const long ecaSetting::ID_STATICLINE1 = wxNewId();
+const long ecaSetting::ID_STATICTEXT3 = wxNewId();
+const long ecaSetting::ID_RADIOBOX5 = wxNewId();
+const long ecaSetting::ID_STATICLINE2 = wxNewId();
 const long ecaSetting::ID_STATICTEXT1 = wxNewId();
 const long ecaSetting::ID_RADIOBOX1 = wxNewId();
 const long ecaSetting::ID_RADIOBOX2 = wxNewId();
 const long ecaSetting::ID_RADIOBOX3 = wxNewId();
 const long ecaSetting::ID_RADIOBOX4 = wxNewId();
+const long ecaSetting::ID_STATICLINE3 = wxNewId();
 const long ecaSetting::ID_STATICTEXT2 = wxNewId();
 const long ecaSetting::ID_CHECKBOX1 = wxNewId();
 const long ecaSetting::ID_CHECKBOX2 = wxNewId();
@@ -27,7 +34,22 @@ END_EVENT_TABLE()
 
 ecaSetting::ecaSetting(wxWindow* parent,wxWindowID id)
 {
+
+  econfig=new wxConfig("ecang","AndreaF");
+
+	econfig->Read(wxT("/PDOformat64"),&format64in);
+	econfig->Read(wxT("/PDOformat32"),&format32in);
+	econfig->Read(wxT("/PDOformat16"),&format16in);
+	econfig->Read(wxT("/PDOformat8"),&format8in);
+	econfig->Read(wxT("/language"),&language);
+	econfig->Read(wxT("/PathEni"),&pathEni);
+	econfig->Read(wxT("/PathPca"),&pathPca);
+	econfig->Read(wxT("/PathCsv"),&pathCsv);
+
+
+
 	//(*Initialize(ecaSetting)
+	wxBoxSizer* BoxSizer10;
 	wxBoxSizer* BoxSizer1;
 	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer3;
@@ -36,58 +58,79 @@ ecaSetting::ecaSetting(wxWindow* parent,wxWindowID id)
 	wxBoxSizer* BoxSizer6;
 	wxBoxSizer* BoxSizer7;
 	wxBoxSizer* BoxSizer8;
+	wxBoxSizer* BoxSizer9;
 
 	Create(parent, id, _("Setting"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
 	SetClientSize(wxSize(600,500));
 	SetMinSize(wxSize(300,500));
 	SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
-	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
-	StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("--- PDO format ---"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
-	BoxSizer3->Add(StaticText1, 0, wxALL|wxALIGN_LEFT, 5);
-	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxEXPAND, 5);
-	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer9 = new wxBoxSizer(wxVERTICAL);
+	StaticLine1 = new wxStaticLine(this, ID_STATICLINE1, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE1"));
+	BoxSizer9->Add(StaticLine1, 0, wxALL|wxEXPAND, 5);
+	StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("-- Language --"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
+	BoxSizer9->Add(StaticText3, 1, wxALL|wxALIGN_LEFT, 5);
+	BoxSizer1->Add(BoxSizer9, 0, wxTOP|wxLEFT|wxRIGHT|wxEXPAND, 5);
+	BoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
 	wxString __wxRadioBoxChoices_1[3] =
 	{
-	    _("num"),
-	    _("(0x) hex"),
-	    _("(b) binary")
+	  _(" system  "),
+	  _(" it  "),
+	  _(" en ")
 	};
-	RadioBox1 = new wxRadioBox(this, ID_RADIOBOX1, _("64 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format64in), _T("ID_RADIOBOX1"));
-	RadioBox1->SetSelection(0);
-	BoxSizer4->Add(RadioBox1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	RadioBox5 = new wxRadioBox(this, ID_RADIOBOX5, wxEmptyString, wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_ROWS|wxBORDER_NONE, wxGenericValidator(&language), _T("ID_RADIOBOX5"));
+	BoxSizer10->Add(RadioBox5, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 5);
+	BoxSizer1->Add(BoxSizer10, 0, wxALL|wxEXPAND, 5);
+	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
+	StaticLine2 = new wxStaticLine(this, ID_STATICLINE2, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE2"));
+	BoxSizer3->Add(StaticLine2, 0, wxALL|wxEXPAND, 5);
+	StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("--- PDO format ---"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+	BoxSizer3->Add(StaticText1, 0, wxALL|wxALIGN_LEFT, 5);
+	BoxSizer1->Add(BoxSizer3, 0, wxTOP|wxLEFT|wxRIGHT|wxEXPAND, 5);
+	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	wxString __wxRadioBoxChoices_2[3] =
 	{
-	    _("num"),
-	    _("(0x) hex"),
-	    _("(b) binary")
+	  _("num"),
+	  _("(0x) hex"),
+	  _("(b) binary")
 	};
-	RadioBox2 = new wxRadioBox(this, ID_RADIOBOX2, _("32 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_2, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format32in), _T("ID_RADIOBOX2"));
-	RadioBox2->SetSelection(0);
-	BoxSizer4->Add(RadioBox2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	RadioBox1 = new wxRadioBox(this, ID_RADIOBOX1, _("64 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_2, 1, wxRA_SPECIFY_COLS|wxRA_VERTICAL, wxGenericValidator(&format64in), _T("ID_RADIOBOX1"));
+	RadioBox1->SetSelection(0);
+	BoxSizer4->Add(RadioBox1, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	wxString __wxRadioBoxChoices_3[3] =
 	{
-	    _("num"),
-	    _("(0x) hex"),
-	    _("(b) binary")
+	  _("num"),
+	  _("(0x) hex"),
+	  _("(b) binary")
 	};
-	RadioBox3 = new wxRadioBox(this, ID_RADIOBOX3, _("16 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_3, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format16in), _T("ID_RADIOBOX3"));
-	RadioBox3->SetSelection(0);
-	BoxSizer4->Add(RadioBox3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	RadioBox2 = new wxRadioBox(this, ID_RADIOBOX2, _("32 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_3, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format32in), _T("ID_RADIOBOX2"));
+	RadioBox2->SetSelection(0);
+	BoxSizer4->Add(RadioBox2, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	wxString __wxRadioBoxChoices_4[3] =
 	{
-	    _("num"),
-	    _("(0x) hex"),
-	    _("(b) binary")
+	  _("num"),
+	  _("(0x) hex"),
+	  _("(b) binary")
 	};
-	RadioBox4 = new wxRadioBox(this, ID_RADIOBOX4, _("8 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_4, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format8in), _T("ID_RADIOBOX4"));
+	RadioBox3 = new wxRadioBox(this, ID_RADIOBOX3, _("16 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_4, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format16in), _T("ID_RADIOBOX3"));
+	RadioBox3->SetSelection(0);
+	BoxSizer4->Add(RadioBox3, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	wxString __wxRadioBoxChoices_5[3] =
+	{
+	  _("num"),
+	  _("(0x) hex"),
+	  _("(b) binary")
+	};
+	RadioBox4 = new wxRadioBox(this, ID_RADIOBOX4, _("8 bits"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_5, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&format8in), _T("ID_RADIOBOX4"));
 	RadioBox4->SetSelection(0);
-	BoxSizer4->Add(RadioBox4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	BoxSizer1->Add(BoxSizer4, 1, wxALL|wxEXPAND, 5);
+	BoxSizer4->Add(RadioBox4, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer1->Add(BoxSizer4, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 5);
 	BoxSizer5 = new wxBoxSizer(wxVERTICAL);
+	StaticLine3 = new wxStaticLine(this, ID_STATICLINE3, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE3"));
+	BoxSizer5->Add(StaticLine3, 0, wxALL|wxEXPAND, 5);
 	StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("--- Options ---"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
 	BoxSizer5->Add(StaticText2, 1, wxALL|wxALIGN_LEFT, 5);
-	BoxSizer1->Add(BoxSizer5, 0, wxALL|wxEXPAND, 5);
+	BoxSizer1->Add(BoxSizer5, 0, wxTOP|wxLEFT|wxRIGHT|wxEXPAND, 5);
 	BoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer7 = new wxBoxSizer(wxVERTICAL);
 	CheckBox1 = new wxCheckBox(this, ID_CHECKBOX1, _("Label"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
@@ -128,15 +171,21 @@ ecaSetting::ecaSetting(wxWindow* parent,wxWindowID id)
 
 ecaSetting::~ecaSetting()
 {
-	//(*Destroy(ecaSetting)
-	//*)
+	SaveSetting();
 }
 
 
 
-void ecaSetting::OnButton2Click(wxCommandEvent& event)
+void ecaSetting::SaveSetting(void)
 {
-  EndModal(wxID_OK);
+  econfig->Write(wxT("/PDOformat64"),format64in);
+	econfig->Write(wxT("/PDOformat32"),format32in);
+	econfig->Write(wxT("/PDOformat16"),format16in);
+	econfig->Write(wxT("/PDOformat8"),format8in);
+	econfig->Write(wxT("/Language"),language);
+	econfig->Write(wxT("/PathEni"),pathEni);
+	econfig->Write(wxT("/PathPca"),pathPca);
+	econfig->Write(wxT("/PathCsv"),pathCsv);
+	econfig->Flush();
+
 }
-
-

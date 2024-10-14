@@ -11,11 +11,19 @@
 #define ECAAPP_H
 
 #include <wx/app.h>
+#include <wx/config.h>
 
 class ecaApp : public wxApp
 {
     public:
         virtual bool OnInit();
+
+    private:
+        wxConfig* econfig;
+        wxLocale* m_locale;
+
 };
+
+wxDECLARE_APP(ecaApp);
 
 #endif // ECAAPP_H

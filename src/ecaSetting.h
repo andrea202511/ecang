@@ -7,11 +7,14 @@
 #include <wx/dialog.h>
 #include <wx/radiobox.h>
 #include <wx/sizer.h>
+#include <wx/statline.h>
 #include <wx/stattext.h>
 //*)
 
 #include <wx/valtext.h>
 #include <wx/valgen.h>
+#include <wx/config.h>
+
 
 
 
@@ -21,7 +24,9 @@ class ecaSetting: public wxDialog
 
 		ecaSetting(wxWindow* parent,wxWindowID id=wxID_ANY);
 		virtual ~ecaSetting();
+		void SaveSetting(void);
 
+		wxConfig* econfig;
 
 		bool allPDOin=true;
 		bool allPDOout=true;
@@ -30,6 +35,11 @@ class ecaSetting: public wxDialog
 		int format32in=0;
 		int format16in=0;
 		int format8in=0;
+		int language=0;
+		wxString pathEni;
+		wxString pathPca;
+		wxString pathCsv;
+
 
 
   private:
@@ -48,18 +58,28 @@ class ecaSetting: public wxDialog
 		wxRadioBox* RadioBox2;
 		wxRadioBox* RadioBox3;
 		wxRadioBox* RadioBox4;
+		wxRadioBox* RadioBox5;
+		wxStaticLine* StaticLine1;
+		wxStaticLine* StaticLine2;
+		wxStaticLine* StaticLine3;
 		wxStaticText* StaticText1;
 		wxStaticText* StaticText2;
+		wxStaticText* StaticText3;
 		//*)
 
 	protected:
 
 		//(*Identifiers(ecaSetting)
+		static const long ID_STATICLINE1;
+		static const long ID_STATICTEXT3;
+		static const long ID_RADIOBOX5;
+		static const long ID_STATICLINE2;
 		static const long ID_STATICTEXT1;
 		static const long ID_RADIOBOX1;
 		static const long ID_RADIOBOX2;
 		static const long ID_RADIOBOX3;
 		static const long ID_RADIOBOX4;
+		static const long ID_STATICLINE3;
 		static const long ID_STATICTEXT2;
 		static const long ID_CHECKBOX1;
 		static const long ID_CHECKBOX2;
@@ -78,10 +98,12 @@ class ecaSetting: public wxDialog
 		void OnCheckBox1Click1(wxCommandEvent& event);
 		void OnCheckBox2Click(wxCommandEvent& event);
 		void OnButton2Click(wxCommandEvent& event);
-		void OnButton3Click(wxCommandEvent& event);
+		//    void OnButton3Click(wxCommandEvent& event);
+		void OnClose(wxCloseEvent& event);
 		//*)
 
 		DECLARE_EVENT_TABLE()
+
 
 };
 

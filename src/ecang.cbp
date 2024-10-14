@@ -9,7 +9,6 @@
 		<Build>
 			<Target title="Debug">
 				<Option output="../bin/Debug/ecang" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../ecang_wrk" />
 				<Option object_output="../obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -63,20 +62,20 @@
 		<Unit filename="ecaApp.cpp" />
 		<Unit filename="ecaApp.h" />
 		<Unit filename="ecaDataFilter.cpp" />
-		<Unit filename="ecaDataFilter.h" />
 		<Unit filename="ecaMain.cpp" />
 		<Unit filename="ecaMain.h" />
 		<Unit filename="ecaPDO.h" />
 		<Unit filename="ecaPDOFilter.cpp" />
 		<Unit filename="ecaPDOFilter.h" />
 		<Unit filename="ecaSetting.cpp" />
+		<Unit filename="ecaSetting.h" />
 		<Unit filename="ecaSlaves.h" />
+		<Unit filename="ecaStruct.h" />
 		<Unit filename="version.h" />
 		<Unit filename="wxsmith/ecaABOUT.wxs" />
-		<Unit filename="wxsmith/ecaDataFilter.wxs" />
+		<Unit filename="wxsmith/ecaFrame.wxs" />
 		<Unit filename="wxsmith/ecaPDOFilter.wxs" />
 		<Unit filename="wxsmith/ecaSetting.wxs" />
-		<Unit filename="wxsmith/ecadialog.wxs" />
 		<Extensions>
 			<AutoVersioning>
 				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="10000" />
@@ -95,9 +94,9 @@
 				<general />
 			</DoxyBlocks>
 			<wxsmith version="1">
-				<gui name="wxWidgets" src="ecaApp.cpp" main="ecaDialog" init_handlers="necessary" language="CPP" />
+				<gui name="wxWidgets" src="ecaApp.cpp" main="ecaFrame" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxDialog wxs="wxsmith/ecadialog.wxs" src="ecaMain.cpp" hdr="ecaMain.h" fwddecl="0" i18n="1" name="ecaDialog" language="CPP" />
+					<wxFrame wxs="wxsmith/ecaFrame.wxs" src="ecaMain.cpp" hdr="ecaMain.h" fwddecl="0" i18n="1" name="ecaFrame" language="CPP" />
 					<wxDialog wxs="wxsmith/ecaSetting.wxs" src="ecaSetting.cpp" hdr="ecaSetting.h" fwddecl="0" i18n="1" name="ecaSetting" language="CPP" />
 					<wxDialog wxs="wxsmith/ecaPDOFilter.wxs" src="ecaPDOFilter.cpp" hdr="ecaPDOFilter.h" fwddecl="0" i18n="1" name="ecaPDOFilter" language="CPP" />
 					<wxDialog wxs="wxsmith/ecaDataFilter.wxs" src="ecaDataFilter.cpp" hdr="ecaDataFilter.h" fwddecl="0" i18n="1" name="ecaDataFilter" language="CPP" />

@@ -67,6 +67,7 @@ class ecaFrame: public wxFrame
         void OnTimer1Trigger(wxTimerEvent& event);
         //*)
 
+
         //(*Identifiers(ecaFrame)
         static const long ID_STATICTEXT1;
         static const long ID_TEXTCTRL1;

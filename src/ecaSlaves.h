@@ -8,6 +8,7 @@ class ecaSlaves
         ecaSlaves() {}
         wxString Slave_name;
         int16_t Slave_addr;
+        int Slave_incr;
         bool Reg_enable;
         bool Sdo_enable;
         int16_t Regcol;  //registro, valore

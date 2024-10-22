@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ecang\n"
-"POT-Creation-Date: 2024-10-14 20:37+0200\n"
-"PO-Revision-Date: 2024-10-14 20:37+0200\n"
+"POT-Creation-Date: 2024-10-22 21:34+0200\n"
+"PO-Revision-Date: 2024-10-22 21:42+0200\n"
 "Last-Translator: andreaf <andrea202511@gmail.com>\n"
 "Language-Team: andrea\n"
 "Language: it\n"
@@ -20,6 +20,14 @@ msgstr ""
 msgid "about"
 msgstr "informazioni"
 
+#: ecaABOUT.cpp:40
+msgid "ecang"
+msgstr ""
+
+#: ecaABOUT.cpp:45 ecaABOUT.cpp:51
+msgid "0"
+msgstr ""
+
 #: ecaABOUT.cpp:53
 msgid ""
 "Author: andrea202511 (Andrea Fabbri)\n"
@@ -34,179 +42,206 @@ msgstr ""
 "della GNU General Public License versione 3\n"
 "http://www.gnu.org/licenses/gpl-3.0.html"
 
-#: ecaABOUT.cpp:55 ecaPDOFilter.cpp:46
+#: ecaABOUT.cpp:55 ecaPDOFilter.cpp:67
 msgid "Close"
 msgstr "Chiudi"
 
-#: ecaMain.cpp:113
+#: ecaMain.cpp:114
 msgid "Ecang"
 msgstr ""
 
-#: ecaMain.cpp:126 ecaMain.cpp:179
+#: ecaMain.cpp:127 ecaMain.cpp:180
 msgid "ENI"
 msgstr ""
 
-#: ecaMain.cpp:134 ecaMain.cpp:180
+#: ecaMain.cpp:135 ecaMain.cpp:181
 msgid "PCAPNG"
 msgstr ""
 
-#: ecaMain.cpp:145
+#: ecaMain.cpp:146
 msgid "Load ENI"
 msgstr "Carica file ENI"
 
-#: ecaMain.cpp:145 ecaMain.cpp:179
-msgid "Load ENI file (xml file)"
-msgstr "Carica file ENI (file xml)"
-
-#: ecaMain.cpp:147
+#: ecaMain.cpp:148
 msgid "Load PCAPNG"
 msgstr "Carica file PCAPNG"
 
-#: ecaMain.cpp:147 ecaMain.cpp:180
-msgid "Load PCAPNG file (by wireshark)"
-msgstr "Carica file PCAPNG (da wireshark)"
+#: ecaMain.cpp:148 ecaMain.cpp:181
+msgid "Load PCAPNG file"
+msgstr "Carica file PCAPNG"
 
-#: ecaMain.cpp:150
+#: ecaMain.cpp:151 ecaMain.cpp:183
 msgid "Clear"
 msgstr "Azzera"
 
-#: ecaMain.cpp:150 ecaMain.cpp:182
-msgid "Clear fields"
-msgstr "Azzera campi"
-
-#: ecaMain.cpp:153
+#: ecaMain.cpp:154
 msgid "Quit\tAlt-F4"
 msgstr "Uscita\tAlt-F4"
 
-#: ecaMain.cpp:153
+#: ecaMain.cpp:154
 msgid "Quit the application"
 msgstr "Uscita dal programma"
 
-#: ecaMain.cpp:155
+#: ecaMain.cpp:156
 msgid "&File"
 msgstr "&File"
 
-#: ecaMain.cpp:157
+#: ecaMain.cpp:158
 msgid "Filter"
 msgstr "Filtri"
 
-#: ecaMain.cpp:157
-msgid "Datagram filter"
-msgstr "Filtro datagrammi"
-
-#: ecaMain.cpp:159
+#: ecaMain.cpp:160
 msgid "Option"
 msgstr "Opzioni"
 
-#: ecaMain.cpp:159 ecaMain.cpp:186
-msgid "Program options"
-msgstr "Opzioni programma"
-
-#: ecaMain.cpp:162 ecaMain.cpp:189
+#: ecaMain.cpp:163
 msgid "Execute"
 msgstr "Esegui"
 
-#: ecaMain.cpp:164
+#: ecaMain.cpp:165
 msgid "Build"
 msgstr "Crea"
 
-#: ecaMain.cpp:166 ecaMain.cpp:170 ecaMain.cpp:191
+#: ecaMain.cpp:167 ecaMain.cpp:171 ecaMain.cpp:192
 msgid "Help"
-msgstr "Aiuto"
+msgstr "Manuale"
 
-#: ecaMain.cpp:166 ecaMain.cpp:191
-msgid "Manuals"
-msgstr "Manuali"
-
-#: ecaMain.cpp:168
+#: ecaMain.cpp:169
 msgid "About\tF1"
 msgstr "About F1"
 
-#: ecaMain.cpp:168
-msgid "Informations about this application"
-msgstr "Informazioni programma"
+#: ecaMain.cpp:169
+msgid "Show info about this application"
+msgstr "Informazioni sul programma"
 
-#: ecaMain.cpp:182
+#: ecaMain.cpp:180
+msgid "Load ENI file"
+msgstr "Carica file ENI"
+
+#: ecaMain.cpp:183
 msgid "CLEAR"
 msgstr "AZZERA"
 
-#: ecaMain.cpp:185
+#: ecaMain.cpp:186
 msgid "FILTER"
 msgstr "FILTRI"
 
-#: ecaMain.cpp:185
+#: ecaMain.cpp:186
 msgid "Datagram filters"
 msgstr "Filtri datagram"
 
-#: ecaMain.cpp:186
+#: ecaMain.cpp:187
 msgid "OPTIONS"
 msgstr "OPZIONI"
 
-#: ecaMain.cpp:189
+#: ecaMain.cpp:187
+msgid "Program options"
+msgstr "Opzioni programma"
+
+#: ecaMain.cpp:190
 msgid "EXECUTE"
 msgstr "ESEGUI"
 
-#: ecaMain.cpp:194
-msgid "Open ENI file"
-msgstr "Selezione file ENI"
+#: ecaMain.cpp:190
+msgid "Go!"
+msgstr ""
 
-#: ecaMain.cpp:194
+#: ecaMain.cpp:195
+msgid "Select file XML"
+msgstr ""
+
+#: ecaMain.cpp:195
 msgid "*.xml"
 msgstr "*.xml"
 
-#: ecaMain.cpp:195
-msgid "Open PCAPNG file"
-msgstr "Selezione PCAPNG"
+#: ecaMain.cpp:196
+msgid "Select file PCAPNG"
+msgstr ""
 
-#: ecaMain.cpp:195
+#: ecaMain.cpp:196
 msgid "*.pcapng"
 msgstr "*.pcapng"
 
-#: ecaMain.cpp:196
-msgid "Write CSV file"
-msgstr "Selezione file CSV"
+#: ecaMain.cpp:197
+msgid "Select file CSV"
+msgstr ""
 
-#: ecaMain.cpp:196
+#: ecaMain.cpp:197
 msgid "*.csv"
 msgstr "*.csv"
 
-#: ecaMain.cpp:265
+#: ecaMain.cpp:268 ecaMain.cpp:494
 msgid "Open file: "
 msgstr "Apertura file: "
 
-#: ecaMain.cpp:453
+#: ecaMain.cpp:463
 #, c-format
 msgid " Found %i slaves\n"
-msgstr "Trovati %i slaves\n"
+msgstr " Trovati %i slaves\n"
 
-#: ecaMain.cpp:456
+#: ecaMain.cpp:466
 #, c-format
 msgid " Found %i PDO Inputs\n"
 msgstr " Trovati %i PDO di ingresso\n"
 
-#: ecaMain.cpp:458
+#: ecaMain.cpp:468
 #, c-format
 msgid " Found %i PDO Outputs\n"
 msgstr " Trovati %i PDO di uscita\n"
 
-#: ecaMain.cpp:617 ecaMain.cpp:621
+#: ecaMain.cpp:628 ecaMain.cpp:632
 #, c-format
 msgid "Frames in the file: %i\n"
 msgstr "Numero Frame nel file: %i\n"
 
-#: ecaMain.cpp:619
+#: ecaMain.cpp:630
 msgid "Frames in the file: >10000\n"
 msgstr "Numero Frame nel file: >10000\n"
 
-#: ecaMain.cpp:626
+#: ecaMain.cpp:637
 msgid "Master/Slaves mac address find...Done\n"
 msgstr "Ricerca mac address Master/Slaves....Ok\n"
 
-#: ecaMain.cpp:632
+#: ecaMain.cpp:643
 msgid "Master/Slaves mac address find...FAIL\n"
 msgstr "Ricerca mac address Master/Slaves....ERRORE\n"
 
-#: ecaMain.cpp:1362
+#: ecaMain.cpp:735
+msgid "Open a valid ENI file before Execute\n"
+msgstr ""
+"Aprire un file ENI valido prima di ESEGUI\n"
+"\n"
+
+#: ecaMain.cpp:743
+msgid ""
+"PCAPNG file not found\n"
+"Open a valid PCAPNG file before Execute\n"
+msgstr ""
+"File PCAPNG non trovato\n"
+"Aprire un file PCAPNG valido\n"
+" prima di ESEGUI\n"
+
+#: ecaMain.cpp:763
+msgid "Select at least one element in the Filter dialog before Execute\n"
+msgstr "Selezionare almeno una voce nella finestra FILTRO\n"
+
+#: ecaMain.cpp:780
+msgid "Select a valid CSV to Execute\n"
+msgstr "Selezionare un file CSV valido\n"
+
+#: ecaMain.cpp:788
+msgid "CSV file open error\n"
+msgstr "Errore apertura file CSV\n"
+
+#: ecaMain.cpp:812
+msgid "Execute running...\n"
+msgstr "Elaborazione in corso...\n"
+
+#: ecaMain.cpp:1490
+msgid "Execute terminate\n"
+msgstr "Elaborazione terminata\n"
+
+#: ecaMain.cpp:1495
 #, c-format
 msgid ""
 "Blocks managed: %i \n"
@@ -216,83 +251,99 @@ msgstr ""
 "i \n"
 "Tempo elaborazione: %is"
 
-#: ecaMain.cpp:1363
+#: ecaMain.cpp:1496
 msgid "- Finish -"
 msgstr "- Terminato -"
 
-#: ecaPDOFilter.cpp:39
-msgid "Reset"
-msgstr "Nessuno"
+#: ecaPDOFilter.cpp:47
+msgid "REG_ON"
+msgstr ""
 
-#: ecaPDOFilter.cpp:41
-msgid "Set all"
-msgstr "Tutti"
+#: ecaPDOFilter.cpp:49
+msgid "REG_OFF"
+msgstr ""
 
-#: ecaSetting.cpp:60
+#: ecaPDOFilter.cpp:53
+msgid "SDO_ON"
+msgstr ""
+
+#: ecaPDOFilter.cpp:55
+msgid "SDO_OFF"
+msgstr ""
+
+#: ecaPDOFilter.cpp:59
+msgid "PDO_ON"
+msgstr ""
+
+#: ecaPDOFilter.cpp:61
+msgid "PDO_OFF"
+msgstr ""
+
+#: ecaSetting.cpp:63
 msgid "Setting"
 msgstr "Settaggi"
 
-#: ecaSetting.cpp:68
+#: ecaSetting.cpp:71
 msgid "-- Language --"
 msgstr "-- Lingua --"
 
-#: ecaSetting.cpp:74
+#: ecaSetting.cpp:77
 msgid " system  "
 msgstr " sistema "
 
-#: ecaSetting.cpp:75
+#: ecaSetting.cpp:78
 msgid " it  "
 msgstr ""
 
-#: ecaSetting.cpp:76
+#: ecaSetting.cpp:79
 msgid " en "
 msgstr ""
 
-#: ecaSetting.cpp:84
+#: ecaSetting.cpp:87
 msgid "--- PDO format ---"
 msgstr "--- formato PDO ---"
 
-#: ecaSetting.cpp:90 ecaSetting.cpp:99 ecaSetting.cpp:108 ecaSetting.cpp:117
+#: ecaSetting.cpp:93 ecaSetting.cpp:102 ecaSetting.cpp:111 ecaSetting.cpp:120
 msgid "num"
 msgstr "num"
 
-#: ecaSetting.cpp:91 ecaSetting.cpp:100 ecaSetting.cpp:109 ecaSetting.cpp:118
+#: ecaSetting.cpp:94 ecaSetting.cpp:103 ecaSetting.cpp:112 ecaSetting.cpp:121
 msgid "(0x) hex"
 msgstr "(0x) hex"
 
-#: ecaSetting.cpp:92 ecaSetting.cpp:101 ecaSetting.cpp:110 ecaSetting.cpp:119
+#: ecaSetting.cpp:95 ecaSetting.cpp:104 ecaSetting.cpp:113 ecaSetting.cpp:122
 msgid "(b) binary"
 msgstr "(b) binary"
 
-#: ecaSetting.cpp:94
+#: ecaSetting.cpp:97
 msgid "64 bits"
 msgstr "64 bits"
 
-#: ecaSetting.cpp:103
+#: ecaSetting.cpp:106
 msgid "32 bits"
 msgstr "32 bits"
 
-#: ecaSetting.cpp:112
+#: ecaSetting.cpp:115
 msgid "16 bits"
 msgstr "16 bits"
 
-#: ecaSetting.cpp:121
+#: ecaSetting.cpp:124
 msgid "8 bits"
 msgstr "8 bits"
 
-#: ecaSetting.cpp:128
+#: ecaSetting.cpp:131
 msgid "--- Options ---"
 msgstr "--- Opzioni ---"
 
-#: ecaSetting.cpp:133 ecaSetting.cpp:136 ecaSetting.cpp:139 ecaSetting.cpp:144
-#: ecaSetting.cpp:147 ecaSetting.cpp:150
+#: ecaSetting.cpp:136 ecaSetting.cpp:139 ecaSetting.cpp:142 ecaSetting.cpp:147
+#: ecaSetting.cpp:150 ecaSetting.cpp:153
 msgid "Label"
 msgstr ""
 
-#: ecaSetting.cpp:156
+#: ecaSetting.cpp:159
 msgid "CANCEL"
 msgstr "CANCEL"
 
-#: ecaSetting.cpp:158
+#: ecaSetting.cpp:161
 msgid "OK"
 msgstr "OK"

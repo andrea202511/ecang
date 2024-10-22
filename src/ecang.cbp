@@ -61,7 +61,11 @@
 		<Unit filename="ecaABOUT.h" />
 		<Unit filename="ecaApp.cpp" />
 		<Unit filename="ecaApp.h" />
-		<Unit filename="ecaDataFilter.cpp" />
+		<Unit filename="ecaDataFilter.cpp">
+			<Option target="Release" />
+			<Option target="Profile" />
+		</Unit>
+		<Unit filename="ecaLogo.xpm" />
 		<Unit filename="ecaMain.cpp" />
 		<Unit filename="ecaMain.h" />
 		<Unit filename="ecaPDO.h" />

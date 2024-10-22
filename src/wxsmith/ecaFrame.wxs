@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxFrame" name="ecaFrame">
 		<title>Ecang</title>
-		<icon stock_id="wxART_WX_LOGO" stock_client="wxART_FRAME_ICON" />
+		<icon>/home/andrea/projects/ecang/src/ecaLogo.xpm</icon>
 		<font>
 			<size>9</size>
 			<style>normal</style>

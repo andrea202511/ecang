@@ -9,6 +9,7 @@
 
 #include "ecaMain.h"
 #include "version.h"
+#include "ecaLogo.xpm"
 #include <wx/msgdlg.h>
 #include <wx/xml/xml.h>
 #include <wx/file.h>
@@ -117,7 +118,7 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
     {
       wxIcon FrameIcon;
-      FrameIcon.CopyFromBitmap(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_WX_LOGO")),wxART_FRAME_ICON));
+      FrameIcon.CopyFromBitmap(wxBitmap(ecaLogo64_xpm));
       SetIcon(FrameIcon);
     }
     BoxSizer1 = new wxBoxSizer(wxVERTICAL);
@@ -142,30 +143,30 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     SetSizer(BoxSizer1);
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
-    Menu3 = new wxMenuItem(Menu1, ID_MENUITEM1, _("Load ENI"), _("Load ENI file (xml file)"), wxITEM_NORMAL);
+    Menu3 = new wxMenuItem(Menu1, ID_MENUITEM1, _("Load ENI"), wxEmptyString, wxITEM_NORMAL);
     Menu1->Append(Menu3);
-    MenuItem3 = new wxMenuItem(Menu1, ID_MENUITEM2, _("Load PCAPNG"), _("Load PCAPNG file (by wireshark)"), wxITEM_NORMAL);
+    MenuItem3 = new wxMenuItem(Menu1, ID_MENUITEM2, _("Load PCAPNG"), _("Load PCAPNG file"), wxITEM_NORMAL);
     Menu1->Append(MenuItem3);
     Menu1->AppendSeparator();
-    MenuItem7 = new wxMenuItem(Menu1, ID_MENUITEM6, _("Clear"), _("Clear fields"), wxITEM_NORMAL);
+    MenuItem7 = new wxMenuItem(Menu1, ID_MENUITEM6, _("Clear"), wxEmptyString, wxITEM_NORMAL);
     Menu1->Append(MenuItem7);
     Menu1->AppendSeparator();
     MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);
     Menu1->Append(MenuItem1);
     MenuBar1->Append(Menu1, _("&File"));
     Menu4 = new wxMenu();
-    MenuItem4 = new wxMenuItem(Menu4, ID_MENUITEM3, _("Filter"), _("Datagram filter"), wxITEM_NORMAL);
+    MenuItem4 = new wxMenuItem(Menu4, ID_MENUITEM3, _("Filter"), wxEmptyString, wxITEM_NORMAL);
     Menu4->Append(MenuItem4);
-    MenuItem5 = new wxMenuItem(Menu4, ID_MENUITEM4, _("Option"), _("Program options"), wxITEM_NORMAL);
+    MenuItem5 = new wxMenuItem(Menu4, ID_MENUITEM4, _("Option"), wxEmptyString, wxITEM_NORMAL);
     Menu4->Append(MenuItem5);
     Menu4->AppendSeparator();
-    MenuItem6 = new wxMenuItem(Menu4, ID_MENUITEM5, _("Execute"), _("Execute"), wxITEM_NORMAL);
+    MenuItem6 = new wxMenuItem(Menu4, ID_MENUITEM5, _("Execute"), wxEmptyString, wxITEM_NORMAL);
     Menu4->Append(MenuItem6);
     MenuBar1->Append(Menu4, _("Build"));
     Menu2 = new wxMenu();
-    MenuItem8 = new wxMenuItem(Menu2, ID_MENUITEM7, _("Help"), _("Manuals"), wxITEM_NORMAL);
+    MenuItem8 = new wxMenuItem(Menu2, ID_MENUITEM7, _("Help"), wxEmptyString, wxITEM_NORMAL);
     Menu2->Append(MenuItem8);
-    MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Informations about this application"), wxITEM_NORMAL);
+    MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Show info about this application"), wxITEM_NORMAL);
     Menu2->Append(MenuItem2);
     MenuBar1->Append(Menu2, _("Help"));
     SetMenuBar(MenuBar1);
@@ -176,24 +177,24 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
     SetStatusBar(StatusBar1);
     ToolBar1 = new wxToolBar(this, ID_TOOLBAR1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_TEXT|wxTB_TOP|wxALWAYS_SHOW_SB, _T("ID_TOOLBAR1"));
-    ToolBarItem1 = ToolBar1->AddTool(ID_TOOLBARITEM1, _("ENI"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Load ENI file (xml file)"), wxEmptyString);
-    ToolBarItem2 = ToolBar1->AddTool(ID_TOOLBARITEM2, _("PCAPNG"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Load PCAPNG file (by wireshark)"), wxEmptyString);
+    ToolBarItem1 = ToolBar1->AddTool(ID_TOOLBARITEM1, _("ENI"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Load ENI file"), wxEmptyString);
+    ToolBarItem2 = ToolBar1->AddTool(ID_TOOLBARITEM2, _("PCAPNG"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Load PCAPNG file"), wxEmptyString);
     ToolBar1->AddSeparator();
-    ToolBarItem3 = ToolBar1->AddTool(ID_TOOLBARITEM3, _("CLEAR"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_DELETE")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_DELETE")),wxART_TOOLBAR), wxITEM_NORMAL, _("Clear fields"), wxEmptyString);
+    ToolBarItem3 = ToolBar1->AddTool(ID_TOOLBARITEM3, _("CLEAR"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_DELETE")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_DELETE")),wxART_TOOLBAR), wxITEM_NORMAL, _("Clear"), wxEmptyString);
     ToolBar1->AddSeparator();
     ToolBar1->AddSeparator();
     ToolBarItem4 = ToolBar1->AddTool(ID_TOOLBARITEM4, _("FILTER"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_LIST_VIEW")),wxART_TOOLBAR), wxITEM_NORMAL, _("Datagram filters"), wxEmptyString);
     ToolBarItem5 = ToolBar1->AddTool(ID_TOOLBARITEM6, _("OPTIONS"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_EXECUTABLE_FILE")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_EXECUTABLE_FILE")),wxART_TOOLBAR), wxITEM_NORMAL, _("Program options"), wxEmptyString);
     ToolBar1->AddSeparator();
     ToolBar1->AddSeparator();
-    ToolBarItem8 = ToolBar1->AddTool(ID_TOOLBARITEM5, _("EXECUTE"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GOTO_LAST")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GOTO_LAST")),wxART_TOOLBAR), wxITEM_NORMAL, _("Execute"), wxEmptyString);
+    ToolBarItem8 = ToolBar1->AddTool(ID_TOOLBARITEM5, _("EXECUTE"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GOTO_LAST")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GOTO_LAST")),wxART_TOOLBAR), wxITEM_NORMAL, _("Go!"), wxEmptyString);
     ToolBar1->AddStretchableSpace();
-    ToolBarItem10 = ToolBar1->AddTool(ID_TOOLBARITEM7, _("Help"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP")),wxART_TOOLBAR), wxITEM_NORMAL, _("Manuals"), wxEmptyString);
+    ToolBarItem10 = ToolBar1->AddTool(ID_TOOLBARITEM7, _("Help"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP")),wxART_TOOLBAR), wxITEM_NORMAL, _("Help"), wxEmptyString);
     ToolBar1->Realize();
     SetToolBar(ToolBar1);
-    FileDialog1 = new wxFileDialog(this, _("Open ENI file"), wxEmptyString, wxEmptyString, _("*.xml"), wxFD_DEFAULT_STYLE|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
-    FileDialog2 = new wxFileDialog(this, _("Open PCAPNG file"), wxEmptyString, wxEmptyString, _("*.pcapng"), wxFD_DEFAULT_STYLE|wxFD_OPEN|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
-    FileDialog3 = new wxFileDialog(this, _("Write CSV file"), wxEmptyString, wxEmptyString, _("*.csv"), wxFD_SAVE|wxFD_OVERWRITE_PROMPT, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
+    FileDialog1 = new wxFileDialog(this, _("Select file XML"), wxEmptyString, wxEmptyString, _("*.xml"), wxFD_DEFAULT_STYLE|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
+    FileDialog2 = new wxFileDialog(this, _("Select file PCAPNG"), wxEmptyString, wxEmptyString, _("*.pcapng"), wxFD_DEFAULT_STYLE|wxFD_OPEN|wxFD_FILE_MUST_EXIST, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
+    FileDialog3 = new wxFileDialog(this, _("Select file CSV"), wxEmptyString, wxEmptyString, _("*.csv"), wxFD_SAVE|wxFD_OVERWRITE_PROMPT, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
     Timer1.SetOwner(this, ID_TIMER1);
     Timer1.Start(1000, false);
     Fit();
@@ -438,8 +439,8 @@ void ecaFrame::OpenFileENI(wxCommandEvent& event)
                                 SlvTmp.Slave_addr=(int16_t) longtmp;
                                 if (SlvTmp.Slave_name!="")
                                 {
-                                    ArraySlaves.Add(SlvTmp);
                                     slaves++;
+                                    ArraySlaves.Add(SlvTmp);
                                 }
                                 SlvTmp.Slave_name="";
                             }
@@ -453,6 +454,12 @@ void ecaFrame::OpenFileENI(wxCommandEvent& event)
         }
         child_liv1=child_liv1->GetNext();
     }
+
+    for (unsigned int i=0; i<ArraySlaves.GetCount(); i++)
+    {
+      ArraySlaves[i].Slave_incr=slaves-i;
+    }
+
     str1.Printf(_(" Found %i slaves\n"),slaves);
     TextCtrl3->SetDefaultStyle(wxTextAttr(*wxBLACK));
     TextCtrl3->AppendText(str1);
@@ -669,7 +676,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
     MAILBOX_SERVICE MailboxService;
 
     wxArrayString arrstr;
-    arrstr.Add("12345679012345678901234567890",500);
+    arrstr.Add("12345679012345678901234567890",1000);
 
     uint32_t ui32;
     uint16_t ui16;
@@ -682,6 +689,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
     wxString str2;
     wxString fileCSV;
     wxString rigacsv;
+    wxString datagramdata;
 
     wxFile filecsv;
     wxFile filepcap;
@@ -691,6 +699,9 @@ void ecaFrame::Elabora(wxCommandEvent& event)
     wxFileOffset puntoC=0;
 
     bool is_NOP;
+    bool is_APRD;
+    bool is_APWR;
+    bool is_APRW;
     bool is_FPRD_REG;
     bool is_FPWR_REG;
     bool is_FPRD_SDO;
@@ -717,9 +728,44 @@ void ecaFrame::Elabora(wxCommandEvent& event)
     str1.Alloc(2000);
     rigacsv.Alloc(5000);
 
+    int checked=0;
+
+    if (ArrayPDO.GetCount()<1)
+    {
+        str1=_("Open a valid ENI file before Execute\n");
+        TextCtrl3->SetDefaultStyle(wxTextAttr(*wxRED));
+        TextCtrl3->AppendText(str1);
+        return;
+    }
 
     if (!filepcap.Open(FilePcapng,wxFile::read))
+    {
+        str1=_("PCAPNG file not found\nOpen a valid PCAPNG file before Execute\n");
+        TextCtrl3->SetDefaultStyle(wxTextAttr(*wxRED));
+        TextCtrl3->AppendText(str1);
         return;
+    }
+
+    for (int i=0; i<ArraySlaves.GetCount(); i++)
+    {
+        if (ArraySlaves[i].Reg_enable==true)
+            checked++;
+        if (ArraySlaves[i].Sdo_enable==true)
+            checked++;
+    }
+    for (int i=0; i<ArrayPDO.GetCount(); i++)
+    {
+        if (ArrayPDO[i].enabled==true)
+            checked++;
+    }
+    if (checked==0)
+    {
+        str1=_("Select at least one element in the Filter dialog before Execute\n");
+        TextCtrl3->SetDefaultStyle(wxTextAttr(*wxRED));
+        TextCtrl3->AppendText(str1);
+        return;
+    }
+
 
     long int sizepcap=filepcap.Length();
     FileDialog3->SetDirectory(SettingDialog->pathCsv);
@@ -731,11 +777,19 @@ void ecaFrame::Elabora(wxCommandEvent& event)
      }
     else
     {
+        str1=_("Select a valid CSV to Execute\n");
+        TextCtrl3->SetDefaultStyle(wxTextAttr(*wxRED));
+        TextCtrl3->AppendText(str1);
         return;
     }
 
     if (!filecsv.Open(fileCSV,wxFile::write))
+    {
+        str1=_("CSV file open error\n");
+        TextCtrl3->SetDefaultStyle(wxTextAttr(*wxRED));
+        TextCtrl3->AppendText(str1);
         return;
+    }
 
     wxFileOutputStream outfilecsv(filecsv);
     wxTextOutputStream outfile(outfilecsv);
@@ -755,6 +809,9 @@ void ecaFrame::Elabora(wxCommandEvent& event)
     arrstr[4]="Errors";
     col=5;
 
+    str1=_("Execute running...\n");
+    TextCtrl3->SetDefaultStyle(wxTextAttr(*wxBLACK));
+    TextCtrl3->AppendText(str1);
 
     for (uint16_t i=0; i<ArraySlaves.GetCount(); i++)
     {
@@ -898,6 +955,9 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                 {
 
                     is_NOP=false;
+                    is_APRD=false;
+                    is_APWR=false;
+                    is_APRW=false;
                     is_FPRD_REG=false;
                     is_FPWR_REG=false;
                     is_FPRD_SDO=false;
@@ -922,6 +982,12 @@ void ecaFrame::Elabora(wxCommandEvent& event)
 
                     if(DatagramHeader.Command==0x00)  //NOP
                         is_NOP=true;
+                    if(DatagramHeader.Command==0x01)  //Auto increment physical read
+                        is_APRD=true;
+                    if(DatagramHeader.Command==0x02)  //Auto increment physical write
+                        is_APWR=true;
+                    if(DatagramHeader.Command==0x03)  //Auto increment physical read write
+                        is_APRW=true;
 
                     if(DatagramHeader.Command==0x04) //FPRD configured address physical read
                     {
@@ -986,19 +1052,41 @@ void ecaFrame::Elabora(wxCommandEvent& event)
 
 
                     //FPRD configured address physical read
-                    if (is_FPRD_REG && !dirout)
+                    if ((is_FPRD_REG || is_APRD) && !dirout)
                     {
                         filepcap.Seek(puntoC);
-                        //           filepcap.Read(&MailboxHeader,6);
-                        //          filepcap.Read(&MailboxService,10);
+
+                        datagramdata="";
+                        for (int j=0; j<DatagramLenght; j++)
+                        {
+                            filepcap.Read(&ui8,1);
+                            datagramdata+=wxString::Format(" %02X",ui8);
+                            if (j>30)
+                            {
+                                datagramdata+="...";
+                                break;
+                            }
+                        }
+
                         for (unsigned int i=0; i<ArraySlaves.GetCount(); i++)
                         {
-                            if (ArraySlaves[i].Slave_addr==DatagramHeader.Address  && ArraySlaves[i].Reg_enable)
+                            if (((ArraySlaves[i].Slave_addr==DatagramHeader.Address && is_FPRD_REG) ||
+                                (ArraySlaves[i].Slave_incr==DatagramHeader.Address && is_APRD)) &&
+                              ArraySlaves[i].Reg_enable)
                             {
                                 int u=ArraySlaves[i].Regcol;
-                                arrstr[u]=wxT("FpRD");
+                                if (is_FPRD_REG) {
+                                  arrstr[u]=wxT("FpRD");
+                                }
+                                else if (is_APRD) {
+                                  arrstr[u]=wxT("ApRD");
+                                }
+//                                else
+//                                  arrstr[u]=wxT("BRD");
                                 arrstr[++u]=wxString::Format("0x%X",DatagramHeader.Offset);
                                 arrstr[++u]="h";
+                                arrstr[u]+=datagramdata;
+                                /*
                                 for (int j=0; j<DatagramLenght; j++)
                                 {
                                     filepcap.Read(&ui8,1);
@@ -1009,7 +1097,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                                         break;
                                     }
                                 }
-
+                                */
                                 towrite=true;
 
                             }
@@ -1017,20 +1105,42 @@ void ecaFrame::Elabora(wxCommandEvent& event)
 
                     }
                     //FPWR configured address physical write
-                    if (is_FPWR_REG && dirout)
+                    if ((is_FPWR_REG || is_APWR || is_BWR) && !dirout)
                     {
                         filepcap.Seek(puntoC);
 
-                        //   filepcap.Read(&MailboxHeader,6);
-                        // filepcap.Read(&MailboxService,10);
+                        datagramdata="";
+                        for (int j=0; j<DatagramLenght; j++)
+                        {
+                            filepcap.Read(&ui8,1);
+                            datagramdata+=wxString::Format(" %02X",ui8);
+                            if (j>30)
+                            {
+                                datagramdata+="...";
+                                break;
+                            }
+                        }
+
                         for (unsigned int i=0; i<ArraySlaves.GetCount(); i++)
                         {
-                            if (ArraySlaves[i].Slave_addr==DatagramHeader.Address  && ArraySlaves[i].Reg_enable)
-                            {
+                           if (((ArraySlaves[i].Slave_addr==DatagramHeader.Address && (is_FPWR_REG || is_BWR) ) ||
+                                (ArraySlaves[i].Slave_incr==DatagramHeader.Address && is_APWR)) &&
+                                ArraySlaves[i].Reg_enable)
+                              {
                                 int u=ArraySlaves[i].Regcol;
-                                arrstr[u]=wxT("FpWR");
+                                if (is_FPWR_REG) {
+                                  arrstr[u]=wxT("FpWR");
+                                }
+                                else if (is_APWR) {
+                                  arrstr[u]=wxT("ApWR");
+                                }
+                               else if (is_BWR) {
+                                  arrstr[u]=wxT("BWR");
+                               }
                                 arrstr[++u]=wxString::Format("0x%X",DatagramHeader.Offset);
                                 arrstr[++u]="h";
+                                arrstr[u]+=datagramdata;
+                                /*
                                 for (int j=0; j<DatagramLenght; j++)
                                 {
                                     filepcap.Read(&ui8,1);
@@ -1041,9 +1151,27 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                                         break;
                                     }
                                 }
-
+                                */
                                 towrite=true;
                             }
+                        }
+                        if (is_BWR && towrite)
+                        {
+                            //write to file
+                           //block number
+                            i32=blocchi-1;
+                            arrstr[0]=wxString::Format(wxT("%i"),i32);
+                            for (int i=0; i<col; i++)
+                            {
+                              outfile<<arrstr[i];
+                              outfile<<wxT(";");
+                            }
+                            outfile<<wxT("\n");
+
+                            //reset the array
+                            for (int i=0; i<col; i++)
+                                arrstr[i]="";
+                            towrite=false;
                         }
                     }
                     //FPRD configured address physical read
@@ -1075,7 +1203,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                                     else if ((ui8==0x2B) || (ui8==0x4B))
                                         k=2;
                                     else if ((ui8==0x27) || (ui8==0x47))
-                                        k=3;
+                                       k=3;
                                     else if ((ui8==0x23) || (ui8==0x43))
                                         k=4;
 //                                    else if ((ui8==0x22) || (ui8==0x21) || (ui8==0x42) || (ui8==0x41))
@@ -1101,17 +1229,11 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                                 else if ((MailboxHeader.Mix & 0x0F00) == 0x1000)
                                     arrstr[++u]="SoE";
                                 else
-                                    arrstr[++u]="???";
+                                    arrstr[++u]="---";
 
                                 towrite=true;
                             }
                         }
-
-
-
-
-
-
 
 
                     }
@@ -1201,11 +1323,11 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                                     else if (SettingDialog->format64in==1)
                                     {
                                         ui32=(uint32_t)(ui64>>32);
-                                        str1=wxString::Format(wxT("%08X"),ui32);
-                                        outfile<<str1;
+                                        str1=wxString::Format(wxT("0x%08X"),ui32);
+                                        arrstr[u]=str1;
                                         ui32=(uint32_t)ui64;
                                         str1=wxString::Format(wxT("%08X"),ui32);
-                                        arrstr[u]=str1;
+                                        arrstr[u]+=str1;
                                     }
                                     else
                                     {
@@ -1364,6 +1486,11 @@ void ecaFrame::Elabora(wxCommandEvent& event)
         punto+=BlockHeader.BlockLength;
     }
     filecsv.Close();
+
+    str1=_("Execute terminate\n");
+    TextCtrl3->SetDefaultStyle(wxTextAttr(*wxBLACK));
+    TextCtrl3->AppendText(str1);
+
     wxString messa;
     messa.Printf(_("Blocks managed: %i \nElapsed time: %is"),blocchi,ticks);
     wxMessageBox(messa,_("- Finish -"),wxICON_INFORMATION);

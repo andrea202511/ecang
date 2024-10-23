@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="ecaABOUT">
 		<title>about</title>
-		<size>300,300</size>
+		<size>400,400</size>
 		<bg>#F0F0F0</bg>
 		<minsize>300,300</minsize>
 		<pos_arg>1</pos_arg>
@@ -13,11 +13,11 @@
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
 						<object class="wxStaticBitmap" name="ID_STATICBITMAP1" variable="StaticBitmap1" member="yes">
-							<bitmap stock_id="wxART_INFORMATION" stock_client="wxART_BUTTON" />
+							<bitmap>/home/andrea/projects/ecang/src/ecaLogo.xpm</bitmap>
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>2</option>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
@@ -33,7 +33,7 @@
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
-						<option>4</option>
+						<option>1</option>
 					</object>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
@@ -54,19 +54,18 @@
 					</font>
 					<style>wxTE_READONLY|wxBORDER_NONE</style>
 				</object>
-				<flag>wxALIGN_CENTER_HORIZONTAL</flag>
+				<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 				<border>5</border>
-				<option>1</option>
 			</object>
 			<object class="spacer">
 				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 				<border>5</border>
-				<option>1</option>
 				<size>450,0</size>
 			</object>
 			<object class="sizeritem">
 				<object class="wxTextCtrl" name="ID_TEXTCTRL3" variable="TextCtrl3" member="yes">
 					<value>0</value>
+					<bg>#F8EF09</bg>
 					<style>wxTE_READONLY|wxTE_RIGHT|wxBORDER_NONE|wxTRANSPARENT_WINDOW</style>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>

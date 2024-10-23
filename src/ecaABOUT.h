@@ -2,6 +2,7 @@
 #define ECAABOUT_H
 
 #include "version.h"
+#include <wx/statbmp.h>
 
 //(*Headers(ecaABOUT)
 #include <wx/button.h>
@@ -27,6 +28,7 @@ class ecaABOUT: public wxDialog
 		wxTextCtrl* TextCtrl2;
 		wxTextCtrl* TextCtrl3;
 		//*)
+
 
 	protected:
 

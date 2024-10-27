@@ -100,6 +100,7 @@ class ecaSetting: public wxDialog
 		void OnButton2Click(wxCommandEvent& event);
 		//    void OnButton3Click(wxCommandEvent& event);
 		void OnClose(wxCloseEvent& event);
+		void OnRadioBox1Select(wxCommandEvent& event);
 		//*)
 
 		DECLARE_EVENT_TABLE()

@@ -83,7 +83,8 @@
 								<item>(b) binary</item>
 							</content>
 							<validator>wxGenericValidator(&amp;format64in)</validator>
-							<style>wxRA_SPECIFY_COLS|wxRA_VERTICAL</style>
+							<style>wxRA_SPECIFY_COLS</style>
+							<handler function="OnRadioBox1Select" entry="EVT_RADIOBOX" />
 						</object>
 						<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>

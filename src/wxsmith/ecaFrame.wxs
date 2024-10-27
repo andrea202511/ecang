@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxFrame" name="ecaFrame">
 		<title>Ecang</title>
-		<icon>/home/andrea/projects/ecang/src/ecaLogo.xpm</icon>
+		<size>-1,-1</size>
 		<font>
 			<size>9</size>
 			<style>normal</style>
@@ -128,7 +128,7 @@
 			<object class="wxMenu" variable="Menu2" member="no">
 				<label>Help</label>
 				<object class="wxMenuItem" name="ID_MENUITEM7" variable="MenuItem8" member="yes">
-					<label>Help</label>
+					<label>Manual</label>
 				</object>
 				<object class="wxMenuItem" name="idMenuAbout" variable="MenuItem2" member="no">
 					<label>About</label>
@@ -145,7 +145,7 @@
 			<style>wxBORDER_DOUBLE</style>
 		</object>
 		<object class="wxToolBar" name="ID_TOOLBAR1" variable="ToolBar1" member="yes">
-			<style>wxTB_HORIZONTAL|wxTB_TEXT|wxTB_TOP|wxALWAYS_SHOW_SB</style>
+			<style>wxTB_FLAT|wxTB_HORIZONTAL|wxTB_TEXT|wxTB_TOP|wxALWAYS_SHOW_SB</style>
 			<object class="tool" name="ID_TOOLBARITEM1" variable="ToolBarItem1" member="yes">
 				<label>ENI</label>
 				<bitmap stock_id="wxART_FILE_OPEN" stock_client="wxART_TOOLBAR" />
@@ -191,7 +191,6 @@
 				<tooltip>Go!</tooltip>
 				<handler function="Elabora" entry="EVT_TOOL" />
 			</object>
-			<object class="stretchable" />
 			<object class="tool" name="ID_TOOLBARITEM7" variable="ToolBarItem10" member="yes">
 				<label>Help</label>
 				<bitmap stock_id="wxART_HELP" stock_client="wxART_TOOLBAR" />

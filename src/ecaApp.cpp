@@ -49,9 +49,9 @@ bool ecaApp::OnInit()
     wxInitAllImageHandlers();
     if ( wxsOK )
     {
-      ecaFrame* Frame = new ecaFrame(0);
-      Frame->Show();
-      SetTopWindow(Frame);
+    	ecaFrame* Frame = new ecaFrame(0);
+    	Frame->Show();
+    	SetTopWindow(Frame);
     }
     //*)
     return wxsOK;

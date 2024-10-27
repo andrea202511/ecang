@@ -36,12 +36,12 @@ ecaABOUT::ecaABOUT(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSiz
 	SetBackgroundColour(wxColour(240,240,240));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-	StaticBitmap1 = new wxStaticBitmap(this, ID_STATICBITMAP1, wxBitmap(wxImage(_T("/home/andrea/projects/ecang/src/ecaLogo.xpm"))), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICBITMAP1"));
+	StaticBitmap1 = new wxStaticBitmap(this, ID_STATICBITMAP1, wxIcon(ecaLogo48_xpm), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICBITMAP1"));
 	BoxSizer2->Add(StaticBitmap1, 1, wxALL|wxEXPAND, 5);
 	StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("ecang"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
 	wxFont StaticText1Font(14,wxFONTFAMILY_SWISS,wxFONTSTYLE_ITALIC,wxFONTWEIGHT_BOLD,false,_T("Sans"),wxFONTENCODING_DEFAULT);
 	StaticText1->SetFont(StaticText1Font);
-	BoxSizer2->Add(StaticText1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer2->Add(StaticText1, 2, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer2, 1, wxALL|wxEXPAND, 2);
 	TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, _("0"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY|wxBORDER_NONE, wxDefaultValidator, _T("ID_TEXTCTRL2"));
 	TextCtrl2->SetBackgroundColour(wxColour(240,240,240));
@@ -51,14 +51,17 @@ ecaABOUT::ecaABOUT(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSiz
 	BoxSizer1->Add(450,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	TextCtrl3 = new wxTextCtrl(this, ID_TEXTCTRL3, _("0"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY|wxTE_RIGHT|wxBORDER_NONE|wxTRANSPARENT_WINDOW, wxDefaultValidator, _T("ID_TEXTCTRL3"));
 	TextCtrl3->SetBackgroundColour(wxColour(248,239,9));
-	BoxSizer1->Add(TextCtrl3, 1, wxALL|wxEXPAND, 5);
+	BoxSizer1->Add(TextCtrl3, 0, wxALL|wxEXPAND, 5);
 	TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, _("Author: andrea202511 (Andrea Fabbri)\n\nThis program is licensed under the terms\nof the GNU General Public License version 3\nhttp://www.gnu.org/licenses/gpl-3.0.html"), wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxVSCROLL|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL1"));
 	BoxSizer1->Add(TextCtrl1, 3, wxALL|wxEXPAND, 5);
 	Button1 = new wxButton(this, wxID_CANCEL, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	BoxSizer1->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL, 5);
 	SetSizer(BoxSizer1);
+	SetSizer(BoxSizer1);
 	Layout();
 	//*)
+
+	//BoxSizer2->Add(wxIcon(ecaLogo64_xpm), 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 
 	TextCtrl2->SetValue(AutoVersion::FULLVERSION_STRING);
 	TextCtrl3->SetValue(AutoVersion::STATUS); //+" "+AutoVersion::STATUS);

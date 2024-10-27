@@ -30,7 +30,6 @@ SLVArray ArraySlaves;
 #include <wx/artprov.h>
 #include <wx/bitmap.h>
 #include <wx/font.h>
-#include <wx/icon.h>
 #include <wx/image.h>
 #include <wx/intl.h>
 #include <wx/string.h>
@@ -112,15 +111,11 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     wxMenuItem* MenuItem2;
 
     Create(parent, id, _("Ecang"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxDEFAULT_FRAME_STYLE, _T("id"));
+    SetClientSize(wxSize(-1,-1));
     SetMinSize(wxSize(550,450));
     wxFont thisFont(9,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Sans"),wxFONTENCODING_DEFAULT);
     SetFont(thisFont);
     SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
-    {
-      wxIcon FrameIcon;
-      FrameIcon.CopyFromBitmap(wxBitmap(ecaLogo64_xpm));
-      SetIcon(FrameIcon);
-    }
     BoxSizer1 = new wxBoxSizer(wxVERTICAL);
     BoxSizer2 = new wxBoxSizer(wxVERTICAL);
     BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
@@ -164,7 +159,7 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     Menu4->Append(MenuItem6);
     MenuBar1->Append(Menu4, _("Build"));
     Menu2 = new wxMenu();
-    MenuItem8 = new wxMenuItem(Menu2, ID_MENUITEM7, _("Help"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem8 = new wxMenuItem(Menu2, ID_MENUITEM7, _("Manual"), wxEmptyString, wxITEM_NORMAL);
     Menu2->Append(MenuItem8);
     MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Show info about this application"), wxITEM_NORMAL);
     Menu2->Append(MenuItem2);
@@ -176,7 +171,7 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     StatusBar1->SetFieldsCount(1,__wxStatusBarWidths_1);
     StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
     SetStatusBar(StatusBar1);
-    ToolBar1 = new wxToolBar(this, ID_TOOLBAR1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_TEXT|wxTB_TOP|wxALWAYS_SHOW_SB, _T("ID_TOOLBAR1"));
+    ToolBar1 = new wxToolBar(this, ID_TOOLBAR1, wxDefaultPosition, wxDefaultSize, wxTB_FLAT|wxTB_HORIZONTAL|wxTB_TEXT|wxTB_TOP|wxALWAYS_SHOW_SB, _T("ID_TOOLBAR1"));
     ToolBarItem1 = ToolBar1->AddTool(ID_TOOLBARITEM1, _("ENI"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Load ENI file"), wxEmptyString);
     ToolBarItem2 = ToolBar1->AddTool(ID_TOOLBARITEM2, _("PCAPNG"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Load PCAPNG file"), wxEmptyString);
     ToolBar1->AddSeparator();
@@ -188,7 +183,6 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     ToolBar1->AddSeparator();
     ToolBar1->AddSeparator();
     ToolBarItem8 = ToolBar1->AddTool(ID_TOOLBARITEM5, _("EXECUTE"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GOTO_LAST")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GOTO_LAST")),wxART_TOOLBAR), wxITEM_NORMAL, _("Go!"), wxEmptyString);
-    ToolBar1->AddStretchableSpace();
     ToolBarItem10 = ToolBar1->AddTool(ID_TOOLBARITEM7, _("Help"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP")),wxART_TOOLBAR), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP")),wxART_TOOLBAR), wxITEM_NORMAL, _("Help"), wxEmptyString);
     ToolBar1->Realize();
     SetToolBar(ToolBar1);
@@ -197,7 +191,8 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     FileDialog3 = new wxFileDialog(this, _("Select file CSV"), wxEmptyString, wxEmptyString, _("*.csv"), wxFD_SAVE|wxFD_OVERWRITE_PROMPT, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
     Timer1.SetOwner(this, ID_TIMER1);
     Timer1.Start(1000, false);
-    Fit();
+    SetSizer(BoxSizer1);
+    Layout();
 
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::OpenFileENI);
     Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::OpenFilePcapng);
@@ -216,6 +211,7 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_TIMER1,wxEVT_TIMER,(wxObjectEventFunction)&ecaFrame::OnTimer1Trigger);
     //*)
 
+    SetIcon(wxIcon(ecaLogo32_xpm));
     SettingDialog = new ecaSetting(this);
     FilterPDODialog = new ecaPDOFilter(this);
     AboutDialog = new ecaABOUT(this);
@@ -746,7 +742,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
         return;
     }
 
-    for (int i=0; i<ArraySlaves.GetCount(); i++)
+    for (unsigned int i=0; i<ArraySlaves.GetCount(); i++)
     {
         if (ArraySlaves[i].Reg_enable==true)
             checked++;

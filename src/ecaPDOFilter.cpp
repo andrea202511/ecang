@@ -67,6 +67,7 @@ ecaPDOFilter::ecaPDOFilter(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
 	Button1 = new wxButton(this, ID_BUTTON1, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
 	BoxSizer1->Add(Button1, 0, wxALL|wxEXPAND, 5);
 	SetSizer(BoxSizer1);
+	SetSizer(BoxSizer1);
 	Layout();
 
 	Connect(ID_BUTTON4,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&ecaPDOFilter::OnButton4Click);

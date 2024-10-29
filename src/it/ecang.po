@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecang\n"
 "POT-Creation-Date: 2024-10-22 21:34+0200\n"
-"PO-Revision-Date: 2024-10-22 21:42+0200\n"
+"PO-Revision-Date: 2024-10-29 20:24+0100\n"
 "Last-Translator: andreaf <andrea202511@gmail.com>\n"
 "Language-Team: andrea\n"
 "Language: it\n"
@@ -104,7 +104,7 @@ msgstr "Crea"
 
 #: ecaMain.cpp:167 ecaMain.cpp:171 ecaMain.cpp:192
 msgid "Help"
-msgstr "Manuale"
+msgstr "Aiuto"
 
 #: ecaMain.cpp:169
 msgid "About\tF1"

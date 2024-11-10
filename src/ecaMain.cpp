@@ -16,6 +16,7 @@
 #include <wx/progdlg.h>
 #include <wx/wfstream.h>
 #include <wx/txtstrm.h>
+#include <wx/help.h>
 
 #include <wx/msgdlg.h>
 
@@ -24,6 +25,9 @@ WX_DEFINE_OBJARRAY(SLVArray);
 
 PDOArray ArrayPDO;
 SLVArray ArraySlaves;
+
+extern wxHtmlHelpController* m_helpController;
+
 
 
 //(*InternalHeaders(ecaFrame)
@@ -191,7 +195,6 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     FileDialog3 = new wxFileDialog(this, _("Select file CSV"), wxEmptyString, wxEmptyString, _("*.csv"), wxFD_SAVE|wxFD_OVERWRITE_PROMPT, wxDefaultPosition, wxDefaultSize, _T("wxFileDialog"));
     Timer1.SetOwner(this, ID_TIMER1);
     Timer1.Start(1000, false);
-    SetSizer(BoxSizer1);
     Layout();
 
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::OpenFileENI);
@@ -208,6 +211,7 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_TOOLBARITEM4,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::ShowFilterDataDialog);
     Connect(ID_TOOLBARITEM6,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::ShowSettingDialog);
     Connect(ID_TOOLBARITEM5,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::Elabora);
+    Connect(ID_TOOLBARITEM7,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::OnToolBarHelpButton);
     Connect(ID_TIMER1,wxEVT_TIMER,(wxObjectEventFunction)&ecaFrame::OnTimer1Trigger);
     //*)
 
@@ -600,14 +604,14 @@ void ecaFrame::PreElabora(void)
 
                     DatagramLenght=DatagramHeader.Mix & 0x07FF;
 
-                   filepcap.Seek(puntoC+DatagramLenght);
+                    filepcap.Seek(puntoC+DatagramLenght);
                     filepcap.Read(&WorkingCount,2);
                     if (WorkingCount>0)
-                   {
+                    {
                         MacSourceDirIn=EpbPart2Header.MacSource;
                         break;
-                   }
-                   byteEstratti+=10+DatagramLenght+2;
+                    }
+                    byteEstratti+=10+DatagramLenght+2;
                 }
             }
         }
@@ -716,6 +720,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
     int blocchi=0;
     uint16_t byteEstratti;
     uint16_t WorkingCount;
+    int16_t WorkingCountLRW=0;
     uint16_t DatagramLenght;
  //   char datadatagram[2048];
     int percento;
@@ -861,7 +866,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
     {
         if (ArrayPDO[i].enabled==false)
             continue;
-        str1=ArrayPDO[i].PDO_name+wxString::Format(wxT(" %i"),ArrayPDO[i].PDO_bytes); //+" "+ArrayPDO[i].PDO_bytes;
+        str1=ArrayPDO[i].PDO_name+wxString::Format(wxT(" %i"),ArrayPDO[i].PDO_bytes)+wxString::Format(wxT(" %i"),ArrayPDO[i].PDO_offset); //+" "+ArrayPDO[i].PDO_bytes;
         arrstr[col]=str1;
         col++;
 //\   ecaPDO ep=ArrayPDO[i];
@@ -941,12 +946,13 @@ void ecaFrame::Elabora(wxCommandEvent& event)
             //bool bip;
 
             byteEstratti=0;
-            dirout=true;
+
             //Se e' un frame ethercat ne analizzo i singoli datagram
             if (EpbPart2Header.Type==0xA488)
             {
 
                 towrite=false;
+                WorkingCountLRW=-1;
                 while (byteEstratti<EthercatFrameLenght)
                 {
 
@@ -1026,9 +1032,9 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                     if(MacSourceDirIn.part_1==EpbPart2Header.MacSource.part_1 &&
                        MacSourceDirIn.part_2==EpbPart2Header.MacSource.part_2 &&
                        MacSourceDirIn.part_3==EpbPart2Header.MacSource.part_3)
-                      dirout=0;
+                      dirout=0; //M<=S
                     else
-                      dirout=1;
+                      dirout=1; //M=>S
 
                     //Estraggo i dati del datagramma
 //questo lo devo togliere!!         filepcap.Read(&datadatagram,DatagramLenght); //per adesso questo serve solo a fare avanzare il puntatore al prossimo datagram
@@ -1297,17 +1303,20 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                     }
 
                     //LRW logical read/write
-                    if (is_LRW_PDO && !dirout && WorkingCount>0)
+//                    if (is_LRW_PDO && !dirout && WorkingCount>0)
+                    if (is_LRW_PDO)
                     {
+                        WorkingCountLRW=(int16_t) WorkingCount;
 
+                        int u=Pdocol-1;
                         for (unsigned int i=0; i<ArrayPDO.GetCount(); i++)
                         {
                             if (ArrayPDO[i].enabled==false)
                                 continue;
-                            int u=Pdocol+i;
-                            towrite=true;
-                            if (true) //(ArrayPDO[i].out==dirout)
+                            u++;
+                            if (ArrayPDO[i].out==dirout)
                             {
+                                towrite=true;
                                 filepcap.Seek(puntoB+ArrayPDO[i].PDO_offset);
                                 if (ArrayPDO[i].PDO_bytes==64)
                                 {
@@ -1454,7 +1463,10 @@ void ecaFrame::Elabora(wxCommandEvent& event)
                         arrstr[1]=wxT("M <= S");
 
                     //work counter
-                    arrstr[2]=wxString::Format(wxT("%i"),WorkingCount);
+                    if (WorkingCountLRW>=0)
+                      arrstr[2]=wxString::Format(wxT("%i"),WorkingCountLRW);
+                    else
+                      arrstr[2]="";
 
                     //Note
                     arrstr[3]="";
@@ -1488,7 +1500,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
     TextCtrl3->AppendText(str1);
 
     wxString messa;
-    messa.Printf(_("Blocks managed: %i \nElapsed time: %is"),blocchi,ticks);
+    messa.Printf(_("Blocks managed: %i\nElapsed time: %is"),blocchi,ticks);
     wxMessageBox(messa,_("- Finish -"),wxICON_INFORMATION);
 
 }
@@ -1523,4 +1535,9 @@ void ecaFrame::ShowAboutDialog(wxCommandEvent& event)
 void ecaFrame::OnTimer1Trigger(wxTimerEvent& event)
 {
     ticks++;
+}
+
+void ecaFrame::OnToolBarHelpButton(wxCommandEvent& event)
+{
+  m_helpController->DisplayContents();
 }

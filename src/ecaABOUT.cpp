@@ -57,7 +57,6 @@ ecaABOUT::ecaABOUT(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSiz
 	Button1 = new wxButton(this, wxID_CANCEL, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	BoxSizer1->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL, 5);
 	SetSizer(BoxSizer1);
-	SetSizer(BoxSizer1);
 	Layout();
 	//*)
 

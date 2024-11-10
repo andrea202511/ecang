@@ -60,11 +60,12 @@ class ecaFrame: public wxFrame
         void ShowFilterDataDialog(wxCommandEvent& event);
         void ShowSettingDialog(wxCommandEvent& event);
         void ShowAboutDialog(wxCommandEvent& event);
-//        void OnBitmapButton2Click(wxCommandEvent& event);
-//        void OnBitmapButton3Click(wxCommandEvent& event);
-//        void OnButton5Click(wxCommandEvent& event);
-//        void OnButton1Click(wxCommandEvent& event);
+        //        void OnBitmapButton2Click(wxCommandEvent& event);
+        //        void OnBitmapButton3Click(wxCommandEvent& event);
+        //        void OnButton5Click(wxCommandEvent& event);
+        //        void OnButton1Click(wxCommandEvent& event);
         void OnTimer1Trigger(wxTimerEvent& event);
+        void OnToolBarHelpButton(wxCommandEvent& event);
         //*)
 
 

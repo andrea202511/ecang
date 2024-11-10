@@ -9,6 +9,8 @@
 
 #include "ecaApp.h"
 
+wxHelpController* m_helpController;
+
 
 //(*AppHeaders
 #include "ecaMain.h"
@@ -44,6 +46,11 @@ bool ecaApp::OnInit()
       bb=m_locale->AddCatalog(wxT("ecang"));
 
 
+    //Help
+//42    wxFileSystem::AddHandler(new wxZipFSHandler);
+    m_helpController= new wxHtmlHelpController;
+    m_helpController->Initialize("./help/ecang");
+
     //(*AppInitialize
     bool wxsOK = true;
     wxInitAllImageHandlers();
@@ -57,5 +64,12 @@ bool ecaApp::OnInit()
     return wxsOK;
 
 }
+
+int ecaApp::OnExit()
+{
+   delete m_helpController;
+   return 0;
+}
+
 
 

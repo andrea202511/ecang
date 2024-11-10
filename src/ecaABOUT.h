@@ -43,6 +43,7 @@ class ecaABOUT: public wxDialog
 	private:
 
 		//(*Handlers(ecaABOUT)
+		void OnTextCtrl1Text(wxCommandEvent& event);
 		//*)
 
 		DECLARE_EVENT_TABLE()

@@ -48,6 +48,7 @@ class ecaSetting: public wxDialog
 		//(*Declarations(ecaSetting)
 		wxButton* Button1;
 		wxButton* Button2;
+		wxButton* Button3;
 		wxCheckBox* CheckBox1;
 		wxCheckBox* CheckBox2;
 		wxCheckBox* CheckBox3;
@@ -87,6 +88,7 @@ class ecaSetting: public wxDialog
 		static const long ID_CHECKBOX4;
 		static const long ID_CHECKBOX5;
 		static const long ID_CHECKBOX6;
+		static const long ID_BUTTON1;
 		//*)
 
 	private:
@@ -101,6 +103,7 @@ class ecaSetting: public wxDialog
 		//    void OnButton3Click(wxCommandEvent& event);
 		void OnClose(wxCloseEvent& event);
 		void OnRadioBox1Select(wxCommandEvent& event);
+		void OnButton3Click1(wxCommandEvent& event);
 		//*)
 
 		DECLARE_EVENT_TABLE()

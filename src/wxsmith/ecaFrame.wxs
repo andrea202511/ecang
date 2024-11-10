@@ -196,6 +196,7 @@
 				<bitmap stock_id="wxART_HELP" stock_client="wxART_TOOLBAR" />
 				<bitmap2 stock_id="wxART_HELP" stock_client="wxART_TOOLBAR" />
 				<tooltip>Help</tooltip>
+				<handler function="OnToolBarHelpButton" entry="EVT_TOOL" />
 			</object>
 		</object>
 		<object class="wxFileDialog" variable="FileDialog1" member="yes">

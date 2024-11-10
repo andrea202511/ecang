@@ -236,6 +236,15 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON1" variable="Button3" member="yes">
+							<label>HELP</label>
+							<handler function="OnButton3Click1" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
 						<object class="wxButton" name="wxID_CANCEL" variable="Button1" member="yes">
 							<label>CANCEL</label>
 						</object>

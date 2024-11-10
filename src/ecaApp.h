@@ -12,11 +12,16 @@
 
 #include <wx/app.h>
 #include <wx/config.h>
+#include <wx/help.h>
+#include <wx/fs_zip.h>
+
+
 
 class ecaApp : public wxApp
 {
     public:
         virtual bool OnInit();
+        int OnExit();
 
     private:
         wxConfig* econfig;

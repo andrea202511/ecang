@@ -1,0 +1,19 @@
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>Installation</H2>
+Download the binary file for your OS from <A HREF="sourceforge_link">https://sourceforge.net/projects/ecang/</A><BR>
+In the File tab you can find all available versions
+
+
+
+<H5>Linux</H5>
+DEB package for DEBIAN and derivate is provided. Download it and simply make double click on it to run the package manager of your system.<P>
+Also prompt installation is possible, you can use dpgk<BR>
+
+sudo dpkg -i ecang_1_.... .deb
+<P>
+ 
+<H5>Windows</H5>
+SETUP... .exe installer is provided. Download it and simply make double click on it and follow the instrucions.
+</BODY>
+</HTML>

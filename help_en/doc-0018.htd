@@ -1,0 +1,13 @@
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>Main window</H2>
+The main window of ecang has some standard components and features.<BR>
+At the top a toolbar allows quick access to all the functions. The same functions can be reached using the menus.<BR>
+<UL>ENI selection of the ENI (Ethercat network information) file. The name of the selected file is displayed in the ENI box</UL>
+<UL>PCAPNG selects PCAPNG (Packet Capture Nexg Generation) file. The name of the selected file is displayed in the PCAPNG box.</UL>
+<UL>CLEAR clears all the boxes</UL>
+<UL>FILTER opens the FILTER dialog box</U>
+<UL>EXECUTE performs the conversion generating the CVS file</UL><P>
+<IMG SRC="image0040.png" BORDER="0">
+</BODY>
+</HTML>

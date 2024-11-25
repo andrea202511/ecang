@@ -1,0 +1,13 @@
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>ENI file</H2>
+The ENI (EtherCAT Network Information) file is the configuration file used in EtherCAT networks to describe the network topology and connected devices.
+The ENI file is usually in XML format, and is generated or modified using configuration tools such as EtherCAT configuration software (for example, EtherCAT Configurator or TwinCAT from Beckhoff).<P>
+Currently Ecang extracts only this information from the ENI file:<BR>
+From the <B>&lt;config/slave/info&gt;</B> section, the name and address of each slave are read<BR>
+From the <B>&lt;ProcessImage/Inputs&gt;</B> section the name, size and offset of each input PDO are read<BR>
+From the <B>&lt;ProcessImage/Output&gt;</B> section the name, size and offset of each output PDO are read<BR><P>
+While reading the ENI file a report of the extracted information is displayed in the main window.<P>
+<IMG SRC="image001.png" BORDER="0">
+</BODY>
+</HTML>

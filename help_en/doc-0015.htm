@@ -1,0 +1,27 @@
+
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>PCAPNG file</H2>
+The Packet Capture Next Generation (PCAPNG) is one of the most popular formats to store network packet capture data, is the default format used by Wireshark.<BR>
+The PCAPNG file contains numerous blocks of various types. Ecang extract data from the the Enhanced packet block (EPB).<P>
+Thist is the EPB block structure<BR>
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="100%" bgcolor="#ffffe0">
+<TR><TD width="10%" ALIGN="LEFT" VALIGN="TOP">byte 0</TD><TD ALIGN="LEFT" VALIGN="TOP">EPB signature = 0x00000006</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 4</TD><TD ALIGN="LEFT" VALIGN="TOP">Block Total Length</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 8</TD><TD ALIGN="LEFT" VALIGN="TOP">Interface ID</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 12</TD><TD ALIGN="LEFT" VALIGN="TOP">Timestamp (High)</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 16</TD><TD ALIGN="LEFT" VALIGN="TOP">Timestamp (Low)</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 20</TD><TD ALIGN="LEFT" VALIGN="TOP">Captured Packet Length</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 24</TD><TD ALIGN="LEFT" VALIGN="TOP">Original Packet Length</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 28</TD><TD ALIGN="LEFT" VALIGN="TOP">Packet Data</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">variable</TD><TD ALIGN="LEFT" VALIGN="TOP">Options</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">variable</TD><TD ALIGN="LEFT" VALIGN="TOP">Block Total Length</TD></TR>
+</TABLE><P>
+While opening the PCAPNG file, Ecang find two data:<BR>
+1. From last block is extract the block/frame numbers.<BR>
+2. Next some blocks are read to determine the mac address of the first slave, observing the value of the workingcount. This data is essential to determine the direction of the frame under examination, from master to slaves or from slaves to master.<P>
+
+At the end a report is displayed in the main window<P>
+<IMG SRC="image002.png" BORDER="0">
+</BODY>
+</HTML>

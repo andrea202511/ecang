@@ -47,9 +47,9 @@ bool ecaApp::OnInit()
 
 
     //Help
-//42    wxFileSystem::AddHandler(new wxZipFSHandler);
+    wxFileSystem::AddHandler(new wxZipFSHandler);
     m_helpController= new wxHtmlHelpController;
-    m_helpController->Initialize("./help/ecang");
+    m_helpController->Initialize("/usr/share/ecang/htm/ecang_en.htm");
 
     //(*AppInitialize
     bool wxsOK = true;

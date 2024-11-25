@@ -129,13 +129,13 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     wxFont TextCtrl1Font(9,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Sans"),wxFONTENCODING_DEFAULT);
     TextCtrl1->SetFont(TextCtrl1Font);
     BoxSizer3->Add(TextCtrl1, 1, wxALL|wxEXPAND, 1);
-    BoxSizer2->Add(BoxSizer3, 1, wxEXPAND, 5);
+    BoxSizer2->Add(BoxSizer3, 0, wxEXPAND, 5);
     BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
     StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("PCAPNG"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
     BoxSizer4->Add(StaticText2, 0, wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_TEXTCTRL2"));
     BoxSizer4->Add(TextCtrl2, 1, wxALL|wxEXPAND, 1);
-    BoxSizer2->Add(BoxSizer4, 1, wxEXPAND, 5);
+    BoxSizer2->Add(BoxSizer4, 0, wxEXPAND, 5);
     BoxSizer1->Add(BoxSizer2, 0, wxALL|wxEXPAND, 5);
     TextCtrl3 = new wxTextCtrl(this, ID_TEXTCTRL3, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH2|wxVSCROLL|wxHSCROLL|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL3"));
     BoxSizer1->Add(TextCtrl3, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 5);
@@ -163,7 +163,7 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     Menu4->Append(MenuItem6);
     MenuBar1->Append(Menu4, _("Build"));
     Menu2 = new wxMenu();
-    MenuItem8 = new wxMenuItem(Menu2, ID_MENUITEM7, _("Manual"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem8 = new wxMenuItem(Menu2, ID_MENUITEM7, _("Help contents"), wxEmptyString, wxITEM_NORMAL);
     Menu2->Append(MenuItem8);
     MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Show info about this application"), wxITEM_NORMAL);
     Menu2->Append(MenuItem2);
@@ -204,6 +204,7 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::ShowFilterDataDialog);
     Connect(ID_MENUITEM4,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::ShowSettingDialog);
     Connect(ID_MENUITEM5,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::Elabora);
+    Connect(ID_MENUITEM7,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::OnToolBarHelpButton);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&ecaFrame::ShowAboutDialog);
     Connect(ID_TOOLBARITEM1,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::OpenFileENI);
     Connect(ID_TOOLBARITEM2,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&ecaFrame::OpenFilePcapng);
@@ -754,7 +755,7 @@ void ecaFrame::Elabora(wxCommandEvent& event)
         if (ArraySlaves[i].Sdo_enable==true)
             checked++;
     }
-    for (int i=0; i<ArrayPDO.GetCount(); i++)
+    for (unsigned int i=0; i<ArrayPDO.GetCount(); i++)
     {
         if (ArrayPDO[i].enabled==true)
             checked++;

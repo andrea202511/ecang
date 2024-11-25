@@ -17,6 +17,7 @@ class ecaPDOFilter: public wxDialog
 
 		//(*Declarations(ecaPDOFilter)
 		wxButton* Button1;
+		wxButton* Button2;
 		wxButton* Button4;
 		wxButton* Button5;
 		wxButton* Button6;
@@ -36,6 +37,7 @@ class ecaPDOFilter: public wxDialog
 		static const long ID_BUTTON8;
 		static const long ID_BUTTON9;
 		static const long ID_CHECKLISTBOX1;
+		static const long ID_BUTTON2;
 		static const long ID_BUTTON1;
 		//*)
 
@@ -51,6 +53,7 @@ class ecaPDOFilter: public wxDialog
 		void OnButton5Click(wxCommandEvent& event);
 		void OnButton6Click(wxCommandEvent& event);
 		void OnButton7Click(wxCommandEvent& event);
+		void OnButton2Click1(wxCommandEvent& event);
 		//*)
 
 		DECLARE_EVENT_TABLE()

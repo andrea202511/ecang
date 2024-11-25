@@ -1,0 +1,13 @@
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>Credits</H2>
+Ecang is an open source application that uses many resources that come from the world of open source software:<P>
+Ecang is based on wxWidgets libraries for cross platform developement (www.wxwidgets.org)<P>
+To develop I used Code::Blocks (www.codeblocks.org)<P>
+This Help file is written with HelpBlocks (www.anthemion.co.uk/helpblocks)<P>
+Traslations is managed by Poedit (https://poedit.net)<P>
+Windows installer is made with Inno Setup (https://jrsoftware.org/isinfo.php)<P>
+Wiresharkit is also an open source program
+
+</BODY>
+</HTML>

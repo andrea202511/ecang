@@ -1,8 +1,10 @@
 #include "ecaSetting.h"
 #include "ecaApp.h"
+#include "ecang_ids.h"
 #include <wx/help.h>
+#include <wx/fs_zip.h>
 
-extern wxHtmlHelpController* m_helpController;
+extern wxHelpController* m_helpController;
 
 
 //(*InternalHeaders(ecaSetting)
@@ -205,5 +207,5 @@ void ecaSetting::OnRadioBox1Select(wxCommandEvent& event)
 
 void ecaSetting::OnButton3Click1(wxCommandEvent& event)
 {
-  m_helpController->DisplaySection(wxT("Options dialog"));
+  m_helpController->DisplaySection(Option_dialog);
 }

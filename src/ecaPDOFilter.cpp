@@ -1,9 +1,12 @@
 #include "ecaPDOFilter.h"
 #include "ecaPDO.h"
 #include "ecaSlaves.h"
-#include <wx/help.h>
+#include "ecang_ids.h"
 
-extern wxHtmlHelpController* m_helpController;
+#include <wx/help.h>
+#include <wx/fs_zip.h>
+
+extern wxHelpController* m_helpController;
 
 
 extern PDOArray ArrayPDO;
@@ -186,5 +189,5 @@ void ecaPDOFilter::OnButton7Click(wxCommandEvent& event)
 
 void ecaPDOFilter::OnButton2Click1(wxCommandEvent& event)
 {
-  m_helpController->DisplaySection(wxT("Filter dialog"));
+  m_helpController->DisplaySection(Filter_dialog);
 }

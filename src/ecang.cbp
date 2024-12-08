@@ -61,9 +61,6 @@
 		<Unit filename="ecaABOUT.h" />
 		<Unit filename="ecaApp.cpp" />
 		<Unit filename="ecaApp.h" />
-		<Unit filename="ecaDataFilter.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="ecaLogo.xpm" />
 		<Unit filename="ecaMain.cpp" />
 		<Unit filename="ecaMain.h" />
@@ -74,6 +71,7 @@
 		<Unit filename="ecaSetting.h" />
 		<Unit filename="ecaSlaves.h" />
 		<Unit filename="ecaStruct.h" />
+		<Unit filename="ecang_ids.h" />
 		<Unit filename="version.h" />
 		<Unit filename="wxsmith/ecaABOUT.wxs" />
 		<Unit filename="wxsmith/ecaFrame.wxs" />

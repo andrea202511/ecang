@@ -9,6 +9,8 @@ From the <B>&lt;config/slave/info&gt;</B> section, the name and address of each 
 From the <B>&lt;ProcessImage/Inputs&gt;</B> section the name, size and offset of each input PDO are read<BR>
 From the <B>&lt;ProcessImage/Output&gt;</B> section the name, size and offset of each output PDO are read<BR><P>
 While reading the ENI file a report of the extracted information is displayed in the main window.<P>
-<IMG SRC="image001.png" BORDER="0">
+<IMG SRC="image001.png" BORDER="0"><P>
+Currently ecang handles pdo of size 64, 32, 16 and 8 bits.<BR>
+Pdo sizes smaller than 8 bits are supported in groups of 8 bits. Pdo sizes larger than 64 bits are currently not supported.
 </BODY>
 </HTML>

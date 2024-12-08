@@ -73,6 +73,7 @@
 		<Unit filename="ecaSetting.h" />
 		<Unit filename="ecaSlaves.h" />
 		<Unit filename="ecaStruct.h" />
+		<Unit filename="ecang_ids.h" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

@@ -26,7 +26,7 @@ WX_DEFINE_OBJARRAY(SLVArray);
 PDOArray ArrayPDO;
 SLVArray ArraySlaves;
 
-extern wxHtmlHelpController* m_helpController;
+extern wxHelpController* m_helpController;
 
 
 
@@ -36,6 +36,7 @@ extern wxHtmlHelpController* m_helpController;
 #include <wx/font.h>
 #include <wx/image.h>
 #include <wx/intl.h>
+#include <wx/settings.h>
 #include <wx/string.h>
 //*)
 
@@ -117,6 +118,7 @@ ecaFrame::ecaFrame(wxWindow* parent,wxWindowID id)
     Create(parent, id, _("Ecang"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxDEFAULT_FRAME_STYLE, _T("id"));
     SetClientSize(wxSize(-1,-1));
     SetMinSize(wxSize(550,450));
+    SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
     wxFont thisFont(9,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Sans"),wxFONTENCODING_DEFAULT);
     SetFont(thisFont);
     SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );

@@ -1,6 +1,20 @@
 <HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
 <H2>Option dialog</H2>
+<H3>Language</H3><BR>
+Allows you to select the language used from those proposed.<BR>
+The selected language will be active the next time ecang is started<P>
+<H3>PDO format</H3><BR>
+It is possible to select the representation format of the PDOs in the output file depending on their length in bits<P>
+<HR>
+<BLOCKQUOTE>Tips:<BR>
+Registers (REG) and the mailbox communication (SDO) always use a RAW representation (first byte read, first byte printed) which cannot be changed in this section
+</BLOCKQUOTE>
+<HR>
+<H3>Flags</H3><BR>
+-- to do --<P>
+
+
 
 <IMG SRC="image0031.png" BORDER="0">
 </BODY>

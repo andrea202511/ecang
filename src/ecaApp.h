@@ -12,6 +12,7 @@
 
 #include <wx/app.h>
 #include <wx/config.h>
+#define wxUSE_WXHTML_HELP 1
 #include <wx/help.h>
 #include <wx/fs_zip.h>
 

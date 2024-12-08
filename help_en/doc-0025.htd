@@ -1,0 +1,14 @@
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>CSV file output</H2>
+The output format of ecang is csv with separator character ";"<BR>
+Each frame analyzed from which the information selected in the filter window is extracted generates a line in the file.<BR> <P>
+The first fields of each line are constants:<BR>
+<B>Block:</B> Number of frames according to the numbering reported in wireshark<BR>
+<B>Dir:</B> Direction of the frame in question, M =&gt; S from master to slave, M &lt;= S from slave to master<BR>
+<B>workCnt:</B> work counter of the datagram containing the PDOs, if any<BR>
+<B>Note:</B> Currently not managed<BR>
+<B>Errors:</B> Currently not managed<P>
+Then follow all the fields of the selected items starting from the registers (REG), SDO and then the PDO.<BR>
+</BODY>
+</HTML>

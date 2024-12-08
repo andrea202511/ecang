@@ -3,6 +3,7 @@
 	<object class="wxFrame" name="ecaFrame">
 		<title>Ecang</title>
 		<size>-1,-1</size>
+		<bg>wxSYS_COLOUR_BTNFACE</bg>
 		<font>
 			<size>9</size>
 			<style>normal</style>

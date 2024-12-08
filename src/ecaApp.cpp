@@ -8,7 +8,6 @@
  **************************************************************/
 
 #include "ecaApp.h"
-
 wxHelpController* m_helpController;
 
 
@@ -48,9 +47,14 @@ bool ecaApp::OnInit()
 
     //Help
     wxFileSystem::AddHandler(new wxZipFSHandler);
-    m_helpController= new wxHtmlHelpController;
-    m_helpController->Initialize("/usr/share/ecang/htm/ecang_en.htm");
-
+    //m_helpController= new wxHtmlHelpController;
+    m_helpController= new wxHelpController;
+#if defined(__WXMSW__)
+    m_helpController->Initialize("./en/ecang_en.htm");
+#else
+    m_helpController->Initialize("/usr/share/ecang/help/ecang_en");
+    //m_helpController->Initialize("./en/ecang_en");
+#endif // defined
     //(*AppInitialize
     bool wxsOK = true;
     wxInitAllImageHandlers();

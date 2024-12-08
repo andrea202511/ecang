@@ -67,14 +67,17 @@
     <LI><OBJECT type="text/sitemap">
         <param name="Name" value="Main window">
         <param name="Local" value="doc-0018.htm">
+        <param name="ID" value=1000>
         </OBJECT>
     <LI><OBJECT type="text/sitemap">
         <param name="Name" value="Filter dialog">
         <param name="Local" value="doc-0019.htm">
+        <param name="ID" value=1001>
         </OBJECT>
     <LI><OBJECT type="text/sitemap">
         <param name="Name" value="Options dialog">
         <param name="Local" value="doc-0021.htm">
+        <param name="ID" value=1002>
         </OBJECT>
   </UL>
 </UL>

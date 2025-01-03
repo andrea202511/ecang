@@ -127,23 +127,32 @@ void ecaPDOFilter::OnInit(wxInitDialogEvent& event)
       str1="REG-";
       str1+=(ArraySlaves[i].Slave_name);
       CheckListBox1->InsertItems(1,&str1,ii);
-      CheckListBox1->Check(i,ArraySlaves[i].Reg_enable);
+      CheckListBox1->Check(i,false); //ArraySlaves[i].Reg_enable);
       ii++;
       str1="SDO-";
       str1+=(ArraySlaves[i].Slave_name);
       CheckListBox1->InsertItems(1,&str1,ii);
-      CheckListBox1->Check(i,ArraySlaves[i].Sdo_enable);
+      CheckListBox1->Check(i,false); //ArraySlaves[i].Sdo_enable);
       ii++;
     }
     for (unsigned int i=0; i<ArrayPDO.GetCount();i++) {
       str1="PDO-";
       str1+=(ArrayPDO[i].PDO_name);
       CheckListBox1->InsertItems(1,&str1,ii);
-      CheckListBox1->Check(i,ArrayPDO[i].enabled);
+      CheckListBox1->Check(i,false); //ArrayPDO[i].enabled);
       ii++;
     }
   }
 }
+
+void ecaPDOFilter::Reset()
+{
+  CheckListBox1->Clear();
+
+}
+
+
+
 
 void ecaPDOFilter::OnButton2Click(wxCommandEvent& event)
 {

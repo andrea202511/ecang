@@ -14,6 +14,7 @@ class ecaPDOFilter: public wxDialog
 
 		ecaPDOFilter(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize);
 		virtual ~ecaPDOFilter();
+		void Reset();
 
 		//(*Declarations(ecaPDOFilter)
 		wxButton* Button1;

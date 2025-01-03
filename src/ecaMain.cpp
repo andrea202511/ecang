@@ -252,8 +252,8 @@ void ecaFrame::OpenFileENI(wxCommandEvent& event)
         FileEni=FileDialog1->GetPath();
         SettingDialog->pathEni=FileDialog1->GetDirectory();
         TextCtrl1->SetValue(FileEni);
+        FilterPDODialog->Reset();
     }
-
 
     wxString str1;
     wxString str2;

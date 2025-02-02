@@ -50,10 +50,17 @@ bool ecaApp::OnInit()
     //m_helpController= new wxHtmlHelpController;
     m_helpController= new wxHelpController;
 #if defined(__WXMSW__)
-    m_helpController->Initialize("./en/ecang_en.htm");
+    if (language==1)
+      m_helpController->Initialize("./it/ecang");
+    else
+      m_helpController->Initialize("./en/ecang");
 #else
-    m_helpController->Initialize("/usr/share/ecang/help/ecang_en");
-    //m_helpController->Initialize("./en/ecang_en");
+    if (language==1)
+      m_helpController->Initialize("/usr/share/ecang/help/ecang_it");
+      //m_helpController->Initialize("./it/ecang_it");
+    else
+      m_helpController->Initialize("/usr/share/ecang/help/ecang_en");
+      //m_helpController->Initialize("./en/ecang_en");
 #endif // defined
     //(*AppInitialize
     bool wxsOK = true;

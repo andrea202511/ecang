@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="HelpBlocks">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+</OBJECT>
+<UL>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Contenuti">
+      <param name="Local" value="doc-0004.htm">
+      </OBJECT>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Benvenuti in Ecang">
+      <param name="Local" value="doc-0009.htm">
+      </OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Introduzione">
+        <param name="Local" value="doc-0032.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Contatti">
+        <param name="Local" value="doc-0010.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Installazione">
+        <param name="Local" value="doc-0026.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Licenza">
+        <param name="Local" value="doc-0022.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Crediti">
+        <param name="Local" value="doc-0033.htm">
+        </OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Per iniziare">
+      <param name="Local" value="doc-0013.htm">
+      </OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="File ENI">
+        <param name="Local" value="doc-0023.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="File PCAPNG">
+        <param name="Local" value="doc-0015.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="ETHERCAT notes">
+        <param name="Local" value="doc-0024.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="File CSV">
+        <param name="Local" value="doc-0025.htm">
+        </OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Finestre di dialogo">
+      <param name="Local" value="doc-0017.htm">
+      </OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Finestra principale">
+        <param name="Local" value="doc-0018.htm">
+        <param name="ID" value=1000>
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Filtro">
+        <param name="Local" value="doc-0019.htm">
+        <param name="ID" value=1001>
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Opzioni">
+        <param name="Local" value="doc-0021.htm">
+        <param name="ID" value=1002>
+        </OBJECT>
+  </UL>
+</UL>
+</BODY></HTML>

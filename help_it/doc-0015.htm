@@ -1,0 +1,27 @@
+
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>File PCAPNG</H2>
+Il Packet Capture Next Generation (PCAPNG) &#232; uno dei formati pi&#249; popolari per archiviare dati di cattura dei pacchetti di rete, &#232; il formato predefinito utilizzato da Wireshark.<BR>
+Il file PCAPNG contiene numerosi blocchi di vari tipi. Ecang estrae i dati dal blocco di pacchetti avanzato (EPB).<P>
+Questa &#232; la struttura del blocco EPB<BR>
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="0" WIDTH="100%" bgcolor="#ffffe0">
+<TR><TD width="10%" ALIGN="LEFT" VALIGN="TOP">byte 0</TD><TD ALIGN="LEFT" VALIGN="TOP">Firma EPB = 0x00000006</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 4</TD><TD ALIGN="LEFT" VALIGN="TOP">Lunghezza totale del blocco</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 8</TD><TD ALIGN="LEFT" VALIGN="TOP">Interfaccia ID</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 12</TD><TD ALIGN="LEFT" VALIGN="TOP">Timestamp (alto)</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 16</TD><TD ALIGN="LEFT" VALIGN="TOP">Timestamp (basso)</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 20</TD><TD ALIGN="LEFT" VALIGN="TOP">Lunghezza pacchetto catturato</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 24</TD><TD ALIGN="LEFT" VALIGN="TOP">Lunghezza pacchetto originale</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">byte 28</TD><TD ALIGN="LEFT" VALIGN="TOP">Dati del pacchetto</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">variabile</TD><TD ALIGN="LEFT" VALIGN="TOP">Opzioni</TD></TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP">variabile</TD><TD ALIGN="LEFT" VALIGN="TOP">Lunghezza totale del blocco</TD></TR>
+</TABLE><P>
+Durante l'apertura del file PCAPNG, Ecang trova due dati:<BR>
+1. Dall'ultimo blocco vengono estratti i numeri di blocco/frame.<BR>
+2. Successivamente vengono letti alcuni blocchi per determinare l'indirizzo MAC del primo slave, osservando il valore del workingcount. Questi dati sono essenziali per determinare la direzione del frame in esame, dal master agli slave o dagli slave al master.<P>
+
+Alla fine viene visualizzato un report nella finestra principale<P>
+<IMG SRC="image002.png" BORDER="0">
+</BODY>
+</HTML>

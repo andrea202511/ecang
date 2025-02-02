@@ -1,0 +1,15 @@
+
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>Output file CSV</H2>
+Il formato di output di ecang &#232; csv con carattere separatore ";"<BR>
+Ogni frame analizzato da cui vengono estratte le informazioni selezionate nella finestra filtro genera una riga nel file.<BR> <P>
+I primi campi di ogni riga sono costanti:<BR>
+<B>Block:</B> Numero di frame in base alla numerazione riportata in wireshark<BR>
+<B>Dir:</B> Direzione del frame in questione, M =&gt; S da master a slave, M &lt;= S da slave a master<BR>
+<B>workCnt:</B> contatore di lavoro del datagramma contenente i PDO, se presenti<BR>
+<B>Nota:</B> Attualmente non gestito<BR>
+<B>Errori:</B> Attualmente non gestito<P>
+Seguono quindi tutti i campi degli elementi selezionati a partire dai registri (REG), SDO e quindi il PDO.<BR>
+</BODY>
+</HTML>

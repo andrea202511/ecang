@@ -1,0 +1,15 @@
+
+<HTML><HEAD><TITLE>ECANG</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>File ENI</H2>
+Il file ENI (EtherCAT Network Information) &#232; il file di configurazione utilizzato nelle reti EtherCAT per descrivere la topologia di rete e i dispositivi connessi. Il file ENI &#232; solitamente in formato XML e viene generato o modificato utilizzando strumenti di configurazione come il software di configurazione EtherCAT (ad esempio, EtherCAT Configurator o TwinCAT di Beckhoff).<P>
+Attualmente Ecang estrae solo queste informazioni dal file ENI:<BR>
+Dalla sezione <B>&lt;config/slave/info&gt;</B>, vengono letti il &#8203;&#8203;nome e l'indirizzo di ogni slave<BR>
+Dalla sezione <B>&lt;ProcessImage/Inputs&gt;</B>, vengono letti il &#8203;&#8203;nome, la dimensione e l'offset di ogni PDO di input<BR>
+Dalla sezione <B>&lt;ProcessImage/Output&gt;</B>, vengono letti il &#8203;&#8203;nome, la dimensione e l'offset di ogni PDO di output<BR><P>
+Durante la lettura del file ENI, nella finestra principale viene visualizzato un report delle informazioni estratte.<P>
+<IMG SRC="image001.png" BORDER="0"><P>
+Attualmente ecang gestisce pdo di dimensione 64, 32, 16 e 8 bit.<BR>
+Le dimensioni pdo inferiori a 8 bit sono supportate in gruppi di 8 bit. Le dimensioni pdo superiori a 64 bit non sono attualmente supportate.
+</BODY>
+</HTML>

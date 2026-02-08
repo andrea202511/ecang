@@ -1,3 +1,6 @@
+# this repository has migrated to codeberg.org
+https://codeberg.org/andrea202511/ecang
+
 # ecang
 Utility to convert pcapng log file with ethercat frames (by wireshark) to csv file
 
